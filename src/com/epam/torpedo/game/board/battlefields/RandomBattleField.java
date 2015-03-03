@@ -7,8 +7,9 @@ import com.epam.torpedo.game.ships.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 
-	public RandomBattleField(Dimension dimension) {
+	public RandomBattleField(int numberOfShips, Dimension dimension) {
 		super(dimension);
+		setNumberOfShips(numberOfShips);
 	}
 
 	@Override

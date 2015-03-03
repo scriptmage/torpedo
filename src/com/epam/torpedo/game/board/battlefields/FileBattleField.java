@@ -18,14 +18,16 @@ public class FileBattleField extends BattleField {
 
 	private List<Shape> ships = new ArrayList<>();
 	private List<Integer> numbersOfShips = new ArrayList<>();
+	private File dataOfShips;
 
-	public FileBattleField(Dimension dimension) {
+	public FileBattleField(File dataOfShips, Dimension dimension) {
 		super(dimension);
+		this.dataOfShips = dataOfShips;
 	}
 
-	private String load(File file) throws IOException {
+	private String load() throws IOException {
 		StringBuilder fileContent = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(dataOfShips))) {
 			String buffer = null;
 			while ((buffer = br.readLine()) != null) {
 				fileContent.append(buffer + "\n");
@@ -35,8 +37,8 @@ public class FileBattleField extends BattleField {
 		return fileContent.toString();
 	}
 
-	public int parser(File file) throws IOException {
-		String fileContent = load(file);
+	public void parse() throws IOException {
+		String fileContent = load();
 		StringTokenizer st = new StringTokenizer(fileContent, "\n");
 
 		int dimensionY = 0;
@@ -63,30 +65,36 @@ public class FileBattleField extends BattleField {
 			}
 			dimensionY++;
 		}
-		return shipCounter;
+		
+		setNumberOfShips(shipCounter);
 	}
 
 	@Override
 	public void createBattleField() {
-		for (int i = 0; i < ships.size(); i++) {
-			int counter = 0;
-			int iterateCounter = 0;
-			
-			do {
-				Ship ship = ShipFactory.getFreeShip(ships.get(i),
-						getDimension());
-				try {
-					addShip(ship);
-					iterateCounter = 0;
-					counter++;
-				} catch (RuntimeException e) {
-					System.out.println(e.getMessage());
-				}
-				iterateCounter++;
-			} while (counter < numbersOfShips.get(i)
-					&& iterateCounter < BattleField.ITERATION_TOLERANCE);
-
-			checkTolerance(iterateCounter);
+		try {
+			parse();
+			for (int i = 0; i < ships.size(); i++) {
+				int counter = 0;
+				int iterateCounter = 0;
+				
+				do {
+					Ship ship = ShipFactory.getFreeShip(ships.get(i),
+							getDimension());
+					try {
+						addShip(ship);
+						iterateCounter = 0;
+						counter++;
+					} catch (RuntimeException e) {
+						System.out.println(e.getMessage());
+					}
+					iterateCounter++;
+				} while (counter < numbersOfShips.get(i)
+						&& iterateCounter < BattleField.ITERATION_TOLERANCE);
+				
+				checkTolerance(iterateCounter);
+			}
+		} catch (IOException e1) {
+			throw new IllegalStateException(e1.getMessage(), e1);
 		}
 	}
 
