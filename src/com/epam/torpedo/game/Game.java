@@ -15,8 +15,7 @@ public class Game {
 		this.hunter = hunter;
 	}
 
-	public void start(int numberOfShips) {
-		battleField.setNumberOfShips(numberOfShips);
+	public void start() {
 		battleField.createBattleField();
 		while (battleField.isAliveShips()) {
 			battleField.shoot(hunter);
