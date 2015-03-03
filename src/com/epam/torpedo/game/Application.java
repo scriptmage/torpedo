@@ -8,6 +8,7 @@ import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.board.battlefields.FileBattleField;
 import com.epam.torpedo.game.hunters.RandomHunter;
+import com.epam.torpedo.protocols.FirstProtocol;
 
 public class Application {
 
@@ -30,6 +31,7 @@ public class Application {
 			game.setBattleFieldFillingStrategy(battleField);
 			game.setHunterStrategy(hunter);
 			game.setConnection(connection);
+			game.setProtocol(new FirstProtocol());
 			game.start();
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());
