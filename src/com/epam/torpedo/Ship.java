@@ -105,7 +105,7 @@ public abstract class Ship {
 		healPoint--;
 		return healPoint == 0;
 	}
-
+	
 	abstract public void createShape();
 
 }

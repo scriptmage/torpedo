@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
+import com.epam.torpedo.Protocol;
 import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.board.battlefields.FileBattleField;
@@ -28,10 +29,13 @@ public class Application {
 			BattleField battleField = new FileBattleField(dataOfShips, dimensionOfBattleField);
 
 			SocketGame game = new SocketGame();
+			FirstProtocol protocol = new FirstProtocol();
+			protocol.setBattlefield(battleField);
+			
 			game.setBattleFieldFillingStrategy(battleField);
 			game.setHunterStrategy(hunter);
 			game.setConnection(connection);
-			game.setProtocol(new FirstProtocol());
+			game.setProtocol(protocol);
 			game.start();
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());

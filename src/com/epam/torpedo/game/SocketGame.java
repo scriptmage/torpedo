@@ -25,7 +25,6 @@ public class SocketGame extends Game {
 
 	@Override
 	public void start() {
-		battleField.createBattleField();
 		try {
 			if (connection.isServerConnection()) {
 				startServerGame();
@@ -42,6 +41,7 @@ public class SocketGame extends Game {
 	}
 
 	private void startServerGame() throws IOException {
+		battleField.createBattleField();
 		System.out.println("Starting server game");
 		ServerSocket serverSocket = new ServerSocket(connection.getPortNumber());
 		
@@ -51,7 +51,7 @@ public class SocketGame extends Game {
 		System.out.println("Client connected");
 		DataInputStream reader = new DataInputStream(client.getInputStream());
 		DataOutputStream writer = new DataOutputStream(client.getOutputStream());
-
+		
 		while (client.isConnected()) {
 			String input = reader.readUTF();
 			String answer = protocol.processInput(input);

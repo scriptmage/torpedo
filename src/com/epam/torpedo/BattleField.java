@@ -134,7 +134,7 @@ public abstract class BattleField {
 		}
 		return hasAlive;
 	}
-
+	
 	public boolean shoot(Hunter hunter) {
 		Coordinate shoot = hunter.nextShot(dimension.getWidth(),
 				dimension.getHeight());
