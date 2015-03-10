@@ -175,6 +175,11 @@ public abstract class BattleField {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return dimension.toString();
+	}
+
 	public abstract void createBattleField();
 
 }

@@ -17,6 +17,7 @@ public class SocketGame extends Game {
 
 	private Connection connection;
 	private Protocol protocol;
+	private DataOutputStream writer;
 
 	public void setProtocol(Protocol protocol) {
 		this.protocol = protocol;
@@ -47,7 +48,7 @@ public class SocketGame extends Game {
 				connection.getPortNumber());
 
 		DataInputStream reader = new DataInputStream(client.getInputStream());
-		DataOutputStream writer = new DataOutputStream(client.getOutputStream());
+		writer = new DataOutputStream(client.getOutputStream());
 
 		ConcretePositionHunter hunter = new ConcretePositionHunter();
 		hunter.setDimension(battleField.getDimension());
@@ -66,9 +67,12 @@ public class SocketGame extends Game {
 
 				String command = commandParser.nextToken();
 				if (command.equals("HELLO")) {
-					int widthOfBattleField = Integer.parseInt(commandParser.nextToken());
-					int heightOfBattleField = Integer.parseInt(commandParser.nextToken());
-					battleField.setDimension(widthOfBattleField, heightOfBattleField);
+					int widthOfBattleField = Integer.parseInt(commandParser
+							.nextToken());
+					int heightOfBattleField = Integer.parseInt(commandParser
+							.nextToken());
+					battleField.setDimension(widthOfBattleField,
+							heightOfBattleField);
 					battleField.createBattleField();
 					answer = "FIRE " + shooter.nextShot();
 				} else if (command.equals("FIRE")) {
@@ -77,16 +81,12 @@ public class SocketGame extends Game {
 
 					hunter.setPosition(x, y);
 					if (battleField.shoot(hunter)) {
-						writer.writeUTF("HIT");
-						writer.flush();
-						System.out.println(input + " HIT");
+						sendCommand("HIT");
 					} else {
-						writer.writeUTF("MISS");
-						writer.flush();
-						System.out.println(input + " MISS");
+						sendCommand("MISS");
 					}
 					answer = "FIRE " + shooter.nextShot();
-				} else if(command.equals("HIT")) {
+				} else if (command.equals("HIT")) {
 
 				} else if (command.equals("YOU")) {
 					System.out.println("I won ;)");
@@ -105,8 +105,7 @@ public class SocketGame extends Game {
 				running = false;
 			}
 
-			writer.writeUTF(answer);
-			writer.flush();
+			sendCommand(answer);
 			System.out.println("Answer: " + answer);
 			System.out.println();
 			Thread.sleep(2500);
@@ -125,7 +124,7 @@ public class SocketGame extends Game {
 
 		System.out.println("Client connected");
 		DataInputStream reader = new DataInputStream(client.getInputStream());
-		DataOutputStream writer = new DataOutputStream(client.getOutputStream());
+		writer = new DataOutputStream(client.getOutputStream());
 
 		ConcretePositionHunter hunter = new ConcretePositionHunter();
 		hunter.setDimension(battleField.getDimension());
@@ -133,14 +132,15 @@ public class SocketGame extends Game {
 		RandomHunter shooter = new RandomHunter();
 		shooter.setDimension(battleField.getDimension());
 
-		writer.writeUTF(String.format("HELLO %d %d", battleField.getWidth(), battleField.getHeight()));
+		sendCommand("HELLO " + battleField);
 
 		String answer = "ERROR Unknown protocol";
 		boolean running = true;
 		while (client.isConnected() && running) {
 			String input = reader.readUTF();
 			System.out.println("Input: " + input);
-			StringTokenizer commandParser = new StringTokenizer(input.toUpperCase(), " ");
+			StringTokenizer commandParser = new StringTokenizer(
+					input.toUpperCase(), " ");
 
 			String command = commandParser.nextToken();
 			try {
@@ -150,17 +150,13 @@ public class SocketGame extends Game {
 
 					hunter.setPosition(x, y);
 					if (battleField.shoot(hunter)) {
-						writer.writeUTF("HIT");
-						writer.flush();
-						System.out.println(input + " HIT");
+						sendCommand("HIT");
 					} else {
-						writer.writeUTF("MISS");
-						writer.flush();
-						System.out.println(input + " MISS");
+						sendCommand("MISS");
 					}
 					answer = "FIRE " + shooter.nextShot();
-				} else if(command.equals("HIT")) {
-					
+				} else if (command.equals("HIT")) {
+
 				} else if (command.equals("YOU")) {
 					System.out.println("I won ;)");
 					System.exit(0);
@@ -178,14 +174,23 @@ public class SocketGame extends Game {
 				running = false;
 			}
 
-			writer.writeUTF(answer);
-			writer.flush();
+			sendCommand(answer);
 			System.out.println("Answer: " + answer);
 			System.out.println();
 			Thread.sleep(2500);
 		}
 
 		serverSocket.close();
+	}
+
+	private void sendCommand(String command) throws IOException {
+		writer.writeUTF(command);
+		writer.flush();
+		System.out.println(command);
+	}
+
+	private void sendCommand(String command, String param) throws IOException {
+		sendCommand(command + " " + param);
 	}
 
 }

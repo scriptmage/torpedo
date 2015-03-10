@@ -39,4 +39,9 @@ public class Dimension {
 		return height;
 	}
 
+	@Override
+	public String toString() {
+		return width + " " + height;
+	}
+	
 }
