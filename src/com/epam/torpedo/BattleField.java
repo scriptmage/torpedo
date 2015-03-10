@@ -28,6 +28,14 @@ public abstract class BattleField {
 		this.dimension = dimension;
 		battleField = new HashSet<>();
 	}
+	
+	public void setDimension(Dimension dimension) {
+		this.dimension = dimension;
+	}
+	
+	public void setDimension(int widthOfBattleField, int heightOfBattleField) {
+		this.dimension = new Dimension(widthOfBattleField, heightOfBattleField);
+	}
 
 	public int getWidth() {
 		return dimension.getWidth();
@@ -136,8 +144,7 @@ public abstract class BattleField {
 	}
 	
 	public boolean shoot(Hunter hunter) {
-		Coordinate shoot = hunter.nextShot(dimension.getWidth(),
-				dimension.getHeight());
+		Coordinate shoot = hunter.nextShot();
 		validatePosition(shoot.getX(), shoot.getY());
 
 		boolean hasHit = false;

@@ -3,12 +3,9 @@ package com.epam.torpedo.game;
 import java.io.File;
 
 import com.epam.torpedo.BattleField;
-import com.epam.torpedo.Hunter;
-import com.epam.torpedo.Protocol;
 import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.board.battlefields.FileBattleField;
-import com.epam.torpedo.game.hunters.RandomHunter;
 import com.epam.torpedo.protocols.FirstProtocol;
 
 public class Application {
@@ -22,8 +19,6 @@ public class Application {
 		Connection connection = createConnection(args);
 
 		try {
-			Hunter hunter = new RandomHunter();
-
 			File dataOfShips = new File(SHIPS_DATA_FILE);
 			Dimension dimensionOfBattleField = new Dimension(BATTLEFIELD_WIDTH, BATTLEFIELD_HEIGHT);
 			BattleField battleField = new FileBattleField(dataOfShips, dimensionOfBattleField);
@@ -33,7 +28,6 @@ public class Application {
 			protocol.setBattlefield(battleField);
 			
 			game.setBattleFieldFillingStrategy(battleField);
-			game.setHunterStrategy(hunter);
 			game.setConnection(connection);
 			game.setProtocol(protocol);
 			game.start();

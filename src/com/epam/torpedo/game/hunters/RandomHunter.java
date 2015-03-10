@@ -6,16 +6,13 @@ import com.epam.torpedo.components.Coordinate;
 public class RandomHunter extends Hunter {
 
 	@Override
-	public Coordinate nextShot(int widthBattleField, int heightBattleField) {
+	public Coordinate nextShot() {
 		Coordinate coordinate;
 
 		do {
-			coordinate = Coordinate.getRandomPosition(widthBattleField,
-					heightBattleField);
+			coordinate = Coordinate.getRandomPosition(dimension.getWidth(),
+					dimension.getHeight());
 		} while (isExists(coordinate));
-
-		System.out.println(String.format("Shoot: [ %2d x %-2d ]",
-				coordinate.getX(), coordinate.getY()));
 
 		addShot(coordinate);
 		return coordinate;

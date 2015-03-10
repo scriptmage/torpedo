@@ -52,4 +52,9 @@ public class Coordinate {
 		return new Coordinate(positionX, positionY);
 	}
 
+	@Override
+	public String toString() {
+		return x + " " + y;
+	}
+
 }
