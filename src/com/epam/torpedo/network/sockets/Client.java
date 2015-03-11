@@ -19,6 +19,7 @@ public class Client extends Network {
 			String hostName = connection.getHostName();
 			Socket client = new Socket(hostName, portNumber);
 			setSocket(client);
+			setIOStreams();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

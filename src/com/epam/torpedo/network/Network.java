@@ -32,15 +32,21 @@ public abstract class Network extends Protocol {
 	}
 
 	public void start() {
-		createBoard();
-
+		
+		if(connection.isServerConnection()) {
+			createBoard();
+		}
+		
 		openConnection();
-
 		boolean running = true;
 		try {
 			while (isConnected() && running) {
 				String command = readCommand();
 				switch (command) {
+				case "HELLO":
+					createBoard();
+					fire(shooter.nextShot());
+					break;
 				case "FIRE":
 					hunter.setPosition(getCoordinate());
 					if (battleField.shoot(hunter)) {

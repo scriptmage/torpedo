@@ -8,17 +8,16 @@ import java.net.Socket;
 public class ReadWriteSocket {
 	private DataInputStream reader;
 	private DataOutputStream writer;
-	private Socket socket;
+	private Socket client;
 
-	public void setSocket(Socket socket) {
-		this.socket = socket;
-		setIOStreams();
+	public void setSocket(Socket client) {
+		this.client = client;
 	}
 
-	private void setIOStreams() {
+	public void setIOStreams() {
 		try {
-			reader = new DataInputStream(socket.getInputStream());
-			writer = new DataOutputStream(socket.getOutputStream());
+			reader = new DataInputStream(client.getInputStream());
+			writer = new DataOutputStream(client.getOutputStream());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -26,8 +25,9 @@ public class ReadWriteSocket {
 
 	public String readCommand() {
 		try {
-			String input = reader.readUTF();
-			return input.toUpperCase();
+			String input =reader.readUTF();
+			System.out.println("Input: " + input);
+			return input;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -37,6 +37,7 @@ public class ReadWriteSocket {
 		if (command.trim().length() > 0) {
 			try {
 				writer.writeUTF(command);
+				System.out.println("Output: " + command);
 				writer.flush();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
@@ -57,12 +58,12 @@ public class ReadWriteSocket {
 	}
 
 	public boolean isConnected() {
-		return ((Socket) socket).isConnected();
+		return client.isConnected();
 	}
 	
 	public void closeConnection() {
 		try {
-			socket.close();
+			client.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

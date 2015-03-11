@@ -38,7 +38,7 @@ public class Protocol extends ReadWriteSocket {
 	public String readCommand() {
 		String input = super.readCommand();
 		StringTokenizer commandParser = new StringTokenizer(input, " ");
-		command = commandParser.nextToken();
+		command = commandParser.nextToken().toUpperCase();
 		createParams(command, commandParser);
 		return command;
 	}
@@ -52,6 +52,9 @@ public class Protocol extends ReadWriteSocket {
 			break;
 		case "ERROR":
 			params = commandParser.nextToken();
+			while(commandParser.hasMoreTokens()) {
+				params += " " + commandParser.nextToken();
+			}
 			break;
 		}
 	}

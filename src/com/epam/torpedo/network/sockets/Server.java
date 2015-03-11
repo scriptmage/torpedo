@@ -21,6 +21,7 @@ public class Server extends Network {
 			ServerSocket serverSocket = new ServerSocket(portNumber);
 			Socket client = serverSocket.accept();
 			setSocket(client);
+			setIOStreams();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
