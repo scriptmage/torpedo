@@ -6,7 +6,8 @@ import com.epam.torpedo.BattleField;
 import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.board.battlefields.FileBattleField;
-import com.epam.torpedo.protocols.FirstProtocol;
+import com.epam.torpedo.game.games.SocketGame;
+import com.epam.torpedo.game.hunters.RandomHunter;
 
 public class Application {
 
@@ -24,12 +25,11 @@ public class Application {
 			BattleField battleField = new FileBattleField(dataOfShips, dimensionOfBattleField);
 
 			SocketGame game = new SocketGame();
-			FirstProtocol protocol = new FirstProtocol();
-			protocol.setBattlefield(battleField);
+			RandomHunter hunter = new RandomHunter();
 			
 			game.setBattleFieldFillingStrategy(battleField);
+			game.setHunterStrategy(hunter);
 			game.setConnection(connection);
-			game.setProtocol(protocol);
 			game.start();
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());

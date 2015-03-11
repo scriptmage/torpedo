@@ -1,4 +1,4 @@
-package com.epam.torpedo.game;
+package com.epam.torpedo.game.games;
 
 import com.epam.torpedo.Game;
 
