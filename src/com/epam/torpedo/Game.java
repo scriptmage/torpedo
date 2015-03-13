@@ -1,6 +1,6 @@
 package com.epam.torpedo;
 
-public abstract class Game {
+public abstract class Game implements Startable {
 	protected BattleField battleField;
 	protected Hunter hunter;
 
@@ -11,6 +11,4 @@ public abstract class Game {
 	public void setHunterStrategy(Hunter hunter) {
 		this.hunter = hunter;
 	}
-	
-	abstract public void start();
 }

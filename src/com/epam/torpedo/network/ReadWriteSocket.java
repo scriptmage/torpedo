@@ -1,4 +1,4 @@
-package com.epam.torpedo;
+package com.epam.torpedo.network;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,13 +8,8 @@ import java.net.Socket;
 public class ReadWriteSocket {
 	private DataInputStream reader;
 	private DataOutputStream writer;
-	private Socket client;
 
-	public void setSocket(Socket client) {
-		this.client = client;
-	}
-
-	public void setIOStreams() {
+	public void setIOStreams(Socket client) {
 		try {
 			reader = new DataInputStream(client.getInputStream());
 			writer = new DataOutputStream(client.getOutputStream());
@@ -25,14 +20,14 @@ public class ReadWriteSocket {
 
 	public String readCommand() {
 		try {
-			String input =reader.readUTF();
+			String input = reader.readUTF();
 			System.out.println("Input: " + input);
 			return input;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public void sendCommand(String command) {
 		if (command.trim().length() > 0) {
 			try {
@@ -55,18 +50,6 @@ public class ReadWriteSocket {
 		}
 
 		sendCommand(command + " " + param);
-	}
-
-	public boolean isConnected() {
-		return client.isConnected();
-	}
-	
-	public void closeConnection() {
-		try {
-			client.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 }
