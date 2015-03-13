@@ -4,6 +4,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Iterator;
+
+import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.responses.Response;
+import com.epam.torpedo.network.protocol.responses.ResponseSet;
 
 public class ReadWriteSocket {
 	private DataInputStream reader;
@@ -18,7 +23,7 @@ public class ReadWriteSocket {
 		}
 	}
 
-	public String readCommand() {
+	public String read() {
 		try {
 			String input = reader.readUTF();
 			System.out.println("Input: " + input);
@@ -28,7 +33,18 @@ public class ReadWriteSocket {
 		}
 	}
 
-	public void sendCommand(String command) {
+	public void send(ResponseSet responseSet) {
+		Iterator<Response> iterator = responseSet.iterator();
+		while(iterator.hasNext()) {
+			sendCommand(iterator.next().get());
+		}
+	}
+	
+	public void sendCommand(Command command) {
+		sendCommand(command.toString());
+	}
+	
+	private void sendCommand(String command) {
 		if (command.trim().length() > 0) {
 			try {
 				writer.writeUTF(command);
@@ -40,16 +56,16 @@ public class ReadWriteSocket {
 		}
 	}
 
-	public void sendCommand(String command, String param) {
-		if (command.trim().length() == 0) {
-			throw new IllegalArgumentException("Command should not be empty");
-		}
-
-		if (param.trim().length() == 0) {
-			throw new IllegalArgumentException("Param should not be empty");
-		}
-
-		sendCommand(command + " " + param);
-	}
+//	private void sendCommand(String command, String param) {
+//		if (command.trim().length() == 0) {
+//			throw new IllegalArgumentException("Command should not be empty");
+//		}
+//
+//		if (param.trim().length() == 0) {
+//			throw new IllegalArgumentException("Param should not be empty");
+//		}
+//
+//		sendCommand(command + " " + param);
+//	}
 
 }

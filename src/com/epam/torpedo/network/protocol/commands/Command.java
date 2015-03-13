@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.epam.torpedo.network.protocol.responses.Response;
+import com.epam.torpedo.network.protocol.responses.ResponseSet;
 
 public abstract class Command {
 
@@ -38,5 +38,5 @@ public abstract class Command {
 		this.successor = successor;
 	}
 
-	abstract public Response getResponse(String input);
+	abstract public ResponseSet getResponse(String input);
 }

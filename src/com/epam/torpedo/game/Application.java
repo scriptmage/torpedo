@@ -26,6 +26,7 @@ public class Application {
 
 			SocketGame game = new SocketGame();
 			RandomHunter hunter = new RandomHunter();
+			hunter.setDimension(dimensionOfBattleField);
 			
 			game.setBattleFieldFillingStrategy(battleField);
 			game.setHunterStrategy(hunter);

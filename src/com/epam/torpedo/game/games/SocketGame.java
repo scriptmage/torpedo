@@ -3,15 +3,15 @@ package com.epam.torpedo.game.games;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Game;
 import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.network.ReadWriteSocket;
 import com.epam.torpedo.network.protocol.ProtocolFactory;
 import com.epam.torpedo.network.protocol.commands.Command;
-import com.epam.torpedo.network.protocol.responses.Response;
+import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
+import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
+import com.epam.torpedo.network.protocol.responses.ResponseSet;
 
 public class SocketGame extends Game {
 
@@ -26,37 +26,50 @@ public class SocketGame extends Game {
 	@Override
 	public void start() {
 		try {
-			ReadWriteSocket rwSocket = new ReadWriteSocket();
-
 			openConnection();
+			ReadWriteSocket rwSocket = new ReadWriteSocket();
 			rwSocket.setIOStreams(client);
 
 			Command protocol = ProtocolFactory.getProtocol(battleField, hunter);
 			if (connection.isServerConnection()) {
-				rwSocket.sendCommand("HELLO", battleField.getDimension().toString());
+				rwSocket.sendCommand(new HelloCommand(battleField, hunter));
 			}
 
-			while (client.isConnected()) {
-				String input = rwSocket.readCommand();
-				Response response = protocol.getResponse(input);
-				response.execute();
+			boolean running = true;
+			while (client.isConnected() && running) 
+			{
+				String input = rwSocket.read();
+				ResponseSet response = protocol.getResponse(input);
+				
+				if(response.size() > 0) {
+					rwSocket.send(response);
+				} else {
+					running = false;
+				}
+				
+				if(!battleField.isAliveShips()) {
+					rwSocket.sendCommand(new WinCommand());
+				}
 			}
-
-			closeConnection();
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
-		}
-
-	}
-
-	private void closeConnection() throws IOException {
-		client.close();
-		if (connection.isServerConnection()) {
-			serverSocket.close();
+		} finally {
+			closeConnection();
 		}
 	}
 
-	private void openConnection() throws IOException, UnknownHostException {
+	private void closeConnection() {
+		try {
+			client.close();
+			if (connection.isServerConnection()) {
+				serverSocket.close();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void openConnection() throws IOException {
 		int portNumber = connection.getPortNumber();
 		if (connection.isServerConnection()) {
 			serverSocket = new ServerSocket(portNumber);
