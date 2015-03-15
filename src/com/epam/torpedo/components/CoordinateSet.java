@@ -51,4 +51,10 @@ public class CoordinateSet {
 	public boolean isEmpty() {
 		return coords.isEmpty();
 	}
+
+	@Override
+	public String toString() {
+		return "";
+	}
+	
 }

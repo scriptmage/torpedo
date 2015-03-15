@@ -9,9 +9,9 @@ import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.network.ReadWriteSocket;
 import com.epam.torpedo.network.protocol.ProtocolFactory;
 import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.commands.CommandQueue;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
-import com.epam.torpedo.network.protocol.responses.ResponseSet;
 
 public class SocketGame extends Game {
 
@@ -32,17 +32,17 @@ public class SocketGame extends Game {
 
 			Command protocol = ProtocolFactory.getProtocol(battleField, hunter);
 			if (connection.isServerConnection()) {
+				battleField.createBattleField();
 				rwSocket.sendCommand(new HelloCommand(battleField, hunter));
 			}
 
 			boolean running = true;
-			while (client.isConnected() && running) 
-			{
+			while (client.isConnected() && running) {
 				String input = rwSocket.read();
-				ResponseSet response = protocol.getResponse(input);
+				CommandQueue commands = protocol.getResponse(input);
 				
-				if(response.size() > 0) {
-					rwSocket.send(response);
+				if(commands.size() > 0) {
+					rwSocket.send(commands);
 				} else {
 					running = false;
 				}

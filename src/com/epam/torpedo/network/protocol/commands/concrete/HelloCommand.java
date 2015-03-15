@@ -3,8 +3,7 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.network.protocol.commands.Command;
-import com.epam.torpedo.network.protocol.responses.ResponseSet;
-import com.epam.torpedo.network.protocol.responses.concrete.FireResponse;
+import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class HelloCommand extends Command {
 
@@ -19,15 +18,15 @@ public class HelloCommand extends Command {
 	}
 
 	@Override
-	public ResponseSet getResponse(String input) {
+	public CommandQueue getResponse(String input) {
 		String command = getCommand(input);
 		if (!command.equals(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
 		
-		ResponseSet response = new ResponseSet();
+		CommandQueue response = new CommandQueue();
 		battleField.createBattleField();
-		response.add(new FireResponse(hunter));
+		response.add(new FireCommand(hunter.nextShot()));
 		return response;
 	}
 

@@ -2,9 +2,9 @@ package com.epam.torpedo.components;
 
 public class Connection {
 
-	private static final int DEFAULT_PORT_NUMBER = 3235;
-	private static final int MAXIMUM_PORT_NUMBER = 65535;
-	private static final int MINIMUM_PORT_NUMBER = 1024;
+	public static final int DEFAULT_PORT_NUMBER = 3235;
+	public static final int MAXIMUM_PORT_NUMBER = 65535;
+	public static final int MINIMUM_PORT_NUMBER = 1024;
 
 	private String hostName;
 	private int portNumber;
@@ -39,19 +39,17 @@ public class Connection {
 	}
 
 	public void setPortNumber(int portNumber) {
+		validatePortNumber(portNumber);
+		this.portNumber = portNumber;
+	}
+
+	public void setPortNumber(String portNumber) {
 		try {
-			validatePortNumber(portNumber);
-			this.portNumber = portNumber;
+			setPortNumber(Integer.parseInt(portNumber));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("This isn't a number: "
 					+ portNumber + ". Please, give me a number.", e);
 		}
-	}
-
-	public void setPortNumber(String portNumber) {
-		int parsedPortNumber = Integer.parseInt(portNumber);
-		validatePortNumber(parsedPortNumber);
-		this.portNumber = parsedPortNumber;
 	}
 
 	private static void validatePortNumber(int portNumber) {

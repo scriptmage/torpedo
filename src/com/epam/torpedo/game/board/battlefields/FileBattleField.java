@@ -78,18 +78,17 @@ public class FileBattleField extends BattleField {
 				int iterateCounter = 0;
 				
 				do {
-					Ship ship = ShipFactory.getFreeShip(ships.get(i),
-							getDimension());
+					Ship ship = ShipFactory.getFreeShip(ships.get(i), getDimension());
 					try {
 						addShip(ship);
+						System.out.println(String.format("%d %d", ship.getPositionX(), ship.getPositionY()));
 						iterateCounter = 0;
 						counter++;
 					} catch (RuntimeException e) {
 						System.out.println(e.getMessage());
 					}
 					iterateCounter++;
-				} while (counter < numbersOfShips.get(i)
-						&& iterateCounter < BattleField.ITERATION_TOLERANCE);
+				} while (counter < numbersOfShips.get(i) && iterateCounter < BattleField.ITERATION_TOLERANCE);
 				
 				checkTolerance(iterateCounter);
 			}

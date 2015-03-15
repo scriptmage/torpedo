@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.epam.torpedo.network.protocol.responses.ResponseSet;
-
 public abstract class Command {
 
 	protected Command successor;
@@ -19,6 +17,7 @@ public abstract class Command {
 		if (st.hasMoreTokens()) {
 			command = st.nextToken();
 
+			params.clear();
 			while (st.hasMoreTokens()) {
 				params.add(st.nextToken());
 			}
@@ -38,5 +37,5 @@ public abstract class Command {
 		this.successor = successor;
 	}
 
-	abstract public ResponseSet getResponse(String input);
+	abstract public CommandQueue getResponse(String input);
 }

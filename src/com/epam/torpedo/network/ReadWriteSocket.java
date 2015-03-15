@@ -4,11 +4,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Collection;
 import java.util.Iterator;
 
 import com.epam.torpedo.network.protocol.commands.Command;
-import com.epam.torpedo.network.protocol.responses.Response;
-import com.epam.torpedo.network.protocol.responses.ResponseSet;
+import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class ReadWriteSocket {
 	private DataInputStream reader;
@@ -33,10 +33,11 @@ public class ReadWriteSocket {
 		}
 	}
 
-	public void send(ResponseSet responseSet) {
-		Iterator<Response> iterator = responseSet.iterator();
+	public void send(CommandQueue commandSet) {
+		Collection<Command> commands = commandSet.get();
+		Iterator<Command> iterator = commands.iterator();
 		while(iterator.hasNext()) {
-			sendCommand(iterator.next().get());
+			sendCommand(iterator.next());
 		}
 	}
 	
@@ -55,17 +56,5 @@ public class ReadWriteSocket {
 			}
 		}
 	}
-
-//	private void sendCommand(String command, String param) {
-//		if (command.trim().length() == 0) {
-//			throw new IllegalArgumentException("Command should not be empty");
-//		}
-//
-//		if (param.trim().length() == 0) {
-//			throw new IllegalArgumentException("Param should not be empty");
-//		}
-//
-//		sendCommand(command + " " + param);
-//	}
 
 }
