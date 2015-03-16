@@ -26,7 +26,7 @@ public class ReadWriteSocket {
 	public String read() {
 		try {
 			String input = reader.readUTF();
-			System.out.println("Input: " + input);
+			System.err.println("Input: " + input);
 			return input;
 		} catch (IOException e) {
 			throw new RuntimeException(e);

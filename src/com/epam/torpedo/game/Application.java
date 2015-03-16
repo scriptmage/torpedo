@@ -12,8 +12,8 @@ import com.epam.torpedo.game.hunters.RandomHunter;
 public class Application {
 
 	private static final String SHIPS_DATA_FILE = "ships.dat";
-	private static final int BATTLEFIELD_WIDTH = 10;
-	private static final int BATTLEFIELD_HEIGHT = 10;
+	private static final int BATTLEFIELD_WIDTH = 4;
+	private static final int BATTLEFIELD_HEIGHT = 4;
 
 	public static void main(String[] args) {
 		System.out.println("BattleShip");

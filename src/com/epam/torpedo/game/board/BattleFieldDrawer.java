@@ -22,7 +22,7 @@ public class BattleFieldDrawer implements Drawable {
 
 		for (int y = 0; y < battleField.getHeight(); y++) {
 			for (int x = 0; x < battleField.getWidth(); x++) {
-				char marker = '~';
+				char marker = '.';
 
 				if (shipsCoordinates.contains(new Coordinate(x, y))) {
 					marker = 'O';

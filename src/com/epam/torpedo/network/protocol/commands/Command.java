@@ -30,7 +30,8 @@ public abstract class Command {
 	}
 
 	public Object[] getParams() {
-		return params.toArray();
+		Object[] array = params.toArray();
+		return array;
 	}
 
 	public void setSuccessor(Command successor) {
