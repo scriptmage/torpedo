@@ -1,35 +1,17 @@
 package com.epam.torpedo.game;
 
-import java.io.File;
-
-import com.epam.torpedo.BattleField;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Connection;
-import com.epam.torpedo.components.Dimension;
-import com.epam.torpedo.game.board.battlefields.FileBattleField;
-import com.epam.torpedo.game.games.SocketGame;
-import com.epam.torpedo.game.hunters.RandomHunter;
+import com.epam.torpedo.game.types.SocketGame;
 
 public class Application {
-
-	private static final String SHIPS_DATA_FILE = "ships.dat";
-	private static final int BATTLEFIELD_WIDTH = 4;
-	private static final int BATTLEFIELD_HEIGHT = 4;
 
 	public static void main(String[] args) {
 		System.out.println("BattleShip");
 		Connection connection = createConnection(args);
 
 		try {
-			File dataOfShips = new File(SHIPS_DATA_FILE);
-			Dimension dimensionOfBattleField = new Dimension(BATTLEFIELD_WIDTH, BATTLEFIELD_HEIGHT);
-			BattleField battleField = new FileBattleField(dataOfShips, dimensionOfBattleField);
-
-			SocketGame game = new SocketGame();
-			RandomHunter hunter = new RandomHunter();
-			hunter.setDimension(dimensionOfBattleField);
-			
-			game.setBattleFieldFillingStrategy(battleField);
-			game.setHunterStrategy(hunter);
+			SocketGame game = (SocketGame) Config.getGame();
 			game.setConnection(connection);
 			game.start();
 		} catch (RuntimeException e) {

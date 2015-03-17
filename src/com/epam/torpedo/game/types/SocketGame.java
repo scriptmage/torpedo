@@ -1,19 +1,20 @@
-package com.epam.torpedo.game.games;
+package com.epam.torpedo.game.types;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.epam.torpedo.Game;
+import com.epam.torpedo.BattleField;
+import com.epam.torpedo.Startable;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Connection;
 import com.epam.torpedo.network.ReadWriteSocket;
 import com.epam.torpedo.network.protocol.ProtocolFactory;
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
-import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
 
-public class SocketGame extends Game {
+public class SocketGame implements Startable {
 
 	private Connection connection;
 	private Socket client;
@@ -30,10 +31,11 @@ public class SocketGame extends Game {
 			ReadWriteSocket rwSocket = new ReadWriteSocket();
 			rwSocket.setIOStreams(client);
 
-			Command protocol = ProtocolFactory.getProtocol(battleField, hunter);
+			Command protocol = ProtocolFactory.getProtocol();
 			if (connection.isServerConnection()) {
+				BattleField battleField = Config.getBattleField();
 				battleField.createBattleField();
-				rwSocket.sendCommand(new HelloCommand(battleField, hunter));
+				rwSocket.sendCommand(new HelloCommand());
 			}
 
 			boolean running = true;
@@ -45,14 +47,14 @@ public class SocketGame extends Game {
 					rwSocket.send(commands);
 				} else {
 					running = false;
-				}
-				
-				if(!battleField.isAliveShips()) {
-					rwSocket.sendCommand(new WinCommand());
+					
+//					if(!battleField.isAliveShips()) {
+//						rwSocket.sendCommand(new WinCommand());
+//					}
 				}
 			}
 		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new RuntimeException(e);
 		} finally {
 			closeConnection();
 		}

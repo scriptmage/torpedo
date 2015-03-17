@@ -1,4 +1,4 @@
-package com.epam.torpedo.network.protocol.commands.concrete;
+package com.epam.torpedo.network.protocol.commands.special;
 
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;

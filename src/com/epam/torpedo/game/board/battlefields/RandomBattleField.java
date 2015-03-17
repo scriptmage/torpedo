@@ -2,13 +2,11 @@ package com.epam.torpedo.game.board.battlefields;
 
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Ship;
-import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.ships.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 
-	public RandomBattleField(int numberOfShips, Dimension dimension) {
-		super(dimension);
+	public RandomBattleField(int numberOfShips) {
 		setNumberOfShips(numberOfShips);
 	}
 

@@ -2,6 +2,7 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
+import com.epam.torpedo.network.protocol.commands.special.NullCommand;
 
 public class SunkCommand extends Command {
 
@@ -13,8 +14,7 @@ public class SunkCommand extends Command {
 		CommandQueue response = new CommandQueue();
 
 		if (!command.equals(COMMAND_NAME)) {
-			// azért van, mert ez az utolsó a láncban
-			response.add(new ErrorCommand("Unknown protocol"));
+			return successor.getResponse(input);
 		}
 
 		response.add(new NullCommand());
