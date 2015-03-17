@@ -45,14 +45,14 @@ public class SocketGame extends Game {
 					rwSocket.send(commands);
 				} else {
 					running = false;
-				}
-				
-				if(!battleField.isAliveShips()) {
-					rwSocket.sendCommand(new WinCommand());
+					
+//					if(!battleField.isAliveShips()) {
+//						rwSocket.sendCommand(new WinCommand());
+//					}
 				}
 			}
 		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new RuntimeException(e);
 		} finally {
 			closeConnection();
 		}

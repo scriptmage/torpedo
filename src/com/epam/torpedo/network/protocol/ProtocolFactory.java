@@ -7,10 +7,10 @@ import com.epam.torpedo.network.protocol.commands.concrete.ErrorCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.FireCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.HitCommand;
-import com.epam.torpedo.network.protocol.commands.concrete.LastCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.MissCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.SunkCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
+import com.epam.torpedo.network.protocol.commands.special.LastCommand;
 
 public class ProtocolFactory {
 

@@ -33,7 +33,6 @@ public class FireCommand extends Command {
 			return successor.getResponse(input);
 		}
 
-		Command response;
 		CommandQueue responseQueue = new CommandQueue();
 		
 		Object[] params = getParams();
@@ -43,25 +42,26 @@ public class FireCommand extends Command {
 		shooter.setDimension(battleField.getDimension());
 		shooter.setPosition(x, y);
 		if (battleField.shoot(shooter)) {
+		
 			if (battleField.isAliveShips()) {
-
 				Ship ship = battleField.getShip(x, y);
 				if(ship.isAlive()) {
-					response = new HitCommand();
+					responseQueue.add(new HitCommand());
+					responseQueue.add(new FireCommand(hunter.nextShot()));
 				} else {
-					response = new SunkCommand();
+					responseQueue.add(new SunkCommand());
+					responseQueue.add(new FireCommand(hunter.nextShot()));
 				}
 
 			} else {
-				response = new WinCommand();
+				responseQueue.add(new WinCommand());
 			}
 			
 		} else {
-			response = new MissCommand();
+			responseQueue.add(new MissCommand());
+			responseQueue.add(new FireCommand(hunter.nextShot()));
 		}
 		
-		responseQueue.add(response);
-		responseQueue.add(new FireCommand(hunter.nextShot()));
 		return responseQueue;
 	}
 
