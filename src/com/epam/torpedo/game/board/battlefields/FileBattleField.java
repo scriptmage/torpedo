@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Ship;
-import com.epam.torpedo.components.Dimension;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.game.ships.Shape;
 import com.epam.torpedo.game.ships.ShipFactory;
 
@@ -18,15 +18,10 @@ public class FileBattleField extends BattleField {
 
 	private List<Shape> ships = new ArrayList<>();
 	private List<Integer> numbersOfShips = new ArrayList<>();
-	private File dataOfShips;
-
-	public FileBattleField(File dataOfShips, Dimension dimension) {
-		super(dimension);
-		this.dataOfShips = dataOfShips;
-	}
-
+	
 	private String load() throws IOException {
 		StringBuilder fileContent = new StringBuilder();
+		File dataOfShips = Config.getDataFile();
 		try (BufferedReader br = new BufferedReader(new FileReader(dataOfShips))) {
 			String buffer = null;
 			while ((buffer = br.readLine()) != null) {

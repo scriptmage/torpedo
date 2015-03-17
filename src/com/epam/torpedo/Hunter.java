@@ -1,11 +1,12 @@
 package com.epam.torpedo;
 
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
 
 public abstract class Hunter implements Shooter {
-	protected Dimension dimension;
+	protected Dimension dimension = Config.getBattleFieldDimension();
 
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;

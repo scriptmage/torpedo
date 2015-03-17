@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
@@ -14,6 +15,7 @@ public abstract class BattleField {
 	private Dimension dimension;
 	private Set<Ship> battleField;
 	private int numberOfShips = 10;
+	private BattleFieldDrawer drawer;
 
 	protected static final int ITERATION_TOLERANCE = 25;
 
@@ -25,15 +27,16 @@ public abstract class BattleField {
 		this.numberOfShips = numberOfShips;
 	}
 
-	public BattleField(Dimension dimension) {
-		this.dimension = dimension;
+	public BattleField() {
+		this.dimension = Config.getBattleFieldDimension();
+		this.drawer = Config.getBattleFieldDrawer();
 		battleField = new HashSet<>();
 	}
-	
+
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
 	}
-	
+
 	public void setDimension(int widthOfBattleField, int heightOfBattleField) {
 		this.dimension = new Dimension(widthOfBattleField, heightOfBattleField);
 	}
@@ -58,14 +61,10 @@ public abstract class BattleField {
 
 	public void validatePosition(int x, int y) {
 		if (!isValidPositionX(x)) {
-			throw new IllegalArgumentException(
-					"Illegal X position, must be between 0 and "
-							+ (dimension.getWidth() - 1));
+			throw new IllegalArgumentException("Illegal X position, must be between 0 and " + (dimension.getWidth() - 1));
 		}
 		if (!isValidPositionY(y)) {
-			throw new IllegalArgumentException(
-					"Illegal Y position, must be between 0 and "
-							+ (dimension.getHeight() - 1));
+			throw new IllegalArgumentException("Illegal Y position, must be between 0 and " + (dimension.getHeight() - 1));
 		}
 	}
 
@@ -83,10 +82,8 @@ public abstract class BattleField {
 		}
 
 		if (!isEmptyArea(ship)) {
-			throw new IllegalStateException(
-					String.format(
-							"This area [ %2dx%-2d ] already has a ship or too close to another one",
-							ship.getPositionX(), ship.getPositionY()));
+			throw new IllegalStateException(String.format("This area [ %2dx%-2d ] already has a ship or too close to another one", ship.getPositionX(),
+					ship.getPositionY()));
 		}
 	}
 
@@ -143,7 +140,7 @@ public abstract class BattleField {
 		}
 		return hasAlive;
 	}
-	
+
 	public boolean shoot(Hunter hunter) {
 		Coordinate shoot = hunter.nextShot();
 		validatePosition(shoot.getX(), shoot.getY());
@@ -156,14 +153,17 @@ public abstract class BattleField {
 			if (ship.isHit(shoot.getX(), shoot.getY())) {
 				hasHit = true;
 				ship.decHealPoint();
-				BattleFieldDrawer drawer = new BattleFieldDrawer(this);
-				drawer.draw(hunter);
+				drawer.draw(Config.getHunter());
 			}
 		}
 
 		return hasHit;
 	}
-	
+
+	public Ship getShip(Coordinate coordinate) {
+		return getShip(coordinate.getX(), coordinate.getY());
+	}
+
 	public Ship getShip(int x, int y) {
 		Ship resultShip = new NullShip();
 		Iterator<Ship> shipIterator = battleField.iterator();
@@ -182,9 +182,8 @@ public abstract class BattleField {
 
 	protected void checkTolerance(int iterateCounter) {
 		if (iterateCounter == ITERATION_TOLERANCE) {
-			throw new IllegalStateException("Sorry, maybe the board ["
-					+ dimension.getWidth() + "x" + dimension.getHeight()
-					+ "] is very small for " + numberOfShips + " ships");
+			throw new IllegalStateException("Sorry, maybe the board [" + dimension.getWidth() + "x" + dimension.getHeight() + "] is very small for "
+					+ numberOfShips + " ships");
 		}
 	}
 

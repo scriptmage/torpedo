@@ -3,6 +3,7 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.game.hunters.ConcretePositionHunter;
 import com.epam.torpedo.network.protocol.commands.Command;
@@ -12,18 +13,14 @@ public class FireCommand extends Command {
 
 	private static final String COMMAND_NAME = "FIRE";
 
-	private BattleField battleField;
-	private Hunter hunter;
 	private Coordinate coordinate;
-	private ConcretePositionHunter shooter = new ConcretePositionHunter();
+
+	public FireCommand() {
+		
+	}
 
 	public FireCommand(Coordinate coordinate) {
 		this.coordinate = coordinate;
-	}
-
-	public FireCommand(BattleField battleField, Hunter hunter) {
-		this.battleField = battleField;
-		this.hunter = hunter;
 	}
 
 	@Override
@@ -33,19 +30,16 @@ public class FireCommand extends Command {
 			return successor.getResponse(input);
 		}
 
+		BattleField battleField = Config.getBattleField();
+		Hunter hunter = Config.getHunter();
+		ConcretePositionHunter shooter = getShooter();
+		
 		CommandQueue responseQueue = new CommandQueue();
-		
-		Object[] params = getParams();
-		int x = Integer.parseInt((String) params[0]);
-		int y = Integer.parseInt((String) params[1]);
-		
-		shooter.setDimension(battleField.getDimension());
-		shooter.setPosition(x, y);
 		if (battleField.shoot(shooter)) {
-		
+
 			if (battleField.isAliveShips()) {
-				Ship ship = battleField.getShip(x, y);
-				if(ship.isAlive()) {
+				Ship ship = battleField.getShip(shooter.getPosition());
+				if (ship.isAlive()) {
 					responseQueue.add(new HitCommand());
 					responseQueue.add(new FireCommand(hunter.nextShot()));
 				} else {
@@ -56,13 +50,20 @@ public class FireCommand extends Command {
 			} else {
 				responseQueue.add(new WinCommand());
 			}
-			
+
 		} else {
 			responseQueue.add(new MissCommand());
 			responseQueue.add(new FireCommand(hunter.nextShot()));
 		}
-		
+
 		return responseQueue;
+	}
+
+	private ConcretePositionHunter getShooter() {
+		ConcretePositionHunter shooter = new ConcretePositionHunter();
+		shooter.setDimension(Config.getBattleFieldDimension());
+		shooter.setPosition(getParams());
+		return shooter;
 	}
 
 	@Override

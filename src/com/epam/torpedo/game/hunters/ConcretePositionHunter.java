@@ -11,8 +11,18 @@ public class ConcretePositionHunter extends Hunter {
 		setPosition(new Coordinate(x, y));
 	}
 
+	public void setPosition(Object[] params) {
+		int x = Integer.parseInt((String) params[0]);
+		int y = Integer.parseInt((String) params[1]);
+		setPosition(new Coordinate(x, y));
+	}
+
 	public void setPosition(Coordinate coordinate) {
 		position = coordinate;
+	}
+	
+	public Coordinate getPosition() {
+		return position;
 	}
 	
 	@Override

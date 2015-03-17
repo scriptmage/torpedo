@@ -3,15 +3,15 @@ package com.epam.torpedo.game.board;
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
-import com.epam.torpedo.components.Coordinate;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.CoordinateSet;
 
 public class BattleFieldDrawer implements Drawable {
 
 	private BattleField battleField;
 
-	public BattleFieldDrawer(BattleField battleField) {
-		this.battleField = battleField;
+	public BattleFieldDrawer() {
+		this.battleField = Config.getBattleField();
 	}
 
 	@Override
@@ -24,9 +24,9 @@ public class BattleFieldDrawer implements Drawable {
 			for (int x = 0; x < battleField.getWidth(); x++) {
 				char marker = '.';
 
-				if (shipsCoordinates.contains(new Coordinate(x, y))) {
+				if (shipsCoordinates.contains(x, y)) {
 					marker = 'O';
-					if (shots.contains(new Coordinate(x, y))) {
+					if (shots.contains(x, y)) {
 						marker = 'X';
 					}
 				}
