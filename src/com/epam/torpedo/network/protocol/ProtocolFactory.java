@@ -7,6 +7,7 @@ import com.epam.torpedo.network.protocol.commands.concrete.ErrorCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.FireCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.HitCommand;
+import com.epam.torpedo.network.protocol.commands.concrete.LastCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.MissCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.SunkCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
@@ -22,6 +23,7 @@ public class ProtocolFactory {
 		Command hit = new HitCommand();
 		Command miss = new MissCommand();
 		Command sunk = new SunkCommand();
+		Command last = new LastCommand();
 
 		error.setSuccessor(win);
 		win.setSuccessor(hello);
@@ -29,6 +31,7 @@ public class ProtocolFactory {
 		fire.setSuccessor(hit);
 		hit.setSuccessor(miss);
 		miss.setSuccessor(sunk);
+		sunk.setSuccessor(last);
 
 		return error;
 	}
