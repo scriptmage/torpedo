@@ -2,7 +2,9 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
+import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Coordinate;
+import com.epam.torpedo.game.hunters.ConcretePositionHunter;
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
@@ -13,6 +15,7 @@ public class FireCommand extends Command {
 	private BattleField battleField;
 	private Hunter hunter;
 	private Coordinate coordinate;
+	private ConcretePositionHunter shooter = new ConcretePositionHunter();
 
 	public FireCommand(Coordinate coordinate) {
 		this.coordinate = coordinate;
@@ -30,23 +33,36 @@ public class FireCommand extends Command {
 			return successor.getResponse(input);
 		}
 
-		CommandQueue response = new CommandQueue();
-		if (battleField.shoot(hunter)) {
+		Command response;
+		CommandQueue responseQueue = new CommandQueue();
+		
+		Object[] params = getParams();
+		int x = Integer.parseInt((String) params[0]);
+		int y = Integer.parseInt((String) params[1]);
+		
+		shooter.setDimension(battleField.getDimension());
+		shooter.setPosition(x, y);
+		if (battleField.shoot(shooter)) {
 			if (battleField.isAliveShips()) {
-				
-				System.out.println(String.format("Params: X[%s] Y[%s]", getParams()[0], getParams()[1]));
-				response.add(new HitCommand());
-				// response.add(new SunkResponse());
-				
+
+				Ship ship = battleField.getShip(x, y);
+				if(ship.isAlive()) {
+					response = new HitCommand();
+				} else {
+					response = new SunkCommand();
+				}
+
 			} else {
-				response.add(new WinCommand());
+				response = new WinCommand();
 			}
+			
 		} else {
-			response.add(new MissCommand());
+			response = new MissCommand();
 		}
 		
-		response.add(new FireCommand(hunter.nextShot()));
-		return response;
+		responseQueue.add(response);
+		responseQueue.add(new FireCommand(hunter.nextShot()));
+		return responseQueue;
 	}
 
 	@Override

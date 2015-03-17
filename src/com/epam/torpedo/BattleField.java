@@ -8,6 +8,7 @@ import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.board.BattleFieldDrawer;
+import com.epam.torpedo.game.ships.types.NullShip;
 
 public abstract class BattleField {
 	private Dimension dimension;
@@ -155,12 +156,24 @@ public abstract class BattleField {
 			if (ship.isHit(shoot.getX(), shoot.getY())) {
 				hasHit = true;
 				ship.decHealPoint();
-				BattleFieldDrawer bfDrawer = new BattleFieldDrawer(this);
-				bfDrawer.draw(hunter);
+				BattleFieldDrawer drawer = new BattleFieldDrawer(this);
+				drawer.draw(hunter);
 			}
 		}
 
 		return hasHit;
+	}
+	
+	public Ship getShip(int x, int y) {
+		Ship resultShip = new NullShip();
+		Iterator<Ship> shipIterator = battleField.iterator();
+		while (shipIterator.hasNext()) {
+			Ship ship = shipIterator.next();
+			if (ship.isHit(x, y)) {
+				resultShip = ship;
+			}
+		}
+		return resultShip;
 	}
 
 	public int size() {

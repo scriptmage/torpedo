@@ -13,8 +13,7 @@ public class SunkCommand extends Command {
 		CommandQueue response = new CommandQueue();
 
 		if (!command.equals(COMMAND_NAME)) {
-			// azért van, mert ez az utolsó a láncban
-			response.add(new ErrorCommand("Unknown protocol"));
+			return successor.getResponse(input);
 		}
 
 		response.add(new NullCommand());
