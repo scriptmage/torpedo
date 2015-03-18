@@ -17,9 +17,7 @@ public class Application {
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());
 		}
-
 		System.out.println("Game Over");
-
 	}
 
 	private static Connection createConnection(String[] args) {

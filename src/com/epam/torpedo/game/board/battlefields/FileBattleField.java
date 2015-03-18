@@ -87,8 +87,8 @@ public class FileBattleField extends BattleField {
 				
 				checkTolerance(iterateCounter);
 			}
-		} catch (IOException e1) {
-			throw new IllegalStateException(e1.getMessage(), e1);
+		} catch (IOException e) {
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 	}
 

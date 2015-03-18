@@ -2,7 +2,6 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
-import com.epam.torpedo.network.protocol.commands.special.NullCommand;
 
 public class MissCommand extends Command {
 
@@ -14,10 +13,7 @@ public class MissCommand extends Command {
 		if (!command.equals(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-
-		CommandQueue response = new CommandQueue();
-		response.add(new NullCommand());
-		return response;
+		return new CommandQueue();
 	}
 
 	@Override

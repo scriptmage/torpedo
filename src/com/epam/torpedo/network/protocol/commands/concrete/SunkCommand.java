@@ -2,7 +2,6 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
-import com.epam.torpedo.network.protocol.commands.special.NullCommand;
 
 public class SunkCommand extends Command {
 
@@ -11,14 +10,10 @@ public class SunkCommand extends Command {
 	@Override
 	public CommandQueue getResponse(String input) {
 		String command = getCommand(input);
-		CommandQueue response = new CommandQueue();
-
 		if (!command.equals(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-
-		response.add(new NullCommand());
-		return response;
+		return new CommandQueue();
 	}
 
 	@Override

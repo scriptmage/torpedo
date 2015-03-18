@@ -28,29 +28,26 @@ public class SocketGame implements Startable {
 	public void start() {
 		try {
 			openConnection();
-			ReadWriteSocket rwSocket = new ReadWriteSocket();
-			rwSocket.setIOStreams(client);
-
+			ReadWriteSocket rwSocket = getIOStreams();
 			Command protocol = ProtocolFactory.getProtocol();
+
 			if (connection.isServerConnection()) {
-				BattleField battleField = Config.getBattleField();
-				battleField.createBattleField();
-				rwSocket.sendCommand(new HelloCommand());
+				beginServerGame(rwSocket);
 			}
 
-			boolean running = true;
-			while (client.isConnected() && running) {
+			boolean hasRunning = true;
+			while (client.isConnected() && hasRunning) {
 				String input = rwSocket.read();
 				CommandQueue commands = protocol.getResponse(input);
-				
-				if(commands.size() > 0) {
+
+				switch (commands.toString()) {
+				case "YOU WON":
 					rwSocket.send(commands);
-				} else {
-					running = false;
-					
-//					if(!battleField.isAliveShips()) {
-//						rwSocket.sendCommand(new WinCommand());
-//					}
+				case "QUIT":
+					hasRunning = false;
+					break;
+				default:
+					rwSocket.send(commands);
 				}
 			}
 		} catch (IOException e) {
@@ -58,6 +55,18 @@ public class SocketGame implements Startable {
 		} finally {
 			closeConnection();
 		}
+	}
+
+	private void beginServerGame(ReadWriteSocket rwSocket) {
+		BattleField battleField = Config.getBattleField();
+		battleField.createBattleField();
+		rwSocket.sendCommand(new HelloCommand());
+	}
+
+	private ReadWriteSocket getIOStreams() {
+		ReadWriteSocket rwSocket = new ReadWriteSocket();
+		rwSocket.setIOStreams(client);
+		return rwSocket;
 	}
 
 	private void closeConnection() {

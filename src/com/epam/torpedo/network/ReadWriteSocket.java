@@ -4,7 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Collection;
 import java.util.Iterator;
 
 import com.epam.torpedo.network.protocol.commands.Command;
@@ -33,27 +32,24 @@ public class ReadWriteSocket {
 		}
 	}
 
-	public void send(CommandQueue commandSet) {
-		Collection<Command> commands = commandSet.get();
+	public void send(CommandQueue commands) {
 		Iterator<Command> iterator = commands.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			sendCommand(iterator.next());
 		}
 	}
-	
+
 	public void sendCommand(Command command) {
 		sendCommand(command.toString());
 	}
-	
+
 	private void sendCommand(String command) {
-		if (command.trim().length() > 0) {
-			try {
-				writer.writeUTF(command);
-				System.out.println("Output: " + command);
-				writer.flush();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+		try {
+			System.out.println("Output: " + command);
+			writer.writeUTF(command.trim());
+			writer.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

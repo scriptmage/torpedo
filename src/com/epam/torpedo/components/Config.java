@@ -23,6 +23,8 @@ public class Config {
 	private static Startable game;
 	private static Hunter hunter;
 	private static BattleFieldDrawer battleFieldDrawer;
+	private static File dataFile;
+	private static Dimension dimension;;
 
 	static {
 		properties = new Properties();
@@ -34,58 +36,46 @@ public class Config {
 	}
 
 	public static Dimension getBattleFieldDimension() {
-		int width = Integer.parseInt(properties.getProperty("boardWidth", "25"));
-		int height = Integer.parseInt(properties.getProperty("boardHeight", "25"));
-		return new Dimension(width, height);
+		if (dimension == null) {
+			int width = Integer.parseInt(properties.getProperty("boardWidth", "25"));
+			int height = Integer.parseInt(properties.getProperty("boardHeight", "25"));
+			dimension = new Dimension(width, height);
+		}
+		return dimension;
 	}
 
 	public static File getDataFile() {
-		return new File(properties.getProperty("dataFile", "ships.dat"));
+		if (dataFile == null) {
+			dataFile = new File(properties.getProperty("dataFile", "ships.dat"));
+		}
+		return dataFile;
 	}
 
 	public static BattleField getBattleField() {
-		try {
-			if(battleField == null) {
-				String className = properties.getProperty("battleField", "com.epam.torpedo.game.board.battlefields.FileBattleField");
-				battleField = (BattleField) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+		if (battleField == null) {
 			battleField = new FileBattleField();
+//			battleField.setDrawer(getBattleFieldDrawer());
 		}
+
 		return battleField;
 	}
 
 	public static Startable getGame() {
-		try {
-			if(game == null) {
-				String className = properties.getProperty("game", "com.epam.torpedo.game.types.SocketGame");
-				game = (Startable) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+		if (game == null) {
 			game = new SocketGame();
 		}
 		return game;
 	}
 
 	public static Hunter getHunter() {
-		try {
-			if(hunter == null) {
-				String className = properties.getProperty("hunter", "com.epam.torpedo.game.hunters.RandomHunter");
-				hunter = (Hunter) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+		if (hunter == null) {
 			hunter = new RandomHunter();
 		}
 		return hunter;
 	}
 
 	public static BattleFieldDrawer getBattleFieldDrawer() {
-		try {
-			if(battleFieldDrawer == null) {
-				String className = properties.getProperty("battleFieldDrawer", "com.epam.torpedo.game.board.BattleFieldDrawer");
-				battleFieldDrawer = (BattleFieldDrawer) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+		if (battleFieldDrawer == null) {
 			battleFieldDrawer = new BattleFieldDrawer();
 		}
 		return battleFieldDrawer;

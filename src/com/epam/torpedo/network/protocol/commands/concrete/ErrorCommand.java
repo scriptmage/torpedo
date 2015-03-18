@@ -7,11 +7,11 @@ public class ErrorCommand extends Command {
 
 	private static final String COMMAND_NAME = "ERROR";
 	private String message;
-	
+
 	public ErrorCommand() {
 		this.message = "";
 	}
-	
+
 	public ErrorCommand(String message) {
 		this.message = message;
 	}
@@ -22,9 +22,11 @@ public class ErrorCommand extends Command {
 		if (!command.equals(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		return new CommandQueue();
+		CommandQueue response = new CommandQueue();
+		response.add(new QuitCommand());
+		return response;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("%s %s", COMMAND_NAME, message);
