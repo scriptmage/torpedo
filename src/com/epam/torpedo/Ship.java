@@ -32,9 +32,7 @@ public abstract class Ship {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + healPoint;
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		result = prime * result + ((shape == null) ? 0 : shape.hashCode());
 		return result;
 	}
 
@@ -47,17 +45,10 @@ public abstract class Ship {
 		if (getClass() != obj.getClass())
 			return false;
 		Ship other = (Ship) obj;
-		if (healPoint != other.healPoint)
-			return false;
 		if (position == null) {
 			if (other.position != null)
 				return false;
 		} else if (!position.equals(other.position))
-			return false;
-		if (shape == null) {
-			if (other.shape != null)
-				return false;
-		} else if (!shape.equals(other.shape))
 			return false;
 		return true;
 	}
