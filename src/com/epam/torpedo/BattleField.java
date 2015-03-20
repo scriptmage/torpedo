@@ -23,16 +23,13 @@ public abstract class BattleField {
 		return numberOfShips;
 	}
 
-	public void setDrawer(BattleFieldDrawer drawer) {
-		this.drawer = drawer;
-	}
-
 	public void setNumberOfShips(int numberOfShips) {
 		this.numberOfShips = numberOfShips;
 	}
 
 	public BattleField() {
-		this.dimension = Config.getBattleFieldDimension();
+		drawer = Config.getBattleFieldDrawer();
+		dimension = Config.getBattleFieldDimension();
 		battleField = new HashSet<>();
 	}
 
@@ -158,7 +155,7 @@ public abstract class BattleField {
 				ship.decHealPoint();
 				
 				if(drawer != null) {
-					drawer.draw(Config.getHunter());
+					drawer.draw(getAllShipCoords(), Config.getHunter());
 				}
 			}
 		}
