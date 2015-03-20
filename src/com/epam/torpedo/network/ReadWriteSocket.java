@@ -3,20 +3,22 @@ package com.epam.torpedo.network;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Iterator;
 
+import com.epam.torpedo.network.connection.Connection;
+import com.epam.torpedo.network.connection.ConnectionData;
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
-public class ReadWriteSocket {
+public class ReadWriteSocket extends Connection {
 	private DataInputStream reader;
 	private DataOutputStream writer;
-
-	public void setIOStreams(Socket client) {
+	
+	public ReadWriteSocket(ConnectionData connection) {
+		super(connection);
 		try {
-			reader = new DataInputStream(client.getInputStream());
-			writer = new DataOutputStream(client.getOutputStream());
+			reader = new DataInputStream(getInputStream());
+			writer = new DataOutputStream(getOutputStream());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -35,18 +37,14 @@ public class ReadWriteSocket {
 	public void send(CommandQueue commands) {
 		Iterator<Command> iterator = commands.iterator();
 		while (iterator.hasNext()) {
-			sendCommand(iterator.next());
+			this.send(iterator.next());
 		}
 	}
 
-	public void sendCommand(Command command) {
-		sendCommand(command.toString());
-	}
-
-	private void sendCommand(String command) {
+	public void send(Command command) {
 		try {
-			System.out.println("Output: " + command);
-			writer.writeUTF(command.trim());
+			System.out.println("Output: " + command.toString());
+			writer.writeUTF(command.toString().trim());
 			writer.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);

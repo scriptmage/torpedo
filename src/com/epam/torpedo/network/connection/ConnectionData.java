@@ -1,6 +1,6 @@
-package com.epam.torpedo.components;
+package com.epam.torpedo.network.connection;
 
-public class Connection {
+public class ConnectionData {
 
 	public static final int DEFAULT_PORT_NUMBER = 3235;
 	public static final int MAXIMUM_PORT_NUMBER = 65535;
@@ -9,19 +9,19 @@ public class Connection {
 	private String hostName;
 	private int portNumber;
 
-	public Connection() {
+	public ConnectionData() {
 		portNumber = DEFAULT_PORT_NUMBER;
 	}
 
-	public Connection(int portNumber) {
+	public ConnectionData(int portNumber) {
 		setPortNumber(portNumber);
 	}
 
-	public Connection(String portNumber) {
+	public ConnectionData(String portNumber) {
 		setPortNumber(portNumber);
 	}
 
-	public Connection(String hostName, int portNumber) {
+	public ConnectionData(String hostName, int portNumber) {
 		this.hostName = hostName;
 		setPortNumber(portNumber);
 	}
