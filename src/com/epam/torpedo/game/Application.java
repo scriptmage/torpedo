@@ -2,7 +2,7 @@ package com.epam.torpedo.game;
 
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.game.types.SocketGame;
-import com.epam.torpedo.network.connection.ConnectionData;
+import com.epam.torpedo.network.ConnectionData;
 
 public class Application {
 

@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.epam.torpedo.network.connection.ConnectionData;
-
 public class ConnectionTest {
 
 	private ConnectionData underTest;

@@ -1,4 +1,4 @@
-package com.epam.torpedo.network.connection;
+package com.epam.torpedo.network;
 
 public class ConnectionData {
 

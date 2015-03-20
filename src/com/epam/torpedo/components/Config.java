@@ -12,7 +12,7 @@ import com.epam.torpedo.game.board.BattleFieldDrawer;
 import com.epam.torpedo.game.board.battlefields.FileBattleField;
 import com.epam.torpedo.game.hunters.RandomHunter;
 import com.epam.torpedo.game.types.SocketGame;
-import com.epam.torpedo.network.connection.ConnectionData;
+import com.epam.torpedo.network.ConnectionData;
 
 public class Config {
 
