@@ -1,8 +1,10 @@
-package com.epam.torpedo.network;
+package com.epam.torpedo.network.connection;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.epam.torpedo.network.ConnectionData;
 
 public class ConnectionTest {
 
