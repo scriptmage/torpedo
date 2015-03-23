@@ -11,7 +11,7 @@ public abstract class Command {
 	private String command;
 	private List<String> params = new ArrayList<>();
 
-	private void parseInput(String input) {
+	public void initCommand(String input) {
 		StringTokenizer st = new StringTokenizer(input, " ");
 
 		if (st.hasMoreTokens()) {
@@ -23,9 +23,15 @@ public abstract class Command {
 			}
 		}
 	}
+	
+	public boolean isEqual(String commandName) {
+		if(command == null) {
+			throw new IllegalStateException("Please, first init the command");
+		}
+		return command.equals(commandName);
+	}
 
-	public String getCommand(String input) {
-		parseInput(input);
+	public String getCommand() {
 		return command;
 	}
 

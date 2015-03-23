@@ -16,7 +16,7 @@ public class FireCommand extends Command {
 	private Coordinate coordinate;
 
 	public FireCommand() {
-		
+
 	}
 
 	public FireCommand(Coordinate coordinate) {
@@ -25,28 +25,28 @@ public class FireCommand extends Command {
 
 	@Override
 	public CommandQueue getResponse(String input) {
-		String command = getCommand(input);
-		if (!command.equals(COMMAND_NAME)) {
+		initCommand(input);
+		if (!isEqual(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
 
-		BattleField battleField = Config.getBattleField();
 		Hunter hunter = Config.getHunter();
 		ConcretePositionHunter shooter = getShooter();
-		
+		BattleField battleField = Config.getBattleField();
+
 		CommandQueue responseQueue = new CommandQueue();
 		if (battleField.shoot(shooter)) {
 
 			if (battleField.isAliveShips()) {
+				Command command = new HitCommand();
 				Ship ship = battleField.getShip(shooter.getPosition());
-				if (ship.isAlive()) {
-					responseQueue.add(new HitCommand());
-					responseQueue.add(new FireCommand(hunter.nextShot()));
-				} else {
-					responseQueue.add(new SunkCommand());
-					responseQueue.add(new FireCommand(hunter.nextShot()));
+
+				if (!ship.isAlive()) {
+					command = new SunkCommand();
 				}
 
+				responseQueue.add(command);
+				responseQueue.add(new FireCommand(hunter.nextShot()));
 			} else {
 				responseQueue.add(new WinCommand());
 			}
