@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 public abstract class Command {
 
 	protected Command successor;
+	protected CommandQueue responseQueue = new CommandQueue();
 	
 	private String command;
 	private List<String> params = new ArrayList<>();
@@ -22,9 +23,10 @@ public abstract class Command {
 				params.add(st.nextToken());
 			}
 		}
+		responseQueue.clear();
 	}
 	
-	public boolean isEqual(String commandName) {
+	public boolean isCommand(String commandName) {
 		if(command == null) {
 			throw new IllegalStateException("Please, first init the command");
 		}

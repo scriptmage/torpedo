@@ -12,19 +12,17 @@ public class HelloCommand extends Command {
 
 	@Override
 	public CommandQueue getResponse(String input) {
-		String command = getCommand(input);
-		if (!command.equals(COMMAND_NAME)) {
+		initCommand(input);
+		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		
-		CommandQueue response = new CommandQueue();
 		
 		BattleField battleField = Config.getBattleField();
 		battleField.createBattleField();
 		
 		Hunter hunter = Config.getHunter();
-		response.add(new FireCommand(hunter.nextShot()));
-		return response;
+		responseQueue.add(new FireCommand(hunter.nextShot()));
+		return responseQueue;
 	}
 
 	@Override

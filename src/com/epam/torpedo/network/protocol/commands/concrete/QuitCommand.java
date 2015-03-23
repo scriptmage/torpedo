@@ -9,13 +9,12 @@ public class QuitCommand extends Command {
 
 	@Override
 	public CommandQueue getResponse(String input) {
-		String command = getCommand(input);
-		CommandQueue response = new CommandQueue();
-		if (!command.equals(COMMAND_NAME)) {
-			response.add(new ErrorCommand("Unknown protocol"));
+		initCommand(input);
+		if (!isCommand(COMMAND_NAME)) {
+			responseQueue.add(new ErrorCommand("Unknown protocol"));
 		}
-		response.add(new QuitCommand());
-		return response;
+		responseQueue.add(new QuitCommand());
+		return responseQueue;
 	}
 
 	@Override

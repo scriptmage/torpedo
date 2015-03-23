@@ -26,7 +26,7 @@ public class FireCommand extends Command {
 	@Override
 	public CommandQueue getResponse(String input) {
 		initCommand(input);
-		if (!isEqual(COMMAND_NAME)) {
+		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
 
@@ -34,7 +34,6 @@ public class FireCommand extends Command {
 		ConcretePositionHunter shooter = getShooter();
 		BattleField battleField = Config.getBattleField();
 
-		CommandQueue responseQueue = new CommandQueue();
 		if (battleField.shoot(shooter)) {
 
 			if (battleField.isAliveShips()) {

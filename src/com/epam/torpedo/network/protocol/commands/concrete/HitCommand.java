@@ -9,12 +9,11 @@ public class HitCommand extends Command {
 
 	@Override
 	public CommandQueue getResponse(String input) {
-		String command = getCommand(input);
-		if (!command.equals(COMMAND_NAME)) {
+		initCommand(input);
+		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		
-		return new CommandQueue();
+		return responseQueue;
 	}
 
 	@Override

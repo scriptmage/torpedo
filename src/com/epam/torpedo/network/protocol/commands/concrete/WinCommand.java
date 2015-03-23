@@ -10,13 +10,12 @@ public class WinCommand extends Command {
 
 	@Override
 	public CommandQueue getResponse(String input) {
-		String command = getCommand(input);
-		if (!command.equals(COMMAND_NAME)) {
+		initCommand(input);
+		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		CommandQueue response = new CommandQueue();
-		response.add(new QuitCommand());
-		return response;
+		responseQueue.add(new QuitCommand());
+		return responseQueue;
 	}
 
 	@Override

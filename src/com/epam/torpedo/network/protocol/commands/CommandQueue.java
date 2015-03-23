@@ -21,6 +21,10 @@ public class CommandQueue {
 	public Iterator<Command> iterator() {
 		return queue.iterator();
 	}
+	
+	public void clear() {
+		queue.clear();
+	}
 
 	@Override
 	public String toString() {
