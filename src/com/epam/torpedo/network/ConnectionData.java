@@ -3,14 +3,14 @@ package com.epam.torpedo.network;
 public class ConnectionData {
 
 	public static final int DEFAULT_PORT_NUMBER = 3235;
-	public static final int MAXIMUM_PORT_NUMBER = 65535;
 	public static final int MINIMUM_PORT_NUMBER = 1024;
+	public static final int MAXIMUM_PORT_NUMBER = 65535;
 
 	private String hostName;
 	private int portNumber;
 
 	public ConnectionData() {
-		portNumber = DEFAULT_PORT_NUMBER;
+		setPortNumber(DEFAULT_PORT_NUMBER);
 	}
 
 	public ConnectionData(int portNumber) {
@@ -47,25 +47,22 @@ public class ConnectionData {
 		try {
 			setPortNumber(Integer.parseInt(portNumber));
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("This isn't a number: "
-					+ portNumber + ". Please, give me a number.", e);
+			throw new IllegalArgumentException("This isn't a number: " + portNumber + ". Please, give me a number.", e);
 		}
 	}
 
-	private static void validatePortNumber(int portNumber) {
+	private void validatePortNumber(int portNumber) {
 		if (!isValidPortNumber(portNumber)) {
-			throw new IllegalArgumentException("Port number should be between "
-					+ MINIMUM_PORT_NUMBER + " and " + MAXIMUM_PORT_NUMBER);
+			throw new IllegalArgumentException("Port number should be between " + MINIMUM_PORT_NUMBER + " and " + MAXIMUM_PORT_NUMBER);
 		}
 	}
 
-	private static boolean isValidPortNumber(int portNumber) {
-		return portNumber > MINIMUM_PORT_NUMBER
-				&& portNumber < MAXIMUM_PORT_NUMBER;
+	private boolean isValidPortNumber(int portNumber) {
+		return portNumber > MINIMUM_PORT_NUMBER && portNumber < MAXIMUM_PORT_NUMBER;
 	}
-	
+
 	public boolean isServerConnection() {
-		return hostName == null;
+		return hostName == null || hostName.isEmpty();
 	}
 
 }

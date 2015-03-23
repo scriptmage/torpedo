@@ -23,13 +23,13 @@ public class CoordinateSet {
 		}
 	}
 
-	public void retainAll(CoordinateSet coordinateSet) {
+	public boolean retainAll(CoordinateSet coordinateSet) {
 		Set<Coordinate> intersect = new HashSet<>();
 		Iterator<Coordinate> iterator = coordinateSet.iterator();
 		while (iterator.hasNext()) {
 			intersect.add(iterator.next());
 		}
-		coords.retainAll(intersect);
+		return coords.retainAll(intersect);
 	}
 
 	public boolean contains(int x, int y) {
