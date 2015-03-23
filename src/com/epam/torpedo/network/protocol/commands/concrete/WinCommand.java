@@ -7,6 +7,10 @@ public class WinCommand extends Command {
 
 	// protocol is YOU WON
 	private static final String COMMAND_NAME = "YOU";
+	
+	public WinCommand() {
+		runnableOff();
+	}
 
 	@Override
 	public CommandQueue getResponse(String input) {
@@ -14,8 +18,8 @@ public class WinCommand extends Command {
 		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		responseQueue.add(new QuitCommand());
-		return responseQueue;
+		addResponse(new QuitCommand());
+		return getResponseQueue();
 	}
 
 	@Override

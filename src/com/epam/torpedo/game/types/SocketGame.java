@@ -38,15 +38,8 @@ public class SocketGame implements Startable {
 				String input = socketTalker.read();
 				CommandQueue response = protocol.getResponse(input);
 
-				switch (response.toString()) {
-				case "YOU WON":
-					socketTalker.send(response);
-				case "QUIT":
-					hasRunning = false;
-					break;
-				default:
-					socketTalker.send(response);
-				}
+				socketTalker.send(response);
+				hasRunning = response.isRunnable();
 			}
 
 		} catch (IOException e) {

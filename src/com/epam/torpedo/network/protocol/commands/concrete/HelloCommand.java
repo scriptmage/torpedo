@@ -21,8 +21,8 @@ public class HelloCommand extends Command {
 		battleField.createBattleField();
 		
 		Hunter hunter = Config.getHunter();
-		responseQueue.add(new FireCommand(hunter.nextShot()));
-		return responseQueue;
+		addResponse(new FireCommand(hunter.nextShot()));
+		return getResponseQueue();
 	}
 
 	@Override

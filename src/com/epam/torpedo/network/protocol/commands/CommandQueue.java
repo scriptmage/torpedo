@@ -25,6 +25,15 @@ public class CommandQueue {
 	public void clear() {
 		queue.clear();
 	}
+	
+	public boolean isRunnable() {
+		boolean hasRunnable = true;
+		if(queue.size() == 1) {
+			Command lastCommand = queue.get(queue.size() - 1);
+			hasRunnable = lastCommand.isRunnable();
+		}
+		return hasRunnable;
+	}
 
 	@Override
 	public String toString() {

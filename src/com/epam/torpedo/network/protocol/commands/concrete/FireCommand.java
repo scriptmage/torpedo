@@ -44,18 +44,18 @@ public class FireCommand extends Command {
 					command = new SunkCommand();
 				}
 
-				responseQueue.add(command);
-				responseQueue.add(new FireCommand(hunter.nextShot()));
+				addResponse(command);
+				addResponse(new FireCommand(hunter.nextShot()));
 			} else {
-				responseQueue.add(new WinCommand());
+				addResponse(new WinCommand());
 			}
 
 		} else {
-			responseQueue.add(new MissCommand());
-			responseQueue.add(new FireCommand(hunter.nextShot()));
+			addResponse(new MissCommand());
+			addResponse(new FireCommand(hunter.nextShot()));
 		}
 
-		return responseQueue;
+		return getResponseQueue();
 	}
 
 	private ConcretePositionHunter getShooter() {

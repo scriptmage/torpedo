@@ -23,15 +23,20 @@ public class SocketWriter {
 	public void send(CommandQueue commands) {
 		Iterator<Command> iterator = commands.iterator();
 		while (iterator.hasNext()) {
-			send(iterator.next());
+			Command command = iterator.next();
+			if(command.isSendable()) {
+				send(command);
+			}
 		}
 	}
 
 	public void send(Command command) {
 		try {
-			System.out.println("Output: " + command.toString());
-			outputStream.writeUTF(command.toString().trim());
-			outputStream.flush();
+			if(command.isSendable()) {
+				System.out.println("Output: " + command.toString());
+				outputStream.writeUTF(command.toString().trim());
+				outputStream.flush();
+			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

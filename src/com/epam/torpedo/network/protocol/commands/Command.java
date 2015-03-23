@@ -7,10 +7,12 @@ import java.util.StringTokenizer;
 public abstract class Command {
 
 	protected Command successor;
-	protected CommandQueue responseQueue = new CommandQueue();
-	
+
 	private String command;
 	private List<String> params = new ArrayList<>();
+	private CommandQueue responseQueue = new CommandQueue();
+	private boolean hasRunnable = true;
+	private boolean hasSendable = true;
 
 	public void initCommand(String input) {
 		StringTokenizer st = new StringTokenizer(input, " ");
@@ -25,9 +27,19 @@ public abstract class Command {
 		}
 		responseQueue.clear();
 	}
-	
+
+	public void addResponse(Command response) {
+		responseQueue.add(response);
+	}
+
+	public CommandQueue getResponseQueue() {
+		// TODO itt nem ezt kellene visszaadni, mert maipulálható lenne, hanem
+		// csak az értékeket --> új pélfányt
+		return responseQueue;
+	}
+
 	public boolean isCommand(String commandName) {
-		if(command == null) {
+		if (command == null) {
 			throw new IllegalStateException("Please, first init the command");
 		}
 		return command.equals(commandName);
@@ -44,6 +56,22 @@ public abstract class Command {
 	public void setSuccessor(Command successor) {
 		this.successor = successor;
 	}
-
+	
+	public boolean isRunnable() {
+		return hasRunnable;
+	}
+	
+	public void runnableOff() {
+		hasRunnable = false;
+	}
+	
+	public boolean isSendable() {
+		return hasSendable;
+	}
+	
+	public void sendableOff() {
+		hasSendable = false;
+	}
+	
 	abstract public CommandQueue getResponse(String input);
 }

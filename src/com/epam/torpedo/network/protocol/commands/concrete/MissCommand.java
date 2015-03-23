@@ -13,7 +13,7 @@ public class MissCommand extends Command {
 		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		return responseQueue;
+		return getResponseQueue();
 	}
 
 	@Override

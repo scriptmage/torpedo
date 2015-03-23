@@ -22,8 +22,8 @@ public class ErrorCommand extends Command {
 		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		responseQueue.add(new QuitCommand());
-		return responseQueue;
+		addResponse(new QuitCommand());
+		return getResponseQueue();
 	}
 
 	@Override
