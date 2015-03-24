@@ -22,7 +22,7 @@ public class SocketGame implements Startable {
 
 	@Override
 	public void start() {
-		SocketTalker socketTalker = getSocketTalker();
+		SocketTalker socketTalker = new SocketTalker(connectionData);
 		Command protocol = ProtocolFactory.getProtocol();
 
 		try {
@@ -39,7 +39,7 @@ public class SocketGame implements Startable {
 				CommandQueue response = protocol.getResponse(input);
 
 				socketTalker.send(response);
-				hasRunning = response.isRunnable();
+				hasRunning = getRunnableState(response);
 			}
 
 		} catch (IOException e) {
@@ -49,15 +49,19 @@ public class SocketGame implements Startable {
 		}
 	}
 
-	private SocketTalker getSocketTalker() {
-		SocketTalker socketTalker = new SocketTalker(connectionData);
-		return socketTalker;
-	}
-
 	private void beginServerGame(SocketTalker socketTalker) {
 		BattleField battleField = Config.getBattleField();
 		battleField.createBattleField();
 		socketTalker.send(new HelloCommand());
+	}
+	
+	private boolean getRunnableState(CommandQueue response) {
+		boolean hasRunnable = true;
+		if(response.size() == 1) {
+			Command command = response.get(0);
+			hasRunnable = command.isRunnable();
+		}
+		return hasRunnable;
 	}
 
 }

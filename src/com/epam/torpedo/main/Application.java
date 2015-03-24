@@ -1,8 +1,10 @@
-package com.epam.torpedo.game;
+package com.epam.torpedo.main;
 
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.Startable;
+import com.epam.torpedo.game.GameFactory;
 import com.epam.torpedo.game.types.SocketGame;
 import com.epam.torpedo.network.ConnectionData;
+import com.epam.torpedo.options.GameModeProperties;
 
 public class Application {
 
@@ -11,8 +13,9 @@ public class Application {
 		ConnectionData connectionData = createConnection(args);
 
 		try {
-			SocketGame game = (SocketGame) Config.getGame();
-			game.setConnection(connectionData);
+			GameModeProperties gameMode = new GameModeProperties();
+			Startable game = GameFactory.createGame(gameMode);
+			((SocketGame) game).setConnection(connectionData);
 			game.start();
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());

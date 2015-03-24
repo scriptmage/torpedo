@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
-import com.epam.torpedo.game.ships.Shape;
+import com.epam.torpedo.ships.Shape;
 
 public abstract class Ship {
 

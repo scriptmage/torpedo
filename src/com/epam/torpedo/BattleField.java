@@ -8,14 +8,13 @@ import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
-import com.epam.torpedo.game.board.BattleFieldDrawer;
-import com.epam.torpedo.game.ships.types.NullShip;
+import com.epam.torpedo.ships.types.NullShip;
 
 public abstract class BattleField {
 	private Dimension dimension;
 	private Set<Ship> battleField;
 	private int numberOfShips = 10;
-	private BattleFieldDrawer drawer;
+	private Drawable drawer;
 
 	protected static final int ITERATION_TOLERANCE = 25;
 

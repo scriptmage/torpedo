@@ -1,4 +1,4 @@
-package com.epam.torpedo.game.board.battlefields;
+package com.epam.torpedo.board.battlefields;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,8 +11,8 @@ import java.util.StringTokenizer;
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Config;
-import com.epam.torpedo.game.ships.Shape;
-import com.epam.torpedo.game.ships.ShipFactory;
+import com.epam.torpedo.ships.Shape;
+import com.epam.torpedo.ships.ShipFactory;
 
 public class FileBattleField extends BattleField {
 

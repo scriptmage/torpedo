@@ -1,4 +1,4 @@
-package com.epam.torpedo.game.board;
+package com.epam.torpedo.board.drawers;
 
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;

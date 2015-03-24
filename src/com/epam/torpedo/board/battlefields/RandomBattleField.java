@@ -1,8 +1,8 @@
-package com.epam.torpedo.game.board.battlefields;
+package com.epam.torpedo.board.battlefields;
 
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Ship;
-import com.epam.torpedo.game.ships.ShipFactory;
+import com.epam.torpedo.ships.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 

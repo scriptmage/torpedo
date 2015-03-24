@@ -5,14 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.epam.torpedo.BattleField;
+import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
-import com.epam.torpedo.Startable;
-import com.epam.torpedo.game.board.BattleFieldDrawer;
-import com.epam.torpedo.game.board.battlefields.FileBattleField;
-import com.epam.torpedo.game.hunters.RandomHunter;
-import com.epam.torpedo.game.types.SocketGame;
-import com.epam.torpedo.network.ConnectionData;
+import com.epam.torpedo.board.drawers.BattleFieldDrawer;
+import com.epam.torpedo.hunters.RandomHunter;
 
 public class Config {
 
@@ -20,10 +16,9 @@ public class Config {
 
 	private static Properties properties;
 
-	private static BattleField battleField;
-	private static Startable game;
+//	private static BattleField battleField;
 	private static Hunter hunter;
-	private static BattleFieldDrawer battleFieldDrawer;
+	private static Drawable battleFieldDrawer;
 
 	static {
 		properties = new Properties();
@@ -44,29 +39,17 @@ public class Config {
 		return new File(properties.getProperty("dataFile", "ships.dat"));
 	}
 
-	public static BattleField getBattleField() {
-		try {
-			if(battleField == null) {
-				String className = properties.getProperty("battleField", "com.epam.torpedo.game.board.battlefields.FileBattleField");
-				battleField = (BattleField) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			battleField = new FileBattleField();
-		}
-		return battleField;
-	}
-
-	public static Startable getGame() {
-		try {
-			if(game == null) {
-				String className = properties.getProperty("game", "com.epam.torpedo.game.types.SocketGame");
-				game = (Startable) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			game = new SocketGame();
-		}
-		return game;
-	}
+//	public static BattleField getBattleField() {
+//		try {
+//			if(battleField == null) {
+//				String className = properties.getProperty("battleField", "com.epam.torpedo.game.board.battlefields.FileBattleField");
+//				battleField = (BattleField) Class.forName(className).newInstance();
+//			}
+//		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+//			battleField = new FileBattleField();
+//		}
+//		return battleField;
+//	}
 
 	public static Hunter getHunter() {
 		try {
@@ -80,11 +63,11 @@ public class Config {
 		return hunter;
 	}
 
-	public static BattleFieldDrawer getBattleFieldDrawer() {
+	public static Drawable getBattleFieldDrawer() {
 		try {
 			if(battleFieldDrawer == null) {
 				String className = properties.getProperty("battleFieldDrawer", "com.epam.torpedo.game.board.BattleFieldDrawer");
-				battleFieldDrawer = (BattleFieldDrawer) Class.forName(className).newInstance();
+				battleFieldDrawer = (Drawable) Class.forName(className).newInstance();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			battleFieldDrawer = new BattleFieldDrawer();

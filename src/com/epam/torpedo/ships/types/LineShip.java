@@ -1,4 +1,4 @@
-package com.epam.torpedo.game.ships.types;
+package com.epam.torpedo.ships.types;
 
 import com.epam.torpedo.Ship;
 

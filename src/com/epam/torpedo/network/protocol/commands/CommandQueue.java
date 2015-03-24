@@ -13,6 +13,10 @@ public class CommandQueue {
 	public void add(Command command) {
 		queue.add(command);
 	}
+	
+	public Command get(int index) {
+		return queue.get(index);
+	}
 
 	public Collection<Command> get() {
 		return Collections.unmodifiableCollection(queue);
@@ -26,13 +30,8 @@ public class CommandQueue {
 		queue.clear();
 	}
 	
-	public boolean isRunnable() {
-		boolean hasRunnable = true;
-		if(queue.size() == 1) {
-			Command lastCommand = queue.get(queue.size() - 1);
-			hasRunnable = lastCommand.isRunnable();
-		}
-		return hasRunnable;
+	public int size() {
+		return queue.size();
 	}
 
 	@Override

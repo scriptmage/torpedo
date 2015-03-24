@@ -5,7 +5,7 @@ import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
-import com.epam.torpedo.game.hunters.ConcretePositionHunter;
+import com.epam.torpedo.hunters.ConcretePositionHunter;
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
