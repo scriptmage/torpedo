@@ -3,9 +3,10 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.board.BattleFieldFactory;
 import com.epam.torpedo.components.Coordinate;
-import com.epam.torpedo.hunters.ConcretePositionHunter;
+import com.epam.torpedo.hunters.HunterFactory;
+import com.epam.torpedo.hunters.concrete.ConcretePositionHunter;
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
@@ -14,6 +15,8 @@ public class FireCommand extends Command {
 	private static final String COMMAND_NAME = "FIRE";
 
 	private Coordinate coordinate;
+	private BattleField battleField;
+	private ConcretePositionHunter shooter = (ConcretePositionHunter) HunterFactory.createShooter();
 
 	public FireCommand() {
 
@@ -30,9 +33,9 @@ public class FireCommand extends Command {
 			return successor.getResponse(input);
 		}
 
-		Hunter hunter = Config.getHunter();
-		ConcretePositionHunter shooter = getShooter();
-		BattleField battleField = Config.getBattleField();
+		battleField = BattleFieldFactory.createBattleField();
+		Hunter hunter = HunterFactory.createHunter();
+		shooter.setPosition(getParams());
 
 		if (battleField.shoot(shooter)) {
 
@@ -56,13 +59,6 @@ public class FireCommand extends Command {
 		}
 
 		return getResponseQueue();
-	}
-
-	private ConcretePositionHunter getShooter() {
-		ConcretePositionHunter shooter = new ConcretePositionHunter();
-		shooter.setDimension(Config.getBattleFieldDimension());
-		shooter.setPosition(getParams());
-		return shooter;
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
 public class ProtocolFactory {
 
 	static public Command getProtocol() {
-
+		
 		Command error = new ErrorCommand();
 		Command win = new WinCommand();
 		Command hello = new HelloCommand();

@@ -4,7 +4,8 @@ import com.epam.torpedo.Startable;
 import com.epam.torpedo.game.GameFactory;
 import com.epam.torpedo.game.types.SocketGame;
 import com.epam.torpedo.network.ConnectionData;
-import com.epam.torpedo.options.GameModeProperties;
+import com.epam.torpedo.options.Options;
+import com.epam.torpedo.options.datasources.PropertiesOptions;
 
 public class Application {
 
@@ -13,7 +14,7 @@ public class Application {
 		ConnectionData connectionData = createConnection(args);
 
 		try {
-			GameModeProperties gameMode = new GameModeProperties();
+			Options gameMode = new PropertiesOptions();
 			Startable game = GameFactory.createGame(gameMode);
 			((SocketGame) game).setConnection(connectionData);
 			game.start();

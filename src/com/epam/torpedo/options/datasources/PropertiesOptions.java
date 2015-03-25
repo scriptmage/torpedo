@@ -22,7 +22,7 @@ public class PropertiesOptions implements Options {
 
 	@Override
 	public String getProperty(String propertyName) {
-		return properties.getProperty(propertyName);
+		return properties.getProperty(propertyName).toLowerCase();
 	}
 
 }

@@ -61,6 +61,10 @@ public abstract class Ship {
 		return healPoint > 0;
 	}
 
+	public boolean isHit(Coordinate coordinate) {
+		return isHit(coordinate.getX(), coordinate.getY());
+	}
+
 	public boolean isHit(int x, int y) {
 		return shape.contains(x, y);
 	}

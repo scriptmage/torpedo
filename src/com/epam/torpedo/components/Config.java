@@ -8,7 +8,7 @@ import java.util.Properties;
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.board.drawers.BattleFieldDrawer;
-import com.epam.torpedo.hunters.RandomHunter;
+import com.epam.torpedo.hunters.concrete.RandomHunter;
 
 public class Config {
 
@@ -51,17 +51,17 @@ public class Config {
 //		return battleField;
 //	}
 
-	public static Hunter getHunter() {
-		try {
-			if(hunter == null) {
-				String className = properties.getProperty("hunter", "com.epam.torpedo.game.hunters.RandomHunter");
-				hunter = (Hunter) Class.forName(className).newInstance();
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			hunter = new RandomHunter();
-		}
-		return hunter;
-	}
+//	public static Hunter getHunter() {
+//		try {
+//			if(hunter == null) {
+//				String className = properties.getProperty("hunter", "com.epam.torpedo.game.hunters.RandomHunter");
+//				hunter = (Hunter) Class.forName(className).newInstance();
+//			}
+//		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+//			hunter = new RandomHunter();
+//		}
+//		return hunter;
+//	}
 
 	public static Drawable getBattleFieldDrawer() {
 		try {

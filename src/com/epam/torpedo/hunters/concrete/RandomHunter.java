@@ -1,4 +1,4 @@
-package com.epam.torpedo.hunters;
+package com.epam.torpedo.hunters.concrete;
 
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.components.Coordinate;

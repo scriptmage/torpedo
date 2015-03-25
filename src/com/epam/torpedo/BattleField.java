@@ -8,6 +8,7 @@ import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
+import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.ships.types.NullShip;
 
 public abstract class BattleField {
@@ -58,6 +59,10 @@ public abstract class BattleField {
 		return battleField.add(ship);
 	}
 
+	public void validatePosition(Coordinate coordinate) {
+		validatePosition(coordinate.getX(), coordinate.getY());
+	}
+	
 	public void validatePosition(int x, int y) {
 		if (!isValidPositionX(x)) {
 			throw new IllegalArgumentException("Illegal X position, must be between 0 and " + (dimension.getWidth() - 1));
@@ -141,20 +146,21 @@ public abstract class BattleField {
 	}
 
 	public boolean shoot(Hunter hunter) {
-		Coordinate shoot = hunter.nextShot();
-		validatePosition(shoot.getX(), shoot.getY());
-
 		boolean hasHit = false;
+		Coordinate shoot = hunter.nextShot();
+		validatePosition(shoot);
 
 		Iterator<Ship> shipIterator = battleField.iterator();
 		while (!hasHit && shipIterator.hasNext()) {
 			Ship ship = shipIterator.next();
-			if (ship.isHit(shoot.getX(), shoot.getY())) {
+			if (ship.isHit(shoot)) {
 				hasHit = true;
 				ship.decHealPoint();
-				
-				if(drawer != null) {
-					drawer.draw(getAllShipCoords(), Config.getHunter());
+
+				if (drawer != null) {
+					Hunter shooter = HunterFactory.createShooter();
+					shooter.addShot(shoot);
+					drawer.draw(getAllShipCoords(), shooter);
 				}
 			}
 		}

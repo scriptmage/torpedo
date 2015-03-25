@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Startable;
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.board.BattleFieldFactory;
 import com.epam.torpedo.network.ConnectionData;
 import com.epam.torpedo.network.connection.sockets.SocketTalker;
 import com.epam.torpedo.network.protocol.ProtocolFactory;
@@ -50,7 +50,7 @@ public class SocketGame implements Startable {
 	}
 
 	private void beginServerGame(SocketTalker socketTalker) {
-		BattleField battleField = Config.getBattleField();
+		BattleField battleField = BattleFieldFactory.createBattleField();
 		battleField.createBattleField();
 		socketTalker.send(new HelloCommand());
 	}

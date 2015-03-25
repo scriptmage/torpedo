@@ -3,14 +3,15 @@ package com.epam.torpedo.game;
 import com.epam.torpedo.Startable;
 import com.epam.torpedo.game.types.LocalGame;
 import com.epam.torpedo.game.types.SocketGame;
+import com.epam.torpedo.options.Options;
 
 public class GameFactory {
 
-	public static Startable createGame(GameMode gameMode) {
+	public static Startable createGame(Options gameMode) {
 		Startable result = null;
 
-		String mode = gameMode.getGameMode();
-		switch (mode.toLowerCase()) {
+		String mode = gameMode.getProperty("game");
+		switch (mode) {
 		case "socket":
 			result = new SocketGame();
 			break;
