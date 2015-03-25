@@ -3,8 +3,8 @@ package com.epam.torpedo.board;
 import com.epam.torpedo.BattleField;
 import com.epam.torpedo.board.battlefields.FileBattleField;
 import com.epam.torpedo.board.battlefields.RandomBattleField;
-import com.epam.torpedo.options.Options;
-import com.epam.torpedo.options.datasources.PropertiesOptions;
+import com.epam.torpedo.resolvers.GameModeResolver;
+import com.epam.torpedo.resolvers.datasources.PropertyReader;
 
 public class BattleFieldFactory {
 
@@ -13,7 +13,7 @@ public class BattleFieldFactory {
 	public static BattleField createBattleField() {
 
 		if (battleField == null) {
-			Options options = new PropertiesOptions();
+			GameModeResolver options = new PropertyReader();
 			String mode = options.getProperty("battleField");
 			switch (mode) {
 			case "random":

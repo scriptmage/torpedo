@@ -6,19 +6,15 @@ import com.epam.torpedo.board.BattleFieldFactory;
 import com.epam.torpedo.hunters.concrete.ConcretePositionHunter;
 import com.epam.torpedo.hunters.concrete.PreciseHunter;
 import com.epam.torpedo.hunters.concrete.RandomHunter;
-import com.epam.torpedo.options.Options;
-import com.epam.torpedo.options.datasources.PropertiesOptions;
 
 public class HunterFactory {
 
 	private static Hunter hunter;
 	private static Hunter shooter;
 
-	public static Hunter createHunter() {
+	public static Hunter createHunter(String hunterType) {
 		if (hunter == null) {
-			Options options = new PropertiesOptions();
-			String mode = options.getProperty("hunter");
-			switch (mode) {
+			switch (hunterType) {
 			case "random":
 				hunter = new RandomHunter();
 				break;
@@ -26,7 +22,7 @@ public class HunterFactory {
 				hunter = new PreciseHunter();
 				break;
 			default:
-				throw new IllegalArgumentException("Unknown hunter: " + mode + "! Use the following: random, precise");
+				throw new IllegalArgumentException("Unknown hunter: " + hunterType + "! Use the following: random, precise");
 			}
 
 			BattleField battleField = BattleFieldFactory.createBattleField();

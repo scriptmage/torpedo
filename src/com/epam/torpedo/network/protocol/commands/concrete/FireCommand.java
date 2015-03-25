@@ -9,6 +9,8 @@ import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.hunters.concrete.ConcretePositionHunter;
 import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
+import com.epam.torpedo.resolvers.HunterTypeResolver;
+import com.epam.torpedo.resolvers.datasources.PropertyReader;
 
 public class FireCommand extends Command {
 
@@ -33,6 +35,9 @@ public class FireCommand extends Command {
 			return successor.getResponse(input);
 		}
 
+		HunterTypeResolver hunterTypeResolver = new PropertyReader();
+		String hunterType = hunterTypeResolver.getHunterType();
+		
 		battleField = BattleFieldFactory.createBattleField();
 		Hunter hunter = HunterFactory.createHunter();
 		shooter.setPosition(getParams());

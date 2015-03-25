@@ -4,17 +4,21 @@ import com.epam.torpedo.Startable;
 import com.epam.torpedo.game.GameFactory;
 import com.epam.torpedo.game.types.SocketGame;
 import com.epam.torpedo.network.ConnectionData;
-import com.epam.torpedo.options.Options;
-import com.epam.torpedo.options.datasources.PropertiesOptions;
+import com.epam.torpedo.resolvers.GameModeResolver;
+import com.epam.torpedo.resolvers.datasources.PropertyReader;
 
 public class Application {
-
+	
+	public static final String CONFIG_FILE = "config/config.properties";
+	
 	public static void main(String[] args) {
 		System.out.println("BattleShip");
 		ConnectionData connectionData = createConnection(args);
 
 		try {
-			Options gameMode = new PropertiesOptions();
+			GameModeResolver gameModeResolver = new PropertyReader("game");
+			String gameMode = gameModeResolver.getGameMode();
+			
 			Startable game = GameFactory.createGame(gameMode);
 			((SocketGame) game).setConnection(connectionData);
 			game.start();
