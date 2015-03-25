@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.epam.torpedo.board.drawers.BattleFieldDrawer;
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
@@ -28,8 +29,9 @@ public abstract class BattleField {
 	}
 
 	public BattleField() {
-		drawer = Config.getBattleFieldDrawer();
-		dimension = Config.getBattleFieldDimension();
+		// TODO ezt a függést megszüntetni
+		drawer = new BattleFieldDrawer();
+		dimension = Config.getDimension();
 		battleField = new HashSet<>();
 	}
 

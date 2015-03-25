@@ -1,20 +1,23 @@
 package com.epam.torpedo.hunters;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
-import com.epam.torpedo.board.BattleFieldFactory;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.hunters.concrete.ConcretePositionHunter;
 import com.epam.torpedo.hunters.concrete.PreciseHunter;
 import com.epam.torpedo.hunters.concrete.RandomHunter;
+import com.epam.torpedo.resolvers.Resolver;
 
 public class HunterFactory {
 
 	private static Hunter hunter;
-	private static Hunter shooter;
+	private static ConcretePositionHunter shooter;
 
-	public static Hunter createHunter(String hunterType) {
+	public static Hunter createHunter() {
+		Resolver resolver = Config.getResolver();
+		String hunterShotStrategyName = resolver.get("hunter");
+
 		if (hunter == null) {
-			switch (hunterType) {
+			switch (hunterShotStrategyName) {
 			case "random":
 				hunter = new RandomHunter();
 				break;
@@ -22,20 +25,18 @@ public class HunterFactory {
 				hunter = new PreciseHunter();
 				break;
 			default:
-				throw new IllegalArgumentException("Unknown hunter: " + hunterType + "! Use the following: random, precise");
+				throw new IllegalArgumentException("Unknown hunter type: " + hunterShotStrategyName + "! Use the following: random, precise");
 			}
-
-			BattleField battleField = BattleFieldFactory.createBattleField();
-			hunter.setDimension(battleField.getDimension());
+			hunter.setDimension(Config.getDimension());
 		}
+		
 		return hunter;
 	}
 
-	public static Hunter createShooter() {
+	public static ConcretePositionHunter createShooter() {
 		if (shooter == null) {
 			shooter = new ConcretePositionHunter();
-			BattleField battleField = BattleFieldFactory.createBattleField();
-			shooter.setDimension(battleField.getDimension());
+			shooter.setDimension(Config.getDimension());
 		}
 		return shooter;
 	}
