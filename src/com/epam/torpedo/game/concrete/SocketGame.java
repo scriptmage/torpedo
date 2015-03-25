@@ -1,10 +1,10 @@
-package com.epam.torpedo.game.types;
+package com.epam.torpedo.game.concrete;
 
 import java.io.IOException;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Startable;
-import com.epam.torpedo.board.BattleFieldFactory;
+import com.epam.torpedo.battlefield.BattleField;
+import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.network.ConnectionData;
 import com.epam.torpedo.network.connection.sockets.SocketTalker;
 import com.epam.torpedo.network.protocol.ProtocolFactory;

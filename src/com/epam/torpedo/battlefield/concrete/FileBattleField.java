@@ -1,4 +1,4 @@
-package com.epam.torpedo.board.battlefields;
+package com.epam.torpedo.battlefield.concrete;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Ship;
+import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.resolvers.Resolver;
 import com.epam.torpedo.ships.Shape;
@@ -85,7 +85,7 @@ public class FileBattleField extends BattleField {
 						System.out.println(e.getMessage());
 					}
 					iterateCounter++;
-				} while (counter < numbersOfShips.get(i) && iterateCounter < BattleField.ITERATION_TOLERANCE);
+				} while (counter < numbersOfShips.get(i) && iterateCounter < Config.ITERATION_TOLERANCE);
 				
 				checkTolerance(iterateCounter);
 			}

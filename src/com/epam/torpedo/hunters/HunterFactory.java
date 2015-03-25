@@ -11,12 +11,17 @@ public class HunterFactory {
 
 	private static Hunter hunter;
 	private static ConcretePositionHunter shooter;
+	
+	static {
+		shooter = new ConcretePositionHunter();
+		shooter.setDimension(Config.getDimension());
+	}
 
 	public static Hunter createHunter() {
-		Resolver resolver = Config.getResolver();
-		String hunterShotStrategyName = resolver.get("hunter");
-
 		if (hunter == null) {
+			Resolver resolver = Config.getResolver();
+			String hunterShotStrategyName = resolver.get("hunter");
+
 			switch (hunterShotStrategyName) {
 			case "random":
 				hunter = new RandomHunter();
@@ -34,10 +39,6 @@ public class HunterFactory {
 	}
 
 	public static ConcretePositionHunter createShooter() {
-		if (shooter == null) {
-			shooter = new ConcretePositionHunter();
-			shooter.setDimension(Config.getDimension());
-		}
 		return shooter;
 	}
 

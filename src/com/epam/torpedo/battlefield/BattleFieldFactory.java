@@ -1,8 +1,7 @@
-package com.epam.torpedo.board;
+package com.epam.torpedo.battlefield;
 
-import com.epam.torpedo.BattleField;
-import com.epam.torpedo.board.battlefields.FileBattleField;
-import com.epam.torpedo.board.battlefields.RandomBattleField;
+import com.epam.torpedo.battlefield.concrete.FileBattleField;
+import com.epam.torpedo.battlefield.concrete.RandomBattleField;
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.resolvers.Resolver;
 

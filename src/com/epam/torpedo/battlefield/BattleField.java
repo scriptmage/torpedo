@@ -1,24 +1,24 @@
-package com.epam.torpedo;
+package com.epam.torpedo.battlefield;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.epam.torpedo.board.drawers.BattleFieldDrawer;
+import com.epam.torpedo.Board;
+import com.epam.torpedo.Drawable;
+import com.epam.torpedo.Hunter;
+import com.epam.torpedo.Ship;
+import com.epam.torpedo.battlefield.drawers.BattleFieldDrawer;
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
-import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.ships.types.NullShip;
 
-public abstract class BattleField {
-	private Dimension dimension;
+public abstract class BattleField extends Board {
 	private Set<Ship> battleField;
 	private int numberOfShips = 10;
 	private Drawable drawer;
-
-	protected static final int ITERATION_TOLERANCE = 25;
 
 	public int getNumberOfShips() {
 		return numberOfShips;
@@ -31,55 +31,13 @@ public abstract class BattleField {
 	public BattleField() {
 		// TODO ezt a függést megszüntetni
 		drawer = new BattleFieldDrawer();
-		dimension = Config.getDimension();
 		battleField = new HashSet<>();
-	}
-
-	public void setDimension(Dimension dimension) {
-		this.dimension = dimension;
-	}
-
-	public void setDimension(int widthOfBattleField, int heightOfBattleField) {
-		this.dimension = new Dimension(widthOfBattleField, heightOfBattleField);
-	}
-
-	public int getWidth() {
-		return dimension.getWidth();
-	}
-
-	public int getHeight() {
-		return dimension.getHeight();
-	}
-
-	public Dimension getDimension() {
-		return dimension;
 	}
 
 	public boolean addShip(Ship ship) {
 		ship.createShape();
 		validatePosition(ship);
 		return battleField.add(ship);
-	}
-
-	public void validatePosition(Coordinate coordinate) {
-		validatePosition(coordinate.getX(), coordinate.getY());
-	}
-	
-	public void validatePosition(int x, int y) {
-		if (!isValidPositionX(x)) {
-			throw new IllegalArgumentException("Illegal X position, must be between 0 and " + (dimension.getWidth() - 1));
-		}
-		if (!isValidPositionY(y)) {
-			throw new IllegalArgumentException("Illegal Y position, must be between 0 and " + (dimension.getHeight() - 1));
-		}
-	}
-
-	private boolean isValidPositionX(int x) {
-		return x >= 0 && x < dimension.getWidth();
-	}
-
-	private boolean isValidPositionY(int y) {
-		return y >= 0 && y < dimension.getHeight();
 	}
 
 	public void validatePosition(Ship ship) {
@@ -98,11 +56,11 @@ public abstract class BattleField {
 	}
 
 	private boolean isValidShipPositionX(Ship ship) {
-		return ship.getLeft() >= 0 && ship.getRight() < dimension.getWidth();
+		return ship.getLeft() >= 0 && ship.getRight() < getWidth();
 	}
 
 	private boolean isValidShipPositionY(Ship ship) {
-		return ship.getTop() >= 0 && ship.getBottom() < dimension.getHeight();
+		return ship.getTop() >= 0 && ship.getBottom() < getHeight();
 	}
 
 	private boolean isEmptyArea(Ship ship) {
@@ -191,9 +149,8 @@ public abstract class BattleField {
 	}
 
 	protected void checkTolerance(int iterateCounter) {
-		if (iterateCounter == ITERATION_TOLERANCE) {
-			throw new IllegalStateException("Sorry, maybe the board [" + dimension.getWidth() + "x" + dimension.getHeight() + "] is very small for "
-					+ numberOfShips + " ships");
+		if (iterateCounter == Config.ITERATION_TOLERANCE) {
+			throw new IllegalStateException("Sorry, maybe the board [" + getWidth() + "x" + getHeight() + "] is very small for " + numberOfShips + " ships");
 		}
 	}
 

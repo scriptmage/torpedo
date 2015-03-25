@@ -1,8 +1,8 @@
 package com.epam.torpedo.network.protocol.commands.concrete;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Hunter;
-import com.epam.torpedo.board.BattleFieldFactory;
+import com.epam.torpedo.battlefield.BattleField;
+import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.components.Config;
 import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.network.protocol.commands.Command;

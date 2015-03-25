@@ -6,6 +6,8 @@ import com.epam.torpedo.resolvers.datasources.PropertyFileReader;
 public class Config {
 
 	public static final String CONFIG_FILE = "config.properties";
+	public static final int ITERATION_TOLERANCE = 25;
+	
 	private static PropertyFileReader propertyFileReader;
 
 	public static Resolver getResolver() {

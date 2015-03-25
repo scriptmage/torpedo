@@ -1,7 +1,8 @@
-package com.epam.torpedo.board.battlefields;
+package com.epam.torpedo.battlefield.concrete;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Ship;
+import com.epam.torpedo.battlefield.BattleField;
+import com.epam.torpedo.components.Config;
 import com.epam.torpedo.ships.ShipFactory;
 
 public class RandomBattleField extends BattleField {
@@ -26,8 +27,7 @@ public class RandomBattleField extends BattleField {
 			}
 
 			iterateCounter++;
-		} while (size() < getNumberOfShips()
-				&& iterateCounter < BattleField.ITERATION_TOLERANCE);
+		} while (size() < getNumberOfShips() && iterateCounter < Config.ITERATION_TOLERANCE);
 
 		checkTolerance(iterateCounter);
 	}

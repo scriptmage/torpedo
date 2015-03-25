@@ -1,9 +1,9 @@
-package com.epam.torpedo.board.drawers;
+package com.epam.torpedo.battlefield.drawers;
 
-import com.epam.torpedo.BattleField;
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
-import com.epam.torpedo.board.BattleFieldFactory;
+import com.epam.torpedo.battlefield.BattleField;
+import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
 
