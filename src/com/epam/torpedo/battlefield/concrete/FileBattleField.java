@@ -12,8 +12,8 @@ import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
-import com.epam.torpedo.ships.Shape;
-import com.epam.torpedo.ships.ShipFactory;
+import com.epam.torpedo.targets.Shape;
+import com.epam.torpedo.targets.ShipFactory;
 
 public class FileBattleField extends BattleField {
 

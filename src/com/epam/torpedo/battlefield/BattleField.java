@@ -8,7 +8,7 @@ import com.epam.torpedo.battlefield.drawers.BattleFieldDrawer;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
-import com.epam.torpedo.ships.ShipManager;
+import com.epam.torpedo.targets.ships.ShipManager;
 
 public abstract class BattleField extends Board {
 	private ShipManager ships;

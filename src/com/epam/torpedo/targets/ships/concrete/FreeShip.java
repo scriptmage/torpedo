@@ -1,10 +1,10 @@
-package com.epam.torpedo.ships.concrete;
+package com.epam.torpedo.targets.ships.concrete;
 
 import java.util.Iterator;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Coordinate;
-import com.epam.torpedo.ships.Shape;
+import com.epam.torpedo.targets.Shape;
 
 public class FreeShip extends Ship {
 

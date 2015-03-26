@@ -1,8 +1,10 @@
-package com.epam.torpedo.network.protocol.commands;
+package com.epam.torpedo.network.protocol;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public abstract class Command {
 

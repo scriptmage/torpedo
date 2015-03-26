@@ -2,7 +2,7 @@ package com.epam.torpedo.network.connection.sockets;
 
 import com.epam.torpedo.network.ConnectionData;
 import com.epam.torpedo.network.connection.Connection;
-import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class SocketTalker extends Connection {

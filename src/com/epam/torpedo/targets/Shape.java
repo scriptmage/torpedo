@@ -1,4 +1,4 @@
-package com.epam.torpedo.ships;
+package com.epam.torpedo.targets;
 
 import java.util.Iterator;
 

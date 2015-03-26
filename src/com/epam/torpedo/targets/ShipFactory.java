@@ -1,14 +1,14 @@
-package com.epam.torpedo.ships;
+package com.epam.torpedo.targets;
 
 import java.util.Random;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.Dimension;
-import com.epam.torpedo.ships.concrete.FreeShip;
-import com.epam.torpedo.ships.concrete.LShip;
-import com.epam.torpedo.ships.concrete.LineShip;
-import com.epam.torpedo.ships.concrete.TShip;
+import com.epam.torpedo.targets.ships.concrete.FreeShip;
+import com.epam.torpedo.targets.ships.concrete.LShip;
+import com.epam.torpedo.targets.ships.concrete.LineShip;
+import com.epam.torpedo.targets.ships.concrete.TShip;
 
 public class ShipFactory {
 

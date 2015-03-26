@@ -1,6 +1,6 @@
 package com.epam.torpedo.network.protocol.commands.concrete;
 
-import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class QuitCommand extends Command {

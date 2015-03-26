@@ -1,4 +1,4 @@
-package com.epam.torpedo.ships.concrete;
+package com.epam.torpedo.targets.ships.concrete;
 
 import com.epam.torpedo.Ship;
 

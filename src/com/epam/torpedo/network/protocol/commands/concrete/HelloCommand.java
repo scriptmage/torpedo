@@ -5,7 +5,7 @@ import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
-import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class HelloCommand extends Command {

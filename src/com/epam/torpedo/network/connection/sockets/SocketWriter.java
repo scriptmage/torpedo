@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Iterator;
 
-import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class SocketWriter {

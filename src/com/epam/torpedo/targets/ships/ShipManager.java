@@ -1,4 +1,4 @@
-package com.epam.torpedo.ships;
+package com.epam.torpedo.targets.ships;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
-import com.epam.torpedo.ships.concrete.NullShip;
+import com.epam.torpedo.targets.ships.concrete.NullShip;
 
 public class ShipManager {
 	private Map<Coordinate, Ship> battleField = new HashMap<>();
