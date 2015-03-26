@@ -9,11 +9,11 @@ import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.drawers.BattleFieldDrawer;
-import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
+import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
-import com.epam.torpedo.ships.types.NullShip;
+import com.epam.torpedo.ships.concrete.NullShip;
 
 public abstract class BattleField extends Board {
 	private Set<Ship> battleField;
@@ -149,7 +149,7 @@ public abstract class BattleField extends Board {
 	}
 
 	protected void checkTolerance(int iterateCounter) {
-		if (iterateCounter == Config.ITERATION_TOLERANCE) {
+		if (iterateCounter == GameConfig.ITERATION_TOLERANCE) {
 			throw new IllegalStateException("Sorry, maybe the board [" + getWidth() + "x" + getHeight() + "] is very small for " + numberOfShips + " ships");
 		}
 	}

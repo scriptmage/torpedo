@@ -1,7 +1,6 @@
 package com.epam.torpedo.game;
 
 import com.epam.torpedo.Startable;
-import com.epam.torpedo.components.Config;
 import com.epam.torpedo.game.concrete.LocalGame;
 import com.epam.torpedo.game.concrete.SocketGame;
 import com.epam.torpedo.network.ConnectionData;
@@ -10,7 +9,7 @@ import com.epam.torpedo.resolvers.Resolver;
 public class GameFactory {
 
 	public static Startable createGame(String[] args) {
-		Resolver resolver = Config.getResolver();
+		Resolver resolver = GameConfig.getResolver();
 		String gameMode = resolver.get("game");
 
 		Startable result = null;

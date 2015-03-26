@@ -1,4 +1,4 @@
-package com.epam.torpedo.resolvers;
+package com.epam.torpedo.resolvers.loaders;
 
 import java.io.File;
 import java.io.FileInputStream;

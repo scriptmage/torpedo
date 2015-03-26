@@ -2,7 +2,7 @@ package com.epam.torpedo.battlefield;
 
 import com.epam.torpedo.battlefield.concrete.FileBattleField;
 import com.epam.torpedo.battlefield.concrete.RandomBattleField;
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
 
 public class BattleFieldFactory {
@@ -10,7 +10,7 @@ public class BattleFieldFactory {
 	private static BattleField battleField;
 
 	public static BattleField createBattleField() {
-		Resolver resolver = Config.getResolver();
+		Resolver resolver = GameConfig.getResolver();
 		String battleFieldFillStrategyName = resolver.get("battleField");
 
 		if (battleField == null) {

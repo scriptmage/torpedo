@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
 import com.epam.torpedo.ships.Shape;
 import com.epam.torpedo.ships.ShipFactory;
@@ -22,7 +22,7 @@ public class FileBattleField extends BattleField {
 	
 	private String load() throws IOException {
 		StringBuilder fileContent = new StringBuilder();
-		Resolver resolver = Config.getResolver();
+		Resolver resolver = GameConfig.getResolver();
 		File dataOfShips = new File(resolver.get("dataFile"));
 		try (BufferedReader br = new BufferedReader(new FileReader(dataOfShips))) {
 			String buffer = null;
@@ -85,7 +85,7 @@ public class FileBattleField extends BattleField {
 						System.out.println(e.getMessage());
 					}
 					iterateCounter++;
-				} while (counter < numbersOfShips.get(i) && iterateCounter < Config.ITERATION_TOLERANCE);
+				} while (counter < numbersOfShips.get(i) && iterateCounter < GameConfig.ITERATION_TOLERANCE);
 				
 				checkTolerance(iterateCounter);
 			}

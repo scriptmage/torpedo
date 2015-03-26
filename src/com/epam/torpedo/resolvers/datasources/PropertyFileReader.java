@@ -3,8 +3,8 @@ package com.epam.torpedo.resolvers.datasources;
 import java.io.File;
 import java.util.Properties;
 
-import com.epam.torpedo.resolvers.PropertyFileLoader;
 import com.epam.torpedo.resolvers.Resolver;
+import com.epam.torpedo.resolvers.loaders.PropertyFileLoader;
 
 public class PropertyFileReader implements Resolver {
 

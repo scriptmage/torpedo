@@ -1,14 +1,14 @@
 package com.epam.torpedo;
 
-import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.Dimension;
+import com.epam.torpedo.game.GameConfig;
 
 public class Board {
 	private Dimension dimension;
 
 	public Board() {
-		dimension = Config.getDimension();
+		dimension = GameConfig.getDimension();
 	}
 
 	public void setDimension(Dimension dimension) {
