@@ -1,4 +1,4 @@
-package com.epam.torpedo.ships.types;
+package com.epam.torpedo.ships.concrete;
 
 import java.util.Iterator;
 

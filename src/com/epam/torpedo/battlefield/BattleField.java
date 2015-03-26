@@ -13,7 +13,7 @@ import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.hunters.HunterFactory;
-import com.epam.torpedo.ships.types.NullShip;
+import com.epam.torpedo.ships.concrete.NullShip;
 
 public abstract class BattleField extends Board {
 	private Set<Ship> battleField;
