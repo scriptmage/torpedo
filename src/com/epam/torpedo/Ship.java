@@ -21,7 +21,7 @@ public abstract class Ship {
 	}
 
 	public void setPosition(int x, int y) {
-		position = new Coordinate(x, y);
+		setPosition(new Coordinate(x, y));
 	}
 
 	public int getPositionX() {
@@ -59,14 +59,6 @@ public abstract class Ship {
 
 	public boolean isAlive() {
 		return healPoint > 0;
-	}
-
-	public boolean isHit(Coordinate coordinate) {
-		return isHit(coordinate.getX(), coordinate.getY());
-	}
-
-	public boolean isHit(int x, int y) {
-		return shape.contains(x, y);
 	}
 
 	public void addShapePoint(int x, int y) {

@@ -7,8 +7,8 @@ import com.epam.torpedo.ships.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 
-	public RandomBattleField(int numberOfShips) {
-		setNumberOfShips(numberOfShips);
+	public RandomBattleField(int maxNumberOfShips) {
+		setMaxNumberOfShips(maxNumberOfShips);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class RandomBattleField extends BattleField {
 			}
 
 			iterateCounter++;
-		} while (size() < getNumberOfShips() && iterateCounter < GameConfig.ITERATION_TOLERANCE);
+		} while (getNumberOfShips() < getMaxNumberOfShips() && iterateCounter < GameConfig.ITERATION_TOLERANCE);
 
 		checkTolerance(iterateCounter);
 	}

@@ -15,7 +15,9 @@ public class Shape {
 	}
 
 	public CoordinateSet getPoints() {
-		return points;
+		CoordinateSet coordinateSet = new CoordinateSet();
+		coordinateSet.addAll(points);
+		return coordinateSet;
 	}
 	
 	public Iterator<Coordinate> iterator() {

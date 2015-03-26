@@ -63,7 +63,7 @@ public class FileBattleField extends BattleField {
 			dimensionY++;
 		}
 		
-		setNumberOfShips(shipCounter);
+		setMaxNumberOfShips(shipCounter);
 	}
 
 	@Override
