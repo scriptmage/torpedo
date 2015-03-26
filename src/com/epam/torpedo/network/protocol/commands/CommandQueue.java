@@ -16,6 +16,14 @@ public class CommandQueue {
 		queue.add(command);
 	}
 	
+	public void addAll(CommandQueue commandQueue) {
+		Iterator<Command> iterator = commandQueue.iterator();
+		while(iterator.hasNext()) {
+			Command command = iterator.next();
+			add(command);
+		}
+	}
+	
 	public Command get(int index) {
 		return queue.get(index);
 	}
