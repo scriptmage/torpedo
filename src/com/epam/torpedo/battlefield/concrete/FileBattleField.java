@@ -52,10 +52,13 @@ public class FileBattleField extends BattleField {
 				if (field.equals("x")) {
 					pointsOfShape.add(dimensionX, dimensionY);
 				} else if (field.matches("^\\d+$")) {
+					int amountOfShip = Integer.parseInt(field);
+
 					ships.add(pointsOfShape);
 					pointsOfShape = new Shape();
-					numbersOfShips.add(Integer.parseInt(field));
-					shipCounter += Integer.parseInt(field);
+					
+					numbersOfShips.add(amountOfShip);
+					shipCounter += amountOfShip;
 					dimensionY = -1;
 				}
 				dimensionX++;
