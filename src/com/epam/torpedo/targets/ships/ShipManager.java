@@ -12,12 +12,12 @@ import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.targets.ships.concrete.NullShip;
 
 public class ShipManager {
-	private Set<Ship> battleField = new HashSet<>();
+	private Set<Ship> ships = new HashSet<>();
 
 	public void add(Ship ship) {
 		ship.createShape();
 		validatePosition(ship);
-		battleField.add(ship);
+		ships.add(ship);
 	}
 
 	private boolean isValidShipPosition(Ship ship) {
@@ -70,7 +70,7 @@ public class ShipManager {
 
 	public CoordinateSet getShipCoords() {
 		CoordinateSet coordinateSet = new CoordinateSet();
-		Iterator<Ship> iterator = battleField.iterator();
+		Iterator<Ship> iterator = ships.iterator();
 		while (iterator.hasNext()) {
 			Ship ship = iterator.next();
 			coordinateSet.addAll(ship.getShape());
@@ -79,13 +79,13 @@ public class ShipManager {
 	}
 
 	public int getShipNumber() {
-		return battleField.size();
+		return ships.size();
 	}
 
 	public Ship get(Coordinate coordinate) {
 		Ship result = new NullShip();
 		
-		Iterator<Ship> iterator = battleField.iterator();
+		Iterator<Ship> iterator = ships.iterator();
 		while(iterator.hasNext()) {
 			Ship ship = iterator.next();
 			CoordinateSet shape = ship.getShape();
@@ -103,7 +103,7 @@ public class ShipManager {
 
 	public boolean isAliveShips() {
 		boolean hasAlive = false;
-		Iterator<Ship> iterator = battleField.iterator();
+		Iterator<Ship> iterator = ships.iterator();
 		while (!hasAlive && iterator.hasNext()) {
 			Ship ship = iterator.next();
 			hasAlive = ship.isAlive();
