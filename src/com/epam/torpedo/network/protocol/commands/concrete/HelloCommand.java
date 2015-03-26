@@ -3,9 +3,9 @@ package com.epam.torpedo.network.protocol.commands.concrete;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.battlefield.BattleFieldFactory;
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
-import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class HelloCommand extends Command {
@@ -29,7 +29,7 @@ public class HelloCommand extends Command {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s", COMMAND_NAME, Config.getDimension());
+		return String.format("%s %s", COMMAND_NAME, GameConfig.getDimension());
 	}
 
 }

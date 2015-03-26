@@ -7,7 +7,7 @@ import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.hunters.concrete.ConcretePositionHunter;
-import com.epam.torpedo.network.protocol.commands.Command;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class FireCommand extends Command {

@@ -1,7 +1,7 @@
 package com.epam.torpedo.hunters;
 
 import com.epam.torpedo.Hunter;
-import com.epam.torpedo.components.Config;
+import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.concrete.ConcretePositionHunter;
 import com.epam.torpedo.hunters.concrete.PreciseHunter;
 import com.epam.torpedo.hunters.concrete.RandomHunter;
@@ -14,12 +14,12 @@ public class HunterFactory {
 	
 	static {
 		shooter = new ConcretePositionHunter();
-		shooter.setDimension(Config.getDimension());
+		shooter.setDimension(GameConfig.getDimension());
 	}
 
 	public static Hunter createHunter() {
 		if (hunter == null) {
-			Resolver resolver = Config.getResolver();
+			Resolver resolver = GameConfig.getResolver();
 			String hunterShotStrategyName = resolver.get("hunter");
 
 			switch (hunterShotStrategyName) {
@@ -32,7 +32,7 @@ public class HunterFactory {
 			default:
 				throw new IllegalArgumentException("Unknown hunter type: " + hunterShotStrategyName + "! Use the following: random, precise");
 			}
-			hunter.setDimension(Config.getDimension());
+			hunter.setDimension(GameConfig.getDimension());
 		}
 		
 		return hunter;

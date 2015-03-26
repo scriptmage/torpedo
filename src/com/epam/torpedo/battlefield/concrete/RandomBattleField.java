@@ -2,13 +2,13 @@ package com.epam.torpedo.battlefield.concrete;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
-import com.epam.torpedo.components.Config;
-import com.epam.torpedo.ships.ShipFactory;
+import com.epam.torpedo.game.GameConfig;
+import com.epam.torpedo.targets.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 
-	public RandomBattleField(int numberOfShips) {
-		setNumberOfShips(numberOfShips);
+	public RandomBattleField(int maxNumberOfShips) {
+		setMaxNumberOfShips(maxNumberOfShips);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class RandomBattleField extends BattleField {
 			}
 
 			iterateCounter++;
-		} while (size() < getNumberOfShips() && iterateCounter < Config.ITERATION_TOLERANCE);
+		} while (getNumberOfShips() < getMaxNumberOfShips() && iterateCounter < GameConfig.ITERATION_TOLERANCE);
 
 		checkTolerance(iterateCounter);
 	}

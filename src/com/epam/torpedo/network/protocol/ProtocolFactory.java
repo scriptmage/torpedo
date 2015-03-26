@@ -1,6 +1,5 @@
 package com.epam.torpedo.network.protocol;
 
-import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.concrete.ErrorCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.FireCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;

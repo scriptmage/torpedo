@@ -1,9 +1,10 @@
-package com.epam.torpedo.components;
+package com.epam.torpedo.game;
 
+import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.resolvers.Resolver;
 import com.epam.torpedo.resolvers.datasources.PropertyFileReader;
 
-public class Config {
+public class GameConfig {
 
 	public static final String CONFIG_FILE = "config.properties";
 	public static final int ITERATION_TOLERANCE = 25;

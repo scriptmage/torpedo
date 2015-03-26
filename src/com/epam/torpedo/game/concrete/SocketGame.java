@@ -7,8 +7,8 @@ import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.network.ConnectionData;
 import com.epam.torpedo.network.connection.sockets.SocketTalker;
+import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.ProtocolFactory;
-import com.epam.torpedo.network.protocol.commands.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
 

@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
-import com.epam.torpedo.ships.Shape;
+import com.epam.torpedo.targets.Shape;
 
 public abstract class Ship {
 
@@ -21,7 +21,7 @@ public abstract class Ship {
 	}
 
 	public void setPosition(int x, int y) {
-		position = new Coordinate(x, y);
+		setPosition(new Coordinate(x, y));
 	}
 
 	public int getPositionX() {
@@ -59,14 +59,6 @@ public abstract class Ship {
 
 	public boolean isAlive() {
 		return healPoint > 0;
-	}
-
-	public boolean isHit(Coordinate coordinate) {
-		return isHit(coordinate.getX(), coordinate.getY());
-	}
-
-	public boolean isHit(int x, int y) {
-		return shape.contains(x, y);
 	}
 
 	public void addShapePoint(int x, int y) {
