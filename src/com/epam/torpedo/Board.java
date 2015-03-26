@@ -6,9 +6,13 @@ import com.epam.torpedo.game.GameConfig;
 
 public class Board {
 	private Dimension dimension;
-
+	
 	public Board() {
 		dimension = GameConfig.getDimension();
+	}
+
+	public Board(Dimension dimension) {
+		this.dimension = dimension;
 	}
 
 	public void setDimension(Dimension dimension) {
@@ -31,17 +35,18 @@ public class Board {
 		return dimension;
 	}
 
-	public void validatePosition(Coordinate coordinate) {
-		validatePosition(coordinate.getX(), coordinate.getY());
+	public boolean validatePosition(Coordinate coordinate) {
+		return validatePosition(coordinate.getX(), coordinate.getY());
 	}
 
-	public void validatePosition(int x, int y) {
+	public boolean validatePosition(int x, int y) {
 		if (!isValidPositionX(x)) {
 			throw new IllegalArgumentException("Illegal X position, must be between 0 and " + (dimension.getWidth() - 1));
 		}
 		if (!isValidPositionY(y)) {
 			throw new IllegalArgumentException("Illegal Y position, must be between 0 and " + (dimension.getHeight() - 1));
 		}
+		return true;
 	}
 
 	private boolean isValidPositionX(int x) {

@@ -9,12 +9,9 @@ public class GameConfig {
 	public static final String CONFIG_FILE = "config.properties";
 	public static final int ITERATION_TOLERANCE = 25;
 	
-	private static PropertyFileReader propertyFileReader;
+	private static PropertyFileReader propertyFileReader = new PropertyFileReader(CONFIG_FILE);
 
 	public static Resolver getResolver() {
-		if (propertyFileReader == null) {
-			propertyFileReader = new PropertyFileReader(CONFIG_FILE);
-		}
 		return propertyFileReader;
 	}
 

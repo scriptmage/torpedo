@@ -34,15 +34,17 @@ public class ShipManager {
 		return ship.getTop() >= 0 && ship.getBottom() < dimension.getHeight();
 	}
 
-	public void validatePosition(Ship ship) {
+	public boolean validatePosition(Ship ship) {
 		if (!isValidShipPosition(ship)) {
 			throw new IllegalArgumentException("Invalid ship position");
 		}
 
 		if (!isEmptyArea(ship)) {
-			throw new IllegalStateException(String.format("This area [ %2dx%-2d ] already has a ship or too close to another one", ship.getPositionX(),
-					ship.getPositionY()));
+			int x = ship.getPositionX();
+			int y = ship.getPositionY();
+			throw new IllegalStateException(String.format("This area [ %2dx%-2d ] already has a ship or too close to another one", x, y));
 		}
+		return true;
 	}
 
 	private boolean isEmptyArea(Ship ship) {
@@ -84,16 +86,16 @@ public class ShipManager {
 
 	public Ship get(Coordinate coordinate) {
 		Ship result = new NullShip();
-		
+
 		Iterator<Ship> iterator = ships.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Ship ship = iterator.next();
 			CoordinateSet shape = ship.getShape();
-			if(shape.contains(coordinate)) {
+			if (shape.contains(coordinate)) {
 				result = ship;
 			}
 		}
-		
+
 		return result;
 	}
 

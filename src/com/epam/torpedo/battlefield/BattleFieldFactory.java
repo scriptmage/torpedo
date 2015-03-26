@@ -16,8 +16,9 @@ public class BattleFieldFactory {
 		if (battleField == null) {
 			switch (battleFieldFillStrategyName) {
 			case "random":
+				battleField = new RandomBattleField();
 				String numberOfShips = resolver.get("numberOfShips");
-				battleField = new RandomBattleField(Integer.parseInt(numberOfShips));
+				battleField.setMaxNumberOfShips(Integer.parseInt(numberOfShips));
 				break;
 			case "file":
 				battleField = new FileBattleField();

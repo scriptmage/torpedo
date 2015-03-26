@@ -7,10 +7,6 @@ import com.epam.torpedo.targets.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 
-	public RandomBattleField(int maxNumberOfShips) {
-		setMaxNumberOfShips(maxNumberOfShips);
-	}
-
 	@Override
 	public void createBattleField() {
 		int iterateCounter = 0;
