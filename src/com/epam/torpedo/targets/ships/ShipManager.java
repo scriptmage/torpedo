@@ -1,9 +1,7 @@
 package com.epam.torpedo.targets.ships;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.epam.torpedo.Ship;
@@ -14,14 +12,12 @@ import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.targets.ships.concrete.NullShip;
 
 public class ShipManager {
-	private Map<Coordinate, Ship> battleField = new HashMap<>();
+	private Set<Ship> battleField = new HashSet<>();
 
 	public void add(Ship ship) {
 		ship.createShape();
 		validatePosition(ship);
-		int positionX = ship.getPositionX();
-		int positionY = ship.getPositionY();
-		battleField.put(new Coordinate(positionX, positionY), ship);
+		battleField.add(ship);
 	}
 
 	private boolean isValidShipPosition(Ship ship) {
@@ -74,11 +70,10 @@ public class ShipManager {
 
 	public CoordinateSet getShipCoords() {
 		CoordinateSet coordinateSet = new CoordinateSet();
-		Set<Entry<Coordinate, Ship>> ships = battleField.entrySet();
-		Iterator<Entry<Coordinate, Ship>> iterator = ships.iterator();
+		Iterator<Ship> iterator = battleField.iterator();
 		while (iterator.hasNext()) {
-			Entry<Coordinate, Ship> ship = iterator.next();
-			coordinateSet.add(ship.getKey());
+			Ship ship = iterator.next();
+			coordinateSet.addAll(ship.getShape());
 		}
 		return coordinateSet;
 	}
@@ -89,9 +84,16 @@ public class ShipManager {
 
 	public Ship get(Coordinate coordinate) {
 		Ship result = new NullShip();
-		if (battleField.containsKey(coordinate)) {
-			result = battleField.get(coordinate);
+		
+		Iterator<Ship> iterator = battleField.iterator();
+		while(iterator.hasNext()) {
+			Ship ship = iterator.next();
+			CoordinateSet shape = ship.getShape();
+			if(shape.contains(coordinate)) {
+				result = ship;
+			}
 		}
+		
 		return result;
 	}
 
@@ -101,11 +103,9 @@ public class ShipManager {
 
 	public boolean isAliveShips() {
 		boolean hasAlive = false;
-		Set<Entry<Coordinate, Ship>> ships = battleField.entrySet();
-		Iterator<Entry<Coordinate, Ship>> iterator = ships.iterator();
+		Iterator<Ship> iterator = battleField.iterator();
 		while (!hasAlive && iterator.hasNext()) {
-			Entry<Coordinate, Ship> entry = iterator.next();
-			Ship ship = entry.getValue();
+			Ship ship = iterator.next();
 			hasAlive = ship.isAlive();
 		}
 		return hasAlive;

@@ -16,7 +16,7 @@ public class RandomBattleField extends BattleField {
 		int iterateCounter = 0;
 
 		do {
-			Ship ship = ShipFactory.getRandomShip(getDimension());
+			Ship ship = ShipFactory.getRandomShip();
 			try {
 				addShip(ship);
 				iterateCounter = 0;

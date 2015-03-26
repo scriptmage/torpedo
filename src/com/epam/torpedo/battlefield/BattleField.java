@@ -1,16 +1,12 @@
 package com.epam.torpedo.battlefield;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import com.epam.torpedo.Board;
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.drawers.BattleFieldDrawer;
-import com.epam.torpedo.components.Config;
 import com.epam.torpedo.components.Coordinate;
+import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.targets.ships.ShipManager;
@@ -47,7 +43,6 @@ public abstract class BattleField extends Board {
 	}
 
 	public boolean shoot(Hunter hunter) {
-		boolean hasHit = false;
 		Coordinate shoot = hunter.nextShot();
 		validatePosition(shoot);
 
@@ -56,22 +51,24 @@ public abstract class BattleField extends Board {
 
 		if (hasHit) {
 			ship.decHealPoint();
-
-			if (drawer != null) {
-				Hunter shooter = HunterFactory.createShooter();
-				shooter.addShot(shoot);
-				drawer.draw(ships.getShipCoords(), shooter);
-			}
+			draw(shoot);
 		}
 
 		return hasHit;
+	}
+
+	private void draw(Coordinate shoot) {
+		if (drawer != null) {
+			Hunter shooter = HunterFactory.createShooter();
+			shooter.addShot(shoot);
+			drawer.draw(ships.getShipCoords(), shooter);
+		}
 	}
 
 	protected void checkTolerance(int iterateCounter) {
 		if (iterateCounter == GameConfig.ITERATION_TOLERANCE) {
 			throw new IllegalStateException("Sorry, maybe the board [" + getWidth() + "x" + getHeight() + "] is very small for " + maxNumberOfShips + " ships");
 		}
-		return resultShip;
 	}
 
 	public boolean isAliveShips() {
