@@ -35,9 +35,9 @@ public abstract class Command {
 	}
 
 	public CommandQueue getResponseQueue() {
-		// TODO itt nem ezt kellene visszaadni, mert maipulálható lenne, hanem
-		// csak az értékeket --> új pélfányt
-		return responseQueue;
+		CommandQueue commandQueue = new CommandQueue();
+		commandQueue.addAll(responseQueue);
+		return commandQueue;
 	}
 
 	public boolean isCommand(String commandName) {
