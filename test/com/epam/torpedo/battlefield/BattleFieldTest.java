@@ -2,6 +2,7 @@ package com.epam.torpedo.battlefield;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.epam.torpedo.Ship;
@@ -21,6 +22,7 @@ public class BattleFieldTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetNumberOfShipsWhenAddedTwoShipsShouldTrue() {
 		// GIVEN
 		underTest.setMaxNumberOfShips(2);
@@ -34,6 +36,7 @@ public class BattleFieldTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetShipWhenAddedOneShipShouldPositionSame() {
 		// GIVEN
 		Coordinate position = new Coordinate(2, 2);
