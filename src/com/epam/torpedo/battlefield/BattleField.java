@@ -4,8 +4,8 @@ import com.epam.torpedo.Board;
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
-import com.epam.torpedo.battlefield.drawers.BattleFieldDrawer;
 import com.epam.torpedo.components.Coordinate;
+import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.targets.ships.ShipManager;
@@ -13,11 +13,8 @@ import com.epam.torpedo.targets.ships.ShipManager;
 public abstract class BattleField extends Board {
 	private ShipManager ships;
 	private int maxNumberOfShips = 10;
-	private Drawable drawer;
 	
 	public BattleField() {
-		// TODO ezt a függést megszüntetni
-		drawer = new BattleFieldDrawer();
 		ships = new ShipManager();
 	}
 
@@ -57,6 +54,7 @@ public abstract class BattleField extends Board {
 	}
 
 	private void draw(Coordinate shoot) {
+		Drawable drawer = BattleFieldDrawerFactory.create();
 		if (drawer != null) {
 			Hunter shooter = HunterFactory.createShooter();
 			shooter.addShot(shoot);
@@ -74,6 +72,6 @@ public abstract class BattleField extends Board {
 		return ships.isAliveShips();
 	}
 
-	public abstract void createBattleField();
+	public abstract void createBattleField(Dimension dimensionOfBattleField);
 
 }

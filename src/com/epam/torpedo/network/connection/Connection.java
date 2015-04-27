@@ -30,6 +30,7 @@ public class Connection {
 			String hostName = connectionData.getHostName();
 			client = new Socket(hostName, portNumber);
 		}
+		client.setTcpNoDelay(true);
 	}
 
 	public void close() {

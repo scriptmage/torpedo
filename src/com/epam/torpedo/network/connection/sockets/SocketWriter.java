@@ -1,7 +1,7 @@
 package com.epam.torpedo.network.connection.sockets;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Iterator;
 
@@ -10,11 +10,11 @@ import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class SocketWriter {
 
-	private DataOutputStream outputStream;
+	private PrintWriter outputStream;
 
 	public void createStream(Socket socket) {
 		try {
-			outputStream = new DataOutputStream(socket.getOutputStream());
+			outputStream = new PrintWriter(socket.getOutputStream(), true);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -31,14 +31,9 @@ public class SocketWriter {
 	}
 
 	public void send(Command command) {
-		try {
-			if(command.isSendable()) {
-				System.out.println("Output: " + command.toString());
-				outputStream.writeUTF(command.toString().trim());
-				outputStream.flush();
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		if(command.isSendable()) {
+			System.out.println("Output: " + command.toString());
+			outputStream.println(command.toString().trim());
 		}
 	}
 }

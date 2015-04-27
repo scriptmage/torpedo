@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
+import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
 import com.epam.torpedo.targets.Shape;
@@ -17,6 +18,7 @@ import com.epam.torpedo.targets.ShipFactory;
 
 public class FileBattleField extends BattleField {
 
+	// TODO ez nem biztos hogy kellene ide, miért nem használom a ShipManagert? --> ld. BattleField::ShipManager
 	private List<Shape> ships = new ArrayList<>();
 	private List<Integer> numbersOfShips = new ArrayList<>();
 	
@@ -70,15 +72,16 @@ public class FileBattleField extends BattleField {
 	}
 
 	@Override
-	public void createBattleField() {
+	public void createBattleField(Dimension dimensionOfBattleField) {
 		try {
 			parse();
+			// TODO hajóméretben csökkenő sorrendbe tenni a hajókat, és ebben a sorrendben megpróbálni a lehejezést
 			for (int i = 0; i < ships.size(); i++) {
 				int counter = 0;
 				int iterateCounter = 0;
 				
 				do {
-					Ship ship = ShipFactory.getFreeShip(ships.get(i));
+					Ship ship = ShipFactory.getFreeShip(ships.get(i), dimensionOfBattleField);
 					try {
 						addShip(ship);
 						System.out.println(String.format("%d %d", ship.getPositionX(), ship.getPositionY()));

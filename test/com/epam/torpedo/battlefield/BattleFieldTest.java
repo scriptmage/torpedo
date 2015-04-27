@@ -9,7 +9,7 @@ import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.concrete.RandomBattleField;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.Dimension;
-import com.epam.torpedo.targets.concrete.LineShip;
+import com.epam.torpedo.targets.ships.concrete.LineShip;
 
 public class BattleFieldTest {
 
@@ -26,7 +26,7 @@ public class BattleFieldTest {
 	public void testGetNumberOfShipsWhenAddedTwoShipsShouldTrue() {
 		// GIVEN
 		underTest.setMaxNumberOfShips(2);
-		underTest.createBattleField();
+		underTest.createBattleField(new Dimension(10, 10));
 
 		// WHEN
 		int result = underTest.getNumberOfShips();

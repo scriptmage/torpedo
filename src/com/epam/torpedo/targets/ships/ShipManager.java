@@ -12,6 +12,7 @@ import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.targets.ships.concrete.NullShip;
 
 public class ShipManager {
+	// TODO fordított tárolás, a hajó pontokat  tárolom hajóval HashMapben, nem a hajókat tárolom pontokkal --> megfordítom a viszonyt
 	private Set<Ship> ships = new HashSet<>();
 
 	public void add(Ship ship) {

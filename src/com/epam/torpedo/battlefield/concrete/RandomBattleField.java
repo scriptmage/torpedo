@@ -2,17 +2,18 @@ package com.epam.torpedo.battlefield.concrete;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
+import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.targets.ShipFactory;
 
 public class RandomBattleField extends BattleField {
 
 	@Override
-	public void createBattleField() {
+	public void createBattleField(Dimension dimensionOfBattleField) {
 		int iterateCounter = 0;
 
 		do {
-			Ship ship = ShipFactory.getRandomShip();
+			Ship ship = ShipFactory.getRandomShip(dimensionOfBattleField);
 			try {
 				addShip(ship);
 				iterateCounter = 0;

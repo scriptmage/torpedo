@@ -1,16 +1,18 @@
 package com.epam.torpedo.network.connection.sockets;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class SocketReader {
 
-	private DataInputStream inputStream;
+	private BufferedReader inputStream;
 
 	public void createStream(Socket socket) {
 		try {
-			inputStream = new DataInputStream(socket.getInputStream());
+			inputStream =  new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -18,7 +20,7 @@ public class SocketReader {
 
 	public String read() {
 		try {
-			String input = inputStream.readUTF();
+			String input = inputStream.readLine();
 			System.err.println("Input: " + input);
 			return input;
 		} catch (IOException e) {

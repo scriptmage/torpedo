@@ -4,6 +4,7 @@ import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Startable;
 import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.battlefield.BattleFieldFactory;
+import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
 
 public class LocalGame implements Startable {
@@ -13,7 +14,7 @@ public class LocalGame implements Startable {
 		BattleField battleField = BattleFieldFactory.createBattleField();
 		Hunter hunter = HunterFactory.createHunter();
 		
-		battleField.createBattleField();
+		battleField.createBattleField(GameConfig.getDimension());
 		while (battleField.isAliveShips()) {
 			battleField.shoot(hunter);
 		}
