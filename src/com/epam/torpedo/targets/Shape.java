@@ -5,7 +5,7 @@ import java.util.Iterator;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 
-public class Shape {
+public class Shape implements Comparable<Shape> {
 	private CoordinateSet points;
 	private Coordinate topLeft;
 	private Coordinate bottomRight;
@@ -90,6 +90,12 @@ public class Shape {
 			}
 		}
 		return new Coordinate(x, y);
+	}
+
+	@Override
+	public int compareTo(Shape o) {
+		int size = o.size();
+		return size - this.size();
 	}
 
 }

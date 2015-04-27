@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -21,22 +22,38 @@ public class FileBattleField extends BattleField {
 	// TODO ez nem biztos hogy kellene ide, miért nem használom a ShipManagert? --> ld. BattleField::ShipManager
 	private List<Shape> ships = new ArrayList<>();
 	private List<Integer> numbersOfShips = new ArrayList<>();
-	
-	private String load() throws IOException {
-		StringBuilder fileContent = new StringBuilder();
-		Resolver resolver = GameConfig.getResolver();
-		File dataOfShips = new File(resolver.get("dataFile"));
-		try (BufferedReader br = new BufferedReader(new FileReader(dataOfShips))) {
-			String buffer = null;
-			while ((buffer = br.readLine()) != null) {
-				fileContent.append(buffer + "\n");
+
+	@Override
+	public void createBattleField(Dimension dimensionOfBattleField) {
+		try {
+			parse();
+			shortByShipSize();
+			for (int i = 0; i < ships.size(); i++) {
+				System.out.println(ships.get(i).size());
+				int counter = 0;
+				int iterateCounter = 0;
+				
+				do {
+					Ship ship = ShipFactory.getFreeShip(ships.get(i), dimensionOfBattleField);
+					try {
+						addShip(ship);
+						System.out.println(String.format("%d %d", ship.getPositionX(), ship.getPositionY()));
+						iterateCounter = 0;
+						counter++;
+					} catch (RuntimeException e) {
+						System.out.println(e.getMessage());
+					}
+					iterateCounter++;
+				} while (counter < numbersOfShips.get(i) && iterateCounter < GameConfig.ITERATION_TOLERANCE);
+				
+				checkTolerance(iterateCounter);
 			}
-			br.close();
+		} catch (IOException e) {
+			throw new IllegalStateException(e.getMessage(), e);
 		}
-		return fileContent.toString();
 	}
 
-	public void parse() throws IOException {
+	private void parse() throws IOException {
 		String fileContent = load();
 		StringTokenizer st = new StringTokenizer(fileContent, "\n");
 
@@ -70,33 +87,30 @@ public class FileBattleField extends BattleField {
 		
 		setMaxNumberOfShips(shipCounter);
 	}
-
-	@Override
-	public void createBattleField(Dimension dimensionOfBattleField) {
-		try {
-			parse();
-			// TODO hajóméretben csökkenő sorrendbe tenni a hajókat, és ebben a sorrendben megpróbálni a lehejezést
-			for (int i = 0; i < ships.size(); i++) {
-				int counter = 0;
-				int iterateCounter = 0;
-				
-				do {
-					Ship ship = ShipFactory.getFreeShip(ships.get(i), dimensionOfBattleField);
-					try {
-						addShip(ship);
-						System.out.println(String.format("%d %d", ship.getPositionX(), ship.getPositionY()));
-						iterateCounter = 0;
-						counter++;
-					} catch (RuntimeException e) {
-						System.out.println(e.getMessage());
-					}
-					iterateCounter++;
-				} while (counter < numbersOfShips.get(i) && iterateCounter < GameConfig.ITERATION_TOLERANCE);
-				
-				checkTolerance(iterateCounter);
+	
+	private String load() throws IOException {
+		StringBuilder fileContent = new StringBuilder();
+		Resolver resolver = GameConfig.getResolver();
+		File dataOfShips = new File(resolver.get("dataFile"));
+		try (BufferedReader br = new BufferedReader(new FileReader(dataOfShips))) {
+			String buffer = null;
+			while ((buffer = br.readLine()) != null) {
+				fileContent.append(buffer + "\n");
 			}
-		} catch (IOException e) {
-			throw new IllegalStateException(e.getMessage(), e);
+			br.close();
+		}
+		return fileContent.toString();
+	}
+
+	private void shortByShipSize() {
+		Shape[] unsortedShips = new Shape[ships.size()];
+		for (int i = 0; i < ships.size(); i++) {
+			unsortedShips[i] = ships.get(i);
+		}
+		Arrays.sort(unsortedShips);
+		ships.clear();
+		for(Shape shapeOfShip: unsortedShips) {
+			ships.add(shapeOfShip);
 		}
 	}
 
