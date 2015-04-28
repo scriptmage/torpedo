@@ -12,7 +12,7 @@ public class LocalGame implements Startable {
 	@Override
 	public void start() {
 		BattleField battleField = BattleFieldFactory.createBattleField();
-		Hunter hunter = HunterFactory.createHunter();
+		Hunter hunter = HunterFactory.getHunter();
 		
 		battleField.createBattleField(GameConfig.getDimension());
 		while (battleField.isAliveShips()) {

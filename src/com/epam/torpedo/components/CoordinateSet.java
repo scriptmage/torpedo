@@ -51,6 +51,20 @@ public class CoordinateSet {
 	public boolean isEmpty() {
 		return coords.isEmpty();
 	}
+	
+	public Coordinate pop() {
+		Iterator<Coordinate> iterator = coords.iterator();
+		if(!iterator.hasNext()) {
+			throw new RuntimeException("CoordinateSet is empty");
+		}
+		Coordinate next = iterator.next();
+		coords.remove(next);
+		return next;
+	}
+	
+	public void clear() {
+		coords.clear();
+	}
 
 	@Override
 	public String toString() {

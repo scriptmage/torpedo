@@ -19,4 +19,12 @@ public class RandomHunter extends Hunter {
 		return coordinate;
 	}
 
+	@Override
+	public void setPosition(Coordinate coordinate) {
+	}
+
+	@Override
+	public void clear() {
+	}
+
 }

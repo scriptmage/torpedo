@@ -17,7 +17,7 @@ public class HunterFactory {
 		shooter.setDimension(GameConfig.getDimension());
 	}
 
-	public static Hunter createHunter() {
+	public static Hunter getHunter() {
 		if (hunter == null) {
 			Resolver resolver = GameConfig.getResolver();
 			String hunterShotStrategyName = resolver.get("hunter");

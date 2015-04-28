@@ -27,7 +27,7 @@ public class HelloCommand extends Command {
 		Dimension dimensionOfBattleField = new Dimension(Integer.parseInt((String) sizeOfBattlefield[WIDTH]), Integer.parseInt((String) sizeOfBattlefield[HEIGHT]));
 		battleField.createBattleField(dimensionOfBattleField);
 
-		Hunter hunter = HunterFactory.createHunter();
+		Hunter hunter = HunterFactory.getHunter();
 		addResponse(new FireCommand(hunter.nextShot()));
 		return getResponseQueue();
 	}

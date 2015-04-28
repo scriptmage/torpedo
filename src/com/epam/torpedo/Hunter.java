@@ -7,6 +7,7 @@ import com.epam.torpedo.components.Dimension;
 public abstract class Hunter implements Shooter {
 	protected Dimension dimension;
 	private CoordinateSet shots = new CoordinateSet();
+	private Coordinate lastShot;
 	
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
@@ -17,11 +18,15 @@ public abstract class Hunter implements Shooter {
 	}
 
 	public void addShot(int x, int y) {
-		shots.add(x, y);
+		addShot(new Coordinate(x, y));
 	}
 
 	public void addShot(Coordinate coordinate) {
 		shots.add(coordinate);
+	}
+	
+	public void addShots(CoordinateSet coordinateSet) {
+		shots.addAll(coordinateSet);
 	}
 
 	public boolean isExists(int x, int y) {
@@ -35,6 +40,16 @@ public abstract class Hunter implements Shooter {
 	public CoordinateSet getShots() {
 		return shots;
 	}
-
+	
+	public Coordinate setLastShot(Coordinate coordinate) {
+		return lastShot = coordinate;
+	}
+	
+	public Coordinate getLastShot() {
+		return lastShot;
+	}
+	
 	abstract public Coordinate nextShot();
+	abstract public void setPosition(Coordinate coordinate);
+	abstract public void clear();
 }

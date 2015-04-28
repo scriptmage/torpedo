@@ -1,5 +1,7 @@
 package com.epam.torpedo.network.protocol.commands.concrete;
 
+import com.epam.torpedo.Hunter;
+import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.network.protocol.Command;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
@@ -16,6 +18,8 @@ public class SunkCommand extends Command {
 		// TODO az elsüllyedt hajó körüli területet hozzáadni valahogy azokhoz a
 		// pontokhoz, amiket már kilőtt a hunter, hiszen ide már nem szabadna
 		// lőni
+		Hunter hunter = HunterFactory.getHunter();
+		hunter.clear();
 		return getResponseQueue();
 	}
 

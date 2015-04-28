@@ -17,6 +17,7 @@ public class ConcretePositionHunter extends Hunter {
 		setPosition(new Coordinate(x, y));
 	}
 
+	@Override
 	public void setPosition(Coordinate coordinate) {
 		position = coordinate;
 	}
@@ -29,6 +30,10 @@ public class ConcretePositionHunter extends Hunter {
 	public Coordinate nextShot() {
 		addShot(position);
 		return position;
+	}
+
+	@Override
+	public void clear() {
 	}
 
 }
