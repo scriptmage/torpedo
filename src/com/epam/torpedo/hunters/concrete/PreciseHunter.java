@@ -7,22 +7,23 @@ import com.epam.torpedo.components.CoordinateSet;
 public class PreciseHunter extends Hunter {
 
 	CoordinateSet targetPoints = new CoordinateSet();
-	
+
 	@Override
 	public Coordinate nextShot() {
 		Coordinate coordinate;
-		
-		if(targetPoints.isEmpty()) {
-			do {
+
+		do {
+			if (targetPoints.isEmpty()) {
 				int width = dimension.getWidth();
 				int height = dimension.getHeight();
 				coordinate = Coordinate.getRandomPosition(width, height);
-			} while (isExists(coordinate));
-			setLastShot(coordinate);
-		} else {
-			coordinate = targetPoints.pop();
-		}
-		
+			} else {
+				coordinate = targetPoints.pop();
+			}
+		} while (isExists(coordinate));
+
+		setLastShot(coordinate);
+
 		addShot(coordinate);
 		return coordinate;
 	}
@@ -31,7 +32,7 @@ public class PreciseHunter extends Hunter {
 	public void setPosition(Coordinate coordinate) {
 		targetPoints.add(coordinate);
 	}
-	
+
 	@Override
 	public void clear() {
 		addShots(targetPoints);
