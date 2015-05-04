@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -27,9 +26,8 @@ public class FileBattleField extends BattleField {
 	public void createBattleField(Dimension dimensionOfBattleField) {
 		try {
 			parse();
-			shortByShipSize();
+			shortByShipSize(ships);
 			for (int i = 0; i < ships.size(); i++) {
-				System.out.println(ships.get(i).size());
 				int counter = 0;
 				int iterateCounter = 0;
 				
@@ -100,18 +98,6 @@ public class FileBattleField extends BattleField {
 			br.close();
 		}
 		return fileContent.toString();
-	}
-
-	private void shortByShipSize() {
-		Shape[] unsortedShips = new Shape[ships.size()];
-		for (int i = 0; i < ships.size(); i++) {
-			unsortedShips[i] = ships.get(i);
-		}
-		Arrays.sort(unsortedShips);
-		ships.clear();
-		for(Shape shapeOfShip: unsortedShips) {
-			ships.add(shapeOfShip);
-		}
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.epam.torpedo.battlefield;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.epam.torpedo.Board;
 import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
@@ -8,6 +11,7 @@ import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
+import com.epam.torpedo.targets.Shape;
 import com.epam.torpedo.targets.ships.ShipManager;
 
 public abstract class BattleField extends Board {
@@ -70,6 +74,18 @@ public abstract class BattleField extends Board {
 
 	public boolean isAliveShips() {
 		return ships.isAliveShips();
+	}
+	
+	protected void shortByShipSize(List<Shape> ships) {
+		Shape[] unsortedShips = new Shape[ships.size()];
+		for (int i = 0; i < ships.size(); i++) {
+			unsortedShips[i] = ships.get(i);
+		}
+		Arrays.sort(unsortedShips);
+		ships.clear();
+		for(Shape shapeOfShip: unsortedShips) {
+			ships.add(shapeOfShip);
+		}
 	}
 
 	public abstract void createBattleField(Dimension dimensionOfBattleField);
