@@ -68,7 +68,7 @@ public class CoordinateSet {
 
 	@Override
 	public String toString() {
-		return "";
+		return coords.toString();
 	}
 	
 }

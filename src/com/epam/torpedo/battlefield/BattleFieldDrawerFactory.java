@@ -9,14 +9,19 @@ public class BattleFieldDrawerFactory {
 
 	private static Drawable drawer;
 
-	public static Drawable create() {
+	public static Drawable getDrawer() {
 		Resolver resolver = GameConfig.getResolver();
 		String battleFieldDrawerName = resolver.get("battleFieldDrawer");
 
-		switch (battleFieldDrawerName) {
-		case "console":
-			drawer = new BattleFieldDrawer();
-			break;
+		if(drawer == null) {
+			switch (battleFieldDrawerName.trim()) {
+			case "console":
+				drawer = new BattleFieldDrawer();
+				System.out.println();
+				System.out.println(drawer);
+				System.out.println();
+				break;
+			}
 		}
 
 		return drawer;

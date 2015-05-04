@@ -54,7 +54,7 @@ public abstract class BattleField extends Board {
 	}
 
 	private void draw(Coordinate shoot) {
-		Drawable drawer = BattleFieldDrawerFactory.create();
+		Drawable drawer = BattleFieldDrawerFactory.getDrawer();
 		if (drawer != null) {
 			Hunter shooter = HunterFactory.createShooter();
 			shooter.addShot(shoot);

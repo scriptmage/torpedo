@@ -51,7 +51,7 @@ public class SocketGame implements Startable {
 	}
 
 	private void beginServerGame(SocketTalker socketTalker) {
-		BattleField battleField = BattleFieldFactory.createBattleField();
+		BattleField battleField = BattleFieldFactory.getBattleField();
 		battleField.createBattleField(GameConfig.getDimension());
 		HelloCommand helloCommand = new HelloCommand();
 		socketTalker.send(helloCommand);

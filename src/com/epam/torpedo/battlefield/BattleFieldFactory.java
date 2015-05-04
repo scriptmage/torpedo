@@ -9,12 +9,12 @@ public class BattleFieldFactory {
 
 	private static BattleField battleField;
 
-	public static BattleField createBattleField() {
+	public static BattleField getBattleField() {
 		Resolver resolver = GameConfig.getResolver();
 		String battleFieldFillStrategyName = resolver.get("battleField");
 
 		if (battleField == null) {
-			switch (battleFieldFillStrategyName) {
+			switch (battleFieldFillStrategyName.trim()) {
 			case "random":
 				battleField = new RandomBattleField();
 				String numberOfShips = resolver.get("numberOfShips");

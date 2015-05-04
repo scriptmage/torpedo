@@ -22,6 +22,7 @@ public abstract class Hunter implements Shooter {
 	}
 
 	public void addShot(Coordinate coordinate) {
+		lastShot = coordinate;
 		shots.add(coordinate);
 	}
 	
@@ -39,10 +40,6 @@ public abstract class Hunter implements Shooter {
 
 	public CoordinateSet getShots() {
 		return shots;
-	}
-	
-	public Coordinate setLastShot(Coordinate coordinate) {
-		return lastShot = coordinate;
 	}
 	
 	public Coordinate getLastShot() {

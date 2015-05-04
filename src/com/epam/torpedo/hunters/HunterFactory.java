@@ -22,7 +22,7 @@ public class HunterFactory {
 			Resolver resolver = GameConfig.getResolver();
 			String hunterShotStrategyName = resolver.get("hunter");
 
-			switch (hunterShotStrategyName) {
+			switch (hunterShotStrategyName.trim()) {
 			case "random":
 				hunter = new RandomHunter();
 				break;

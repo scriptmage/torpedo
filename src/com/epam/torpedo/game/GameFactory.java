@@ -13,7 +13,7 @@ public class GameFactory {
 		String gameMode = resolver.get("game");
 
 		Startable result = null;
-		switch (gameMode) {
+		switch (gameMode.trim()) {
 		case "socket":
 			result = new SocketGame();
 			ConnectionData connectionData = createConnection(args);

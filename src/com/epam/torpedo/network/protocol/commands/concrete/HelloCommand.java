@@ -22,7 +22,7 @@ public class HelloCommand extends Command {
 			return successor.getResponse(input);
 		}
 
-		BattleField battleField = BattleFieldFactory.createBattleField();
+		BattleField battleField = BattleFieldFactory.getBattleField();
 		Object[] sizeOfBattlefield = getParams();
 		Dimension dimensionOfBattleField = new Dimension(Integer.parseInt((String) sizeOfBattlefield[WIDTH]), Integer.parseInt((String) sizeOfBattlefield[HEIGHT]));
 		battleField.createBattleField(dimensionOfBattleField);

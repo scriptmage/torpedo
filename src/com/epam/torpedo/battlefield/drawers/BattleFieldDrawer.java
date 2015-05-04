@@ -14,7 +14,7 @@ public class BattleFieldDrawer implements Drawable {
 		StringBuilder sb = new StringBuilder();
 		CoordinateSet shots = shooter.getShots();
 		
-		BattleField battleField = BattleFieldFactory.createBattleField();
+		BattleField battleField = BattleFieldFactory.getBattleField();
 		Dimension dimensionOfBattleField = battleField.getDimension();
 		for (int y = 0; y < dimensionOfBattleField.getHeight(); y++) {
 			for (int x = 0; x < dimensionOfBattleField.getWidth(); x++) {

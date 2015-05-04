@@ -34,7 +34,7 @@ public class FireCommand extends Command {
 		}
 
 		shooter.setPosition(getParams());
-		battleField = BattleFieldFactory.createBattleField();
+		battleField = BattleFieldFactory.getBattleField();
 		Hunter hunter = HunterFactory.getHunter();
 
 		if (battleField.shoot(shooter)) {
