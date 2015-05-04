@@ -45,7 +45,7 @@ public class Coordinate {
 		return y;
 	}
 	
-	static public Coordinate getRandomPosition(int maxXPosition, int maxYPosition) {
+	static public Coordinate getRandomCoordinate(int maxXPosition, int maxYPosition) {
 		Random random = new Random();
 		int positionX = random.nextInt(maxXPosition);
 		int positionY = random.nextInt(maxYPosition);

@@ -12,7 +12,7 @@ public class RandomHunter extends Hunter {
 		do {
 			int width = dimension.getWidth();
 			int height = dimension.getHeight();
-			coordinate = Coordinate.getRandomPosition(width, height);
+			coordinate = Coordinate.getRandomCoordinate(width, height);
 		} while (isExists(coordinate));
 
 		addShot(coordinate);

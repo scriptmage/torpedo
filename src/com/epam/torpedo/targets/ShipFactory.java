@@ -18,7 +18,7 @@ public class ShipFactory {
 	static public Ship getRandomShip(Dimension dimensionOfBattleField) {
 		Ship ship;
 		Random random = new Random();
-		Coordinate coordinate = Coordinate.getRandomPosition(dimensionOfBattleField.getWidth(), dimensionOfBattleField.getHeight());
+		Coordinate coordinate = Coordinate.getRandomCoordinate(dimensionOfBattleField.getWidth(), dimensionOfBattleField.getHeight());
 
 		switch (random.nextInt(NUMBER_OF_SHIPTYPES)) {
 		case 1:
@@ -36,7 +36,7 @@ public class ShipFactory {
 	}
 
 	static public Ship getFreeShip(Shape shape, Dimension dimensionOfBattleField) {
-		Coordinate coordinate = Coordinate.getRandomPosition(dimensionOfBattleField.getWidth(), dimensionOfBattleField.getHeight());
+		Coordinate coordinate = Coordinate.getRandomCoordinate(dimensionOfBattleField.getWidth(), dimensionOfBattleField.getHeight());
 		Ship ship = new FreeShip(shape);
 		ship.setPosition(coordinate);
 		return ship;
