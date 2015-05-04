@@ -19,10 +19,10 @@ public class HitCommand extends Command {
 		Hunter hunter = HunterFactory.getHunter();
 		Coordinate lastShot = hunter.getLastShot();
 		if(lastShot != null) {
-			hunter.setPosition(new Coordinate(lastShot.getX() - 1, lastShot.getY()));
-			hunter.setPosition(new Coordinate(lastShot.getX(), lastShot.getY() - 1));
 			hunter.setPosition(new Coordinate(lastShot.getX() + 1, lastShot.getY()));
+			hunter.setPosition(new Coordinate(lastShot.getX() - 1, lastShot.getY()));
 			hunter.setPosition(new Coordinate(lastShot.getX(), lastShot.getY() + 1));
+			hunter.setPosition(new Coordinate(lastShot.getX(), lastShot.getY() - 1));
 		}
 		return getResponseQueue();
 	}

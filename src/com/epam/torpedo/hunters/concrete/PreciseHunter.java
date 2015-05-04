@@ -1,7 +1,5 @@
 package com.epam.torpedo.hunters.concrete;
 
-import java.util.Random;
-
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
@@ -24,9 +22,8 @@ public class PreciseHunter extends Hunter {
 		Coordinate coordinate;
 
 		do {
-			if (targetPoints.isEmpty()) {
-				coordinate = getRandomGridPosition();
-			} else {
+			coordinate = getRandomGridPosition();
+			if (!targetPoints.isEmpty()) {
 				coordinate = targetPoints.pop();
 			}
 		} while (isExists(coordinate));
@@ -36,23 +33,21 @@ public class PreciseHunter extends Hunter {
 	}
 
 	public Coordinate getRandomGridPosition() {
-		int posX = 0;
-		int posY = 0;
 		Coordinate position = Coordinate.getRandomCoordinate(dimension.getWidth(), dimension.getHeight());
-		
-		posX = 1;
-		posY = position.getY();
-		
-		if(isEven(position.getY())) {
+		int posX = 1;
+		int posY = position.getY();
+
+		if (isEven(position.getY())) {
 			posX = position.getX() & -2;
-		} else if(isEven(position.getX()) && position.getX() > 3) {
-			//default value of posX is 1, so it would be unnecessary tested position.getX() > 1, because 2 - 1 is 1
+		} else if (isEven(position.getX()) && position.getX() > 3) {
+			// default value of posX is 1, so it would be unnecessary tested
+			// position.getX() > 1, because 2 - 1 is 1
 			posX = position.getX() - 1;
-		}	
-		
+		}
+
 		return new Coordinate(posX, posY);
 	}
-	
+
 	private boolean isEven(int number) {
 		return number % 2 == 0;
 	}
