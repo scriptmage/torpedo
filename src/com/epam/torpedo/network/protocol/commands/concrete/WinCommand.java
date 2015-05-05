@@ -19,6 +19,7 @@ public class WinCommand extends Command {
 			return successor.getResponse(input);
 		}
 		addResponse(new QuitCommand());
+		System.out.println("I won!");
 		return getResponseQueue();
 	}
 

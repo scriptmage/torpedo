@@ -17,9 +17,6 @@ public class BattleFieldDrawerFactory {
 			switch (battleFieldDrawerName.trim()) {
 			case "console":
 				drawer = new BattleFieldDrawer();
-				System.out.println();
-				System.out.println(drawer);
-				System.out.println();
 				break;
 			}
 		}

@@ -17,14 +17,12 @@ import com.epam.torpedo.targets.ShipFactory;
 
 public class FileBattleField extends BattleField {
 
-	// TODO ez nem biztos hogy kellene ide, miért nem használom a ShipManagert? --> ld. BattleField::ShipManager
-	private List<Shape> ships = new ArrayList<>();
 	private List<Integer> numbersOfShips = new ArrayList<>();
 
 	@Override
 	public void createBattleField() {
 		try {
-			parse();
+			List<Shape> ships = parse();
 			shortByShipSize(ships);
 			for (int i = 0; i < ships.size(); i++) {
 				int counter = 0;
@@ -50,9 +48,10 @@ public class FileBattleField extends BattleField {
 		}
 	}
 
-	private void parse() throws IOException {
+	private List<Shape> parse() throws IOException {
 		String fileContent = load();
 		StringTokenizer st = new StringTokenizer(fileContent, "\n");
+		List<Shape> ships = new ArrayList<>();
 
 		int dimensionY = 0;
 		int shipCounter = 0;
@@ -83,6 +82,7 @@ public class FileBattleField extends BattleField {
 		}
 		
 		setMaxNumberOfShips(shipCounter);
+		return ships;
 	}
 	
 	private String load() throws IOException {

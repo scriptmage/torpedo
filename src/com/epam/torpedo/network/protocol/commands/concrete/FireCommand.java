@@ -51,6 +51,7 @@ public class FireCommand extends Command {
 				addResponse(new FireCommand(hunter.nextShot()));
 			} else {
 				addResponse(new WinCommand());
+				System.out.println("I lost");
 			}
 
 		} else {

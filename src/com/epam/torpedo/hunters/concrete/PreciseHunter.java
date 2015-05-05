@@ -27,7 +27,6 @@ public class PreciseHunter extends Hunter {
 			coordinate = getRandomGridPosition();
 			if (!targetPoints.isEmpty()) {
 				coordinate = targetPoints.pop();
-				System.out.println("Target point: " + coordinate);
 			}
 		} while (isExists(coordinate));
 

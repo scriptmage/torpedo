@@ -15,9 +15,6 @@ public class SunkCommand extends Command {
 		if (!isCommand(COMMAND_NAME)) {
 			return successor.getResponse(input);
 		}
-		// TODO az elsüllyedt hajó körüli területet hozzáadni valahogy azokhoz a
-		// pontokhoz, amiket már kilőtt a hunter, hiszen ide már nem szabadna
-		// lőni
 		Hunter hunter = HunterFactory.getHunter();
 		hunter.clear();
 		return getResponseQueue();
