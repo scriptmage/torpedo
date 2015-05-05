@@ -16,7 +16,7 @@ public class FireCommand extends Command {
 
 	private Coordinate coordinate;
 	private BattleField battleField;
-	private ConcretePositionHunter shooter = HunterFactory.createShooter();
+	private ConcretePositionHunter shooter = HunterFactory.getShooter();
 
 	public FireCommand() {
 

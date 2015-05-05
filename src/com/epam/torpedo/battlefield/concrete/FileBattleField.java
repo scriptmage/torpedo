@@ -10,7 +10,6 @@ import java.util.StringTokenizer;
 
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
-import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
 import com.epam.torpedo.targets.Shape;
@@ -23,7 +22,7 @@ public class FileBattleField extends BattleField {
 	private List<Integer> numbersOfShips = new ArrayList<>();
 
 	@Override
-	public void createBattleField(Dimension dimensionOfBattleField) {
+	public void createBattleField() {
 		try {
 			parse();
 			shortByShipSize(ships);
@@ -32,10 +31,10 @@ public class FileBattleField extends BattleField {
 				int iterateCounter = 0;
 				
 				do {
-					Ship ship = ShipFactory.getFreeShip(ships.get(i), dimensionOfBattleField);
+					Ship ship = ShipFactory.getFreeShip(ships.get(i));
 					try {
 						addShip(ship);
-						System.out.println(String.format("%d %d", ship.getPositionX(), ship.getPositionY()));
+						System.out.println(String.format("New ship is here: %d %d", ship.getPositionX(), ship.getPositionY()));
 						iterateCounter = 0;
 						counter++;
 					} catch (RuntimeException e) {

@@ -20,7 +20,7 @@ public class Board {
 	}
 
 	public void setDimension(int widthOfBattleField, int heightOfBattleField) {
-		this.dimension = new Dimension(widthOfBattleField, heightOfBattleField);
+		setDimension(new Dimension(widthOfBattleField, heightOfBattleField));
 	}
 
 	public int getWidth() {

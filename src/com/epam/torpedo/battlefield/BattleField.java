@@ -8,7 +8,6 @@ import com.epam.torpedo.Drawable;
 import com.epam.torpedo.Hunter;
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Coordinate;
-import com.epam.torpedo.components.Dimension;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.hunters.HunterFactory;
 import com.epam.torpedo.targets.Shape;
@@ -60,7 +59,7 @@ public abstract class BattleField extends Board {
 	private void draw(Coordinate shoot) {
 		Drawable drawer = BattleFieldDrawerFactory.getDrawer();
 		if (drawer != null) {
-			Hunter shooter = HunterFactory.createShooter();
+			Hunter shooter = HunterFactory.getShooter();
 			shooter.addShot(shoot);
 			drawer.draw(ships.getShipCoords(), shooter);
 		}
@@ -88,6 +87,6 @@ public abstract class BattleField extends Board {
 		}
 	}
 
-	public abstract void createBattleField(Dimension dimensionOfBattleField);
+	public abstract void createBattleField();
 
 }

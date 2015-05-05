@@ -26,7 +26,8 @@ public class BattleFieldTest {
 	public void testGetNumberOfShipsWhenAddedTwoShipsShouldTrue() {
 		// GIVEN
 		underTest.setMaxNumberOfShips(2);
-		underTest.createBattleField(new Dimension(10, 10));
+		underTest.setDimension(new Dimension(10, 10));
+		underTest.createBattleField();
 
 		// WHEN
 		int result = underTest.getNumberOfShips();

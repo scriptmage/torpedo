@@ -22,10 +22,11 @@ public class HelloCommand extends Command {
 			return successor.getResponse(input);
 		}
 
-		BattleField battleField = BattleFieldFactory.getBattleField();
 		Object[] sizeOfBattlefield = getParams();
 		Dimension dimensionOfBattleField = new Dimension(Integer.parseInt((String) sizeOfBattlefield[WIDTH]), Integer.parseInt((String) sizeOfBattlefield[HEIGHT]));
-		battleField.createBattleField(dimensionOfBattleField);
+		GameConfig.setDimension(dimensionOfBattleField);
+		BattleField battleField = BattleFieldFactory.getBattleField();
+		battleField.createBattleField();
 
 		Hunter hunter = HunterFactory.getHunter();
 		addResponse(new FireCommand(hunter.nextShot()));

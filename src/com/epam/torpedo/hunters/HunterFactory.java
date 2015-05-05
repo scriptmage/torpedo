@@ -12,11 +12,6 @@ public class HunterFactory {
 	private static Hunter hunter;
 	private static ConcretePositionHunter shooter;
 	
-	static {
-		shooter = new ConcretePositionHunter();
-		shooter.setDimension(GameConfig.getDimension());
-	}
-
 	public static Hunter getHunter() {
 		if (hunter == null) {
 			Resolver resolver = GameConfig.getResolver();
@@ -32,13 +27,16 @@ public class HunterFactory {
 			default:
 				throw new IllegalArgumentException("Unknown hunter type: " + hunterShotStrategyName + "! Use the following: random, precise");
 			}
-			hunter.setDimension(GameConfig.getDimension());
 		}
-		
+		hunter.setDimension(GameConfig.getDimension());
 		return hunter;
 	}
 
-	public static ConcretePositionHunter createShooter() {
+	public static ConcretePositionHunter getShooter() {
+		if(shooter == null) {
+			shooter = new ConcretePositionHunter();
+		}
+		shooter.setDimension(GameConfig.getDimension());
 		return shooter;
 	}
 

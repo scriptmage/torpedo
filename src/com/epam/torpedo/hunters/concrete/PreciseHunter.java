@@ -1,6 +1,7 @@
 package com.epam.torpedo.hunters.concrete;
 
 import com.epam.torpedo.Hunter;
+import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
@@ -13,8 +14,9 @@ public class PreciseHunter extends Hunter {
 	int numbersOfPossibleEvenPositions;
 
 	public PreciseHunter() {
-		Dimension dimensionOfbattlefield = GameConfig.getDimension();
+		Dimension dimensionOfbattlefield = BattleFieldFactory.getBattleField().getDimension();
 		numbersOfPossibleEvenPositions = (int) (dimensionOfbattlefield.getWidth() * dimensionOfbattlefield.getHeight() / 2);
+		setDimension(dimensionOfbattlefield);
 	}
 
 	@Override
@@ -25,6 +27,7 @@ public class PreciseHunter extends Hunter {
 			coordinate = getRandomGridPosition();
 			if (!targetPoints.isEmpty()) {
 				coordinate = targetPoints.pop();
+				System.out.println("Target point: " + coordinate);
 			}
 		} while (isExists(coordinate));
 
@@ -34,18 +37,21 @@ public class PreciseHunter extends Hunter {
 
 	public Coordinate getRandomGridPosition() {
 		Coordinate position = Coordinate.getRandomCoordinate(dimension.getWidth(), dimension.getHeight());
-		int posX = 1;
-		int posY = position.getY();
+		int posX = position.getX();
 
-		if (isEven(position.getY())) {
-			posX = position.getX() & -2;
-		} else if (isEven(position.getX()) && position.getX() > 3) {
-			// default value of posX is 1, so it would be unnecessary tested
-			// position.getX() > 1, because 2 - 1 is 1
-			posX = position.getX() - 1;
+		if(countEvenPosition <= numbersOfPossibleEvenPositions) {
+			posX = 1;	
+			if (isEven(position.getY())) {
+				posX = position.getX() & -2;
+				countEvenPosition++;
+			} else if (isEven(position.getX()) && position.getX() > 3) {
+				// default value of posX is 1, so it would be unnecessary tested
+				// position.getX() > 1, because 2 - 1 is 1
+				posX = position.getX() - 1;
+			}
 		}
 
-		return new Coordinate(posX, posY);
+		return new Coordinate(posX, position.getY());
 	}
 
 	private boolean isEven(int number) {

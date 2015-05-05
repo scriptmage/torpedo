@@ -14,7 +14,7 @@ import com.epam.torpedo.targets.ships.concrete.NullShip;
 public class ShipManager {
 	// TODO fordított tárolás, a hajó pontokat  tárolom hajóval HashMapben, nem a hajókat tárolom pontokkal --> megfordítom a viszonyt
 	private Set<Ship> ships = new HashSet<>();
-
+	
 	public void add(Ship ship) {
 		ship.createShape();
 		validatePosition(ship);
@@ -34,7 +34,7 @@ public class ShipManager {
 		Dimension dimension = GameConfig.getDimension();
 		return ship.getTop() >= 0 && ship.getBottom() < dimension.getHeight();
 	}
-
+	
 	public boolean validatePosition(Ship ship) {
 		if (!isValidShipPosition(ship)) {
 			throw new IllegalArgumentException("Invalid ship position");

@@ -9,11 +9,11 @@ import com.epam.torpedo.targets.ShipFactory;
 public class RandomBattleField extends BattleField {
 
 	@Override
-	public void createBattleField(Dimension dimensionOfBattleField) {
+	public void createBattleField() {
 		int iterateCounter = 0;
 
 		do {
-			Ship ship = ShipFactory.getRandomShip(dimensionOfBattleField);
+			Ship ship = ShipFactory.getRandomShip();
 			try {
 				addShip(ship);
 				iterateCounter = 0;
