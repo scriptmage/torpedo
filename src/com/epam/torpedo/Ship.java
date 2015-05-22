@@ -23,6 +23,10 @@ public abstract class Ship {
 	public void setPosition(int x, int y) {
 		setPosition(new Coordinate(x, y));
 	}
+	
+	public Coordinate getPosition() {
+		return new Coordinate(position.getX(), position.getY());
+	}
 
 	public int getPositionX() {
 		return position.getX();
@@ -100,6 +104,11 @@ public abstract class Ship {
 		healPoint--;
 	}
 	
+	@Override
+	public String toString() {
+		return position.toString();
+	}
+
 	abstract public void createShape();
 
 }

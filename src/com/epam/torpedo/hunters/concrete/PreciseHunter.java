@@ -12,6 +12,7 @@ public class PreciseHunter extends Hunter {
 	CoordinateSet targetPoints = new CoordinateSet();
 	int countEvenPosition;
 	int numbersOfPossibleEvenPositions;
+	int quarter = 1;
 
 	public PreciseHunter() {
 		Dimension dimensionOfbattlefield = BattleFieldFactory.getBattleField().getDimension();
@@ -35,11 +36,31 @@ public class PreciseHunter extends Hunter {
 	}
 
 	public Coordinate getRandomGridPosition() {
-		Coordinate position = Coordinate.getRandomCoordinate(dimension.getWidth(), dimension.getHeight());
+		Coordinate position;
+
+		switch (quarter) {
+		case 1:
+			position = Coordinate.getRandomIntervalCoordinate(0, dimension.getWidth() / 2, 0, dimension.getHeight() / 2);
+			break;
+		case 2:
+			position = Coordinate.getRandomIntervalCoordinate(dimension.getWidth() / 2, dimension.getWidth(), 0, dimension.getHeight() / 2);
+			break;
+		case 3:
+			position = Coordinate.getRandomIntervalCoordinate(0, dimension.getWidth() / 2, dimension.getHeight() / 2, dimension.getHeight());
+			break;
+		default:
+			position = Coordinate.getRandomIntervalCoordinate(dimension.getWidth() / 2, dimension.getWidth(), dimension.getHeight() / 2, dimension.getHeight());
+		}
+		
+		quarter++;
+		if (quarter > 4) {
+			quarter = 1;
+		}
+
 		int posX = position.getX();
 
-		if(countEvenPosition <= numbersOfPossibleEvenPositions) {
-			posX = 1;	
+		if (countEvenPosition <= numbersOfPossibleEvenPositions) {
+			posX = 1;
 			if (isEven(position.getY())) {
 				posX = position.getX() & -2;
 				countEvenPosition++;

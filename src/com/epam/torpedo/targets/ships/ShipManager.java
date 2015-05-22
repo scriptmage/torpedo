@@ -8,6 +8,7 @@ import com.epam.torpedo.Ship;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
+import com.epam.torpedo.exceptions.InvalidShipPositionException;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.targets.ships.concrete.NullShip;
 
@@ -15,10 +16,17 @@ public class ShipManager {
 	// TODO fordított tárolás, a hajó pontokat  tárolom hajóval HashMapben, nem a hajókat tárolom pontokkal --> megfordítom a viszonyt
 	private Set<Ship> ships = new HashSet<>();
 	
-	public void add(Ship ship) {
-		ship.createShape();
-		validatePosition(ship);
-		ships.add(ship);
+	public boolean add(Ship ship) {
+		boolean result = true;
+		try {
+			ship.createShape();
+			validatePosition(ship);
+			ships.add(ship);
+			System.out.println(String.format("New ship is here: %d %d", ship.getPositionX(), ship.getPositionY()));
+		} catch(InvalidShipPositionException e) {
+			result = false;
+		}
+		return result;
 	}
 
 	private boolean isValidShipPosition(Ship ship) {
@@ -37,13 +45,11 @@ public class ShipManager {
 	
 	public boolean validatePosition(Ship ship) {
 		if (!isValidShipPosition(ship)) {
-			throw new IllegalArgumentException("Invalid ship position");
+			throw new InvalidShipPositionException();
 		}
 
 		if (!isEmptyArea(ship)) {
-			int x = ship.getPositionX();
-			int y = ship.getPositionY();
-			throw new IllegalStateException(String.format("This area [ %2dx%-2d ] already has a ship or too close to another one", x, y));
+			throw new IllegalStateException(String.format("This area [ %s ] already has a ship or too close to another one", ship.getPosition()));
 		}
 		return true;
 	}

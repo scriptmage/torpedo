@@ -33,8 +33,8 @@ public abstract class BattleField extends Board {
 		this.maxNumberOfShips = maxNumberOfShips;
 	}
 
-	public void addShip(Ship ship) {
-		ships.add(ship);
+	public boolean addShip(Ship ship) {
+		return ships.add(ship);
 	}
 
 	public Ship getShip(Coordinate position) {

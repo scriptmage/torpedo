@@ -38,11 +38,7 @@ public class ShipFactory {
 	}
 
 	static public Ship getFreeShip(Shape shape) {
-		Dimension dimensionOfBattleField = GameConfig.getDimension();
-		Coordinate coordinate = Coordinate.getRandomCoordinate(dimensionOfBattleField.getWidth(), dimensionOfBattleField.getHeight());
-		Ship ship = new FreeShip(shape);
-		ship.setPosition(coordinate);
-		return ship;
+		return new FreeShip(shape);
 	}
 
 }
