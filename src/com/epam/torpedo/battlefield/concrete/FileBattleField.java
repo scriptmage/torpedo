@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 import com.epam.torpedo.Ship;
 import com.epam.torpedo.battlefield.BattleField;
 import com.epam.torpedo.components.Coordinate;
-import com.epam.torpedo.components.DimensionOfBattlefieldSplitter;
+import com.epam.torpedo.components.DimensionSplitter;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
 import com.epam.torpedo.targets.Shape;
@@ -20,9 +20,9 @@ import com.epam.torpedo.targets.ShipFactory;
 public class FileBattleField extends BattleField {
 
 	private List<Integer> numbersOfShips = new ArrayList<>();
-	private DimensionOfBattlefieldSplitter dimensionSplitter;
+	private DimensionSplitter dimensionSplitter;
 
-	public FileBattleField(DimensionOfBattlefieldSplitter dimensionSplitter) {
+	public FileBattleField(DimensionSplitter dimensionSplitter) {
 		this.dimensionSplitter = dimensionSplitter;
 	}
 

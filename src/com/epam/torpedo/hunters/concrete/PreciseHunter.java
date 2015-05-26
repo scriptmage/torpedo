@@ -5,14 +5,14 @@ import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
-import com.epam.torpedo.components.DimensionOfBattlefieldSplitter;
+import com.epam.torpedo.components.DimensionSplitter;
 import com.epam.torpedo.game.GameConfig;
 
 public class PreciseHunter extends Hunter {
 
-	CoordinateSet targetPoints = new CoordinateSet();
-	int countEvenPosition;
-	int numbersOfPossibleEvenPositions;
+    private CoordinateSet targetPoints = new CoordinateSet();
+	private int countEvenPosition;
+	private int numbersOfPossibleEvenPositions;
 
 	public PreciseHunter() {
 		Dimension dimensionOfbattlefield = BattleFieldFactory.getBattleField().getDimension();
@@ -23,23 +23,15 @@ public class PreciseHunter extends Hunter {
 	@Override
 	public Coordinate nextShot() {
 		Coordinate coordinate;
-
 		do {
-			coordinate = getRandomGridPosition();
+		    coordinate = convertToGridPosition(Coordinate.getRandomCoordinate(dimension.getWidth(), dimension.getHeight()));
 			if (!targetPoints.isEmpty()) {
 				coordinate = targetPoints.pop();
 			}
 		} while (isExists(coordinate));
-
+		
 		addShot(coordinate);
 		return coordinate;
-	}
-
-	public Coordinate getRandomGridPosition() {
-		DimensionOfBattlefieldSplitter dp = new DimensionOfBattlefieldSplitter(4);
-		Coordinate position = dp.getPosition();
-		dp.next();
-		return convertToGridPosition(position);
 	}
 
 	private Coordinate convertToGridPosition(Coordinate position) {

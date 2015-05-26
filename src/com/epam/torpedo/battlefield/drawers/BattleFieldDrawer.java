@@ -19,6 +19,10 @@ public class BattleFieldDrawer implements Drawable {
 		for (int y = 0; y < dimensionOfBattleField.getHeight(); y++) {
 			for (int x = 0; x < dimensionOfBattleField.getWidth(); x++) {
 				char marker = '.';
+				
+				if(shots.contains(x, y)) {
+				    marker = '*';
+				}
 
 				if (pointsOfShip.contains(x, y)) {
 					marker = 'O';

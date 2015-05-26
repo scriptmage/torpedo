@@ -2,14 +2,14 @@ package com.epam.torpedo.components;
 
 import com.epam.torpedo.game.GameConfig;
 
-public class DimensionOfBattlefieldSplitter {
+public class DimensionSplitter {
 
 	private int counterOfBlocks;
 	private int numberOfBlocks;
 	private int divider;
 	private Dimension dimension;
 
-	public DimensionOfBattlefieldSplitter(int numberOfBlocks) {
+	public DimensionSplitter(int numberOfBlocks) {
 		this.numberOfBlocks = numberOfBlocks;
 		dimension = GameConfig.getDimension();
 		divider = (int) Math.sqrt(numberOfBlocks);

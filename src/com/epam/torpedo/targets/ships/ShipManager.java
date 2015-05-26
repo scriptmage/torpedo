@@ -23,7 +23,7 @@ public class ShipManager {
 			validatePosition(ship);
 			ships.add(ship);
 			System.out.println(String.format("New ship is here: %d %d", ship.getPositionX(), ship.getPositionY()));
-		} catch(InvalidShipPositionException e) {
+		} catch(InvalidShipPositionException | IllegalStateException e) {
 			result = false;
 		}
 		return result;
