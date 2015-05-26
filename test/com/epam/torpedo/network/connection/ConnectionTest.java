@@ -8,64 +8,64 @@ import com.epam.torpedo.network.ConnectionData;
 
 public class ConnectionTest {
 
-  private ConnectionData underTest;
+	private ConnectionData underTest;
 
-  @Before
-  public void setUp() {
-    underTest = new ConnectionData();
-  }
+	@Before
+	public void setUp() {
+		underTest = new ConnectionData();
+	}
 
-  @Test
-  public void testIsServerConnectionShouldTrue() {
-    // GIVEN in setup
+	@Test
+	public void testIsServerConnectionShouldTrue() {
+		// GIVEN in setup
 
-    // WHEN
-    boolean result = underTest.isServerConnection();
+		// WHEN
+		boolean result = underTest.isServerConnection();
 
-    // THEN
-    Assert.assertTrue(result);
-  }
+		// THEN
+		Assert.assertTrue(result);
+	}
 
-  @Test
-  public void testIsServerConnectionWhenSetHostnameShouldFalse() {
-    // GIVEN
-    underTest.setHostName("localhost");
+	@Test
+	public void testIsServerConnectionWhenSetHostnameShouldFalse() {
+		// GIVEN
+		underTest.setHostName("localhost");
 
-    // WHEN
-    boolean result = underTest.isServerConnection();
+		// WHEN
+		boolean result = underTest.isServerConnection();
 
-    // THEN
-    Assert.assertFalse(result);
-  }
+		// THEN
+		Assert.assertFalse(result);
+	}
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetPortNumberWhenPortNumberLessThanMinimumPortNumberThrowsIllegalArgumentException() {
-    // GIVEN
-    underTest.setPortNumber(1000);
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPortNumberWhenPortNumberLessThanMinimumPortNumberThrowsIllegalArgumentException() {
+		// GIVEN
+		underTest.setPortNumber(1000);
 
-    // WHEN
-    // THEN thrown exception
-  }
+		// WHEN
+		// THEN thrown exception
+	}
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetPortNumberWhenPortNumberGreaterThanMaximumPortNumberThrowsIllegalArgumentException() {
-    // GIVEN
-    underTest.setPortNumber(70000);
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPortNumberWhenPortNumberGreaterThanMaximumPortNumberThrowsIllegalArgumentException() {
+		// GIVEN
+		underTest.setPortNumber(70000);
 
-    // WHEN
-    // THEN thrown exception
-  }
+		// WHEN
+		// THEN thrown exception
+	}
 
-  @Test
-  public void testSetPortNumberWhenPortNumberBetweenMinimumAndMaximumPortNumberShouldGetPortNumber() {
-    // GIVEN
-    underTest.setPortNumber(ConnectionData.DEFAULT_PORT_NUMBER);
-
-    // WHEN
-    int result = underTest.getPortNumber();
-
-    // THEN
-    Assert.assertEquals(ConnectionData.DEFAULT_PORT_NUMBER, result);
-  }
+	@Test
+	public void testSetPortNumberWhenPortNumberBetweenMinimumAndMaximumPortNumberShouldGetPortNumber() {
+		// GIVEN
+		underTest.setPortNumber(ConnectionData.DEFAULT_PORT_NUMBER);
+		
+		// WHEN
+		int result = underTest.getPortNumber();
+		
+		// THEN
+		Assert.assertEquals(ConnectionData.DEFAULT_PORT_NUMBER, result);
+	}
 
 }

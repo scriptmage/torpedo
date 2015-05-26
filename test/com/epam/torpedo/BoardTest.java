@@ -8,61 +8,61 @@ import com.epam.torpedo.components.Dimension;
 
 public class BoardTest {
 
-  private Board underTest;
+	private Board underTest;
 
-  @Before
-  public void setUp() {
-    underTest = new Board(new Dimension(5, 5));
-  }
+	@Before
+	public void setUp() {
+		underTest = new Board(new Dimension(5, 5));
+	}
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testValidatePositionWhenXPointLessThanZeroThrowsIllegalArgumentException() {
-    // GIVEN in setup
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidatePositionWhenXPointLessThanZeroThrowsIllegalArgumentException() {
+		// GIVEN in setup
 
-    // WHEN
-    underTest.validatePosition(-1, 1);
+		// WHEN
+		underTest.validatePosition(-1, 1);
 
-    // THEN thrown exception
-  }
+		// THEN thrown exception
+	}
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testValidatePositionWhenYPointLessThanZeroThrowsIllegalArgumentException() {
-    // GIVEN in setup
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidatePositionWhenYPointLessThanZeroThrowsIllegalArgumentException() {
+		// GIVEN in setup
 
-    // WHEN
-    underTest.validatePosition(1, -1);
+		// WHEN
+		underTest.validatePosition(1, -1);
 
-    // THEN thrown exception
-  }
+		// THEN thrown exception
+	}
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testValidatePositionWhenXPointGreaterThanWidthOfBoardThrowsIllegalArgumentException() {
-    // GIVEN in setup
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidatePositionWhenXPointGreaterThanWidthOfBoardThrowsIllegalArgumentException() {
+		// GIVEN in setup
 
-    // WHEN
-    underTest.validatePosition(5, 1);
+		// WHEN
+		underTest.validatePosition(5, 1);
 
-    // THEN thrown exception
-  }
+		// THEN thrown exception
+	}
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testValidatePositionWhenYPointGreaterThanHeightOfBoardThrowsIllegalArgumentException() {
-    // GIVEN in setup
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidatePositionWhenYPointGreaterThanHeightOfBoardThrowsIllegalArgumentException() {
+		// GIVEN in setup
 
-    // WHEN
-    underTest.validatePosition(1, 5);
+		// WHEN
+		underTest.validatePosition(1, 5);
 
-    // THEN thrown exception
-  }
+		// THEN thrown exception
+	}
 
-  @Test
-  public void testValidatePositionWhenCoordinateIsNotOutOfRangeShouldTrue() {
-    // GIVEN in setup
+	@Test
+	public void testValidatePositionWhenCoordinateIsNotOutOfRangeShouldTrue() {
+		// GIVEN in setup
 
-    // WHEN
-    boolean result = underTest.validatePosition(1, 1);
+		// WHEN
+		boolean result = underTest.validatePosition(1, 1);
 
-    // THEN
-    Assert.assertTrue(result);
-  }
+		// THEN
+		Assert.assertTrue(result);
+	}
 }

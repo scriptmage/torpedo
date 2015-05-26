@@ -12,59 +12,59 @@ import com.epam.torpedo.network.protocol.commands.CommandQueue;
 
 public class FireCommand extends Command {
 
-  private static final String    COMMAND_NAME = "FIRE";
+	private static final String COMMAND_NAME = "FIRE";
 
-  private Coordinate             coordinate;
-  private BattleField            battleField;
-  private ConcretePositionHunter shooter      = HunterFactory.getShooter();
+	private Coordinate coordinate;
+	private BattleField battleField;
+	private ConcretePositionHunter shooter = HunterFactory.getShooter();
 
-  public FireCommand() {
+	public FireCommand() {
 
-  }
+	}
 
-  public FireCommand(Coordinate coordinate) {
-    this.coordinate = coordinate;
-  }
+	public FireCommand(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
 
-  @Override
-  public CommandQueue getResponse(String input) {
-    initCommand(input);
-    if (!isCommand(COMMAND_NAME)) {
-      return successor.getResponse(input);
-    }
+	@Override
+	public CommandQueue getResponse(String input) {
+		initCommand(input);
+		if (!isCommand(COMMAND_NAME)) {
+			return successor.getResponse(input);
+		}
 
-    shooter.setPosition(getParams());
-    battleField = BattleFieldFactory.getBattleField();
-    Hunter hunter = HunterFactory.getHunter();
+		shooter.setPosition(getParams());
+		battleField = BattleFieldFactory.getBattleField();
+		Hunter hunter = HunterFactory.getHunter();
 
-    if (battleField.shoot(shooter)) {
+		if (battleField.shoot(shooter)) {
 
-      if (battleField.isAliveShips()) {
-        Command command = new HitCommand();
-        Ship ship = battleField.getShip(shooter.getPosition());
+			if (battleField.isAliveShips()) {
+				Command command = new HitCommand();
+				Ship ship = battleField.getShip(shooter.getPosition());
 
-        if (!ship.isAlive()) {
-          command = new SunkCommand();
-        }
+				if (!ship.isAlive()) {
+					command = new SunkCommand();
+				}
 
-        addResponse(command);
-        addResponse(new FireCommand(hunter.nextShot()));
-      } else {
-        addResponse(new WinCommand());
-        System.out.println("I lost");
-      }
+				addResponse(command);
+				addResponse(new FireCommand(hunter.nextShot()));
+			} else {
+				addResponse(new WinCommand());
+				System.out.println("I lost");
+			}
 
-    } else {
-      addResponse(new MissCommand());
-      addResponse(new FireCommand(hunter.nextShot()));
-    }
+		} else {
+			addResponse(new MissCommand());
+			addResponse(new FireCommand(hunter.nextShot()));
+		}
 
-    return getResponseQueue();
-  }
+		return getResponseQueue();
+	}
 
-  @Override
-  public String toString() {
-    return String.format("%s %s", COMMAND_NAME, coordinate);
-  }
+	@Override
+	public String toString() {
+		return String.format("%s %s", COMMAND_NAME, coordinate);
+	}
 
 }
