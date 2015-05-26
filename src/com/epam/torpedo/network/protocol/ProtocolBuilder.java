@@ -9,7 +9,7 @@ import com.epam.torpedo.network.protocol.commands.concrete.QuitCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.SunkCommand;
 import com.epam.torpedo.network.protocol.commands.concrete.WinCommand;
 
-public class ProtocolFactory {
+public class ProtocolBuilder {
 
 	static public Command getProtocol() {
 		

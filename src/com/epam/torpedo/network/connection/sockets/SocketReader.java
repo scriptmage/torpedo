@@ -21,7 +21,7 @@ public class SocketReader {
 	public String read() {
 		try {
 			String input = inputStream.readLine();
-//			System.out.println("<==  " + input);
+			System.out.println("<==  " + input);
 			return input;
 		} catch (IOException e) {
 			throw new RuntimeException(e);

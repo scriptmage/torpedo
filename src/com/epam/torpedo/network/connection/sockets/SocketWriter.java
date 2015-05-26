@@ -32,7 +32,7 @@ public class SocketWriter {
 
 	public void send(Command command) {
 		if(command.isSendable()) {
-//			System.out.println(" ==> " + command.toString());
+			System.out.println(" ==> " + command.toString());
 			outputStream.println(command.toString().trim());
 		}
 	}

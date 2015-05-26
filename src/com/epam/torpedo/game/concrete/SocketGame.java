@@ -8,7 +8,7 @@ import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.network.ConnectionData;
 import com.epam.torpedo.network.connection.sockets.SocketTalker;
 import com.epam.torpedo.network.protocol.Command;
-import com.epam.torpedo.network.protocol.ProtocolFactory;
+import com.epam.torpedo.network.protocol.ProtocolBuilder;
 import com.epam.torpedo.network.protocol.commands.CommandQueue;
 import com.epam.torpedo.network.protocol.commands.concrete.HelloCommand;
 
@@ -23,7 +23,7 @@ public class SocketGame implements Startable {
 	@Override
 	public void start() {
 		SocketTalker socketTalker = new SocketTalker(connectionData);
-		Command protocol = ProtocolFactory.getProtocol();
+		Command protocol = ProtocolBuilder.getProtocol();
 
 		try {
 			socketTalker.open();
@@ -55,10 +55,10 @@ public class SocketGame implements Startable {
 		HelloCommand helloCommand = new HelloCommand();
 		socketTalker.send(helloCommand);
 	}
-	
+
 	private boolean getRunnableState(CommandQueue response) {
 		boolean hasRunnable = true;
-		if(response.size() == 1) {
+		if (response.size() == 1) {
 			Command command = response.get(0);
 			hasRunnable = command.isRunnable();
 		}

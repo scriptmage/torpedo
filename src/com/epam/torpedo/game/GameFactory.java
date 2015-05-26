@@ -16,7 +16,7 @@ public class GameFactory {
 		switch (gameMode.trim()) {
 		case "socket":
 			result = new SocketGame();
-			ConnectionData connectionData = createConnection(args);
+			ConnectionData connectionData = paramsParser(args);
 			((SocketGame) result).setConnection(connectionData);
 			break;
 		case "local":
@@ -28,7 +28,7 @@ public class GameFactory {
 		return result;
 	}
 
-	private static ConnectionData createConnection(String[] args) {
+	private static ConnectionData paramsParser(String[] args) {
 		ConnectionData connection = new ConnectionData();
 		switch (args.length) {
 		case 0:

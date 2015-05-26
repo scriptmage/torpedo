@@ -2,7 +2,7 @@ package com.epam.torpedo.battlefield;
 
 import com.epam.torpedo.battlefield.concrete.FileBattleField;
 import com.epam.torpedo.battlefield.concrete.RandomBattleField;
-import com.epam.torpedo.components.DimensionSplitter;
+import com.epam.torpedo.components.DimensionOfBattlefieldSplitter;
 import com.epam.torpedo.game.GameConfig;
 import com.epam.torpedo.resolvers.Resolver;
 
@@ -22,7 +22,7 @@ public class BattleFieldFactory {
 				battleField.setMaxNumberOfShips(Integer.parseInt(numberOfShips));
 				break;
 			case "file":
-				battleField = new FileBattleField(new DimensionSplitter(16));
+				battleField = new FileBattleField(new DimensionOfBattlefieldSplitter(16));
 				break;
 			default:
 				throw new IllegalArgumentException("Unknown battlefield type: " + battleFieldFillStrategyName + "! Use the following: random, file");

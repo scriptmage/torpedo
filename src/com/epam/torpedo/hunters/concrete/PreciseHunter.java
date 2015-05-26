@@ -5,6 +5,7 @@ import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.components.Coordinate;
 import com.epam.torpedo.components.CoordinateSet;
 import com.epam.torpedo.components.Dimension;
+import com.epam.torpedo.components.DimensionOfBattlefieldSplitter;
 import com.epam.torpedo.game.GameConfig;
 
 public class PreciseHunter extends Hunter {
@@ -12,7 +13,6 @@ public class PreciseHunter extends Hunter {
 	CoordinateSet targetPoints = new CoordinateSet();
 	int countEvenPosition;
 	int numbersOfPossibleEvenPositions;
-	int quarter = 1;
 
 	public PreciseHunter() {
 		Dimension dimensionOfbattlefield = BattleFieldFactory.getBattleField().getDimension();
@@ -36,29 +36,14 @@ public class PreciseHunter extends Hunter {
 	}
 
 	public Coordinate getRandomGridPosition() {
-		Coordinate position;
+		DimensionOfBattlefieldSplitter dp = new DimensionOfBattlefieldSplitter(4);
+		Coordinate position = dp.getPosition();
+		dp.next();
+		return convertToGridPosition(position);
+	}
 
-		switch (quarter) {
-		case 1:
-			position = Coordinate.getRandomIntervalCoordinate(0, dimension.getWidth() / 2, 0, dimension.getHeight() / 2);
-			break;
-		case 2:
-			position = Coordinate.getRandomIntervalCoordinate(dimension.getWidth() / 2, dimension.getWidth(), 0, dimension.getHeight() / 2);
-			break;
-		case 3:
-			position = Coordinate.getRandomIntervalCoordinate(0, dimension.getWidth() / 2, dimension.getHeight() / 2, dimension.getHeight());
-			break;
-		default:
-			position = Coordinate.getRandomIntervalCoordinate(dimension.getWidth() / 2, dimension.getWidth(), dimension.getHeight() / 2, dimension.getHeight());
-		}
-		
-		quarter++;
-		if (quarter > 4) {
-			quarter = 1;
-		}
-
+	private Coordinate convertToGridPosition(Coordinate position) {
 		int posX = position.getX();
-
 		if (countEvenPosition <= numbersOfPossibleEvenPositions) {
 			posX = 1;
 			if (isEven(position.getY())) {
@@ -70,7 +55,6 @@ public class PreciseHunter extends Hunter {
 				posX = position.getX() - 1;
 			}
 		}
-
 		return new Coordinate(posX, position.getY());
 	}
 
