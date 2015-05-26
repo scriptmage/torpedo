@@ -7,21 +7,21 @@ import com.epam.torpedo.resolvers.Resolver;
 
 public class BattleFieldDrawerFactory {
 
-	private static Drawable drawer;
+  private static Drawable drawer;
 
-	public static Drawable getDrawer() {
-		Resolver resolver = GameConfig.getResolver();
-		String battleFieldDrawerName = resolver.get("battleFieldDrawer");
+  public static Drawable getDrawer() {
+    Resolver resolver = GameConfig.getResolver();
+    String battleFieldDrawerName = resolver.get("battleFieldDrawer");
 
-		if(drawer == null) {
-			switch (battleFieldDrawerName.trim()) {
-			case "console":
-				drawer = new BattleFieldDrawer();
-				break;
-			}
-		}
+    if (drawer == null) {
+      switch (battleFieldDrawerName.trim()) {
+        case "console":
+          drawer = new BattleFieldDrawer();
+          break;
+      }
+    }
 
-		return drawer;
-	}
+    return drawer;
+  }
 
 }

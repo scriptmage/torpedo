@@ -6,55 +6,55 @@ import org.junit.Test;
 
 public class CoordinateTest {
 
-	private Coordinate underTest;
+  private Coordinate underTest;
 
-	@Before
-	public void setUp() {
-		underTest = new Coordinate(5, 5);
-	}
+  @Before
+  public void setUp() {
+    underTest = new Coordinate(5, 5);
+  }
 
-	@Test
-	public void testHashCodeWithTwoSameCoordinate() {
-		// GIVEN
-		Coordinate otherCoordinate = new Coordinate(5, 5);
+  @Test
+  public void testHashCodeWithTwoSameCoordinate() {
+    // GIVEN
+    Coordinate otherCoordinate = new Coordinate(5, 5);
 
-		// WHEN
+    // WHEN
 
-		// THEN
-		Assert.assertEquals(otherCoordinate.hashCode(), underTest.hashCode());
-	}
+    // THEN
+    Assert.assertEquals(otherCoordinate.hashCode(), underTest.hashCode());
+  }
 
-	@Test
-	public void testHashCodeWithTwoDifferentCoordinate() {
-		// GIVEN
-		Coordinate otherCoordinate = new Coordinate(1, 1);
+  @Test
+  public void testHashCodeWithTwoDifferentCoordinate() {
+    // GIVEN
+    Coordinate otherCoordinate = new Coordinate(1, 1);
 
-		// WHEN
+    // WHEN
 
-		// THEN
-		Assert.assertNotEquals(otherCoordinate.hashCode(), underTest.hashCode());
-	}
+    // THEN
+    Assert.assertNotEquals(otherCoordinate.hashCode(), underTest.hashCode());
+  }
 
-	@Test
-	public void testEqualsWithTwoSameCoordinateShouldEquals() {
-		// GIVEN
-		Coordinate otherCoordinate = new Coordinate(5, 5);
+  @Test
+  public void testEqualsWithTwoSameCoordinateShouldEquals() {
+    // GIVEN
+    Coordinate otherCoordinate = new Coordinate(5, 5);
 
-		// WHEN
+    // WHEN
 
-		// THEN
-		Assert.assertEquals(otherCoordinate, underTest);
-	}
+    // THEN
+    Assert.assertEquals(otherCoordinate, underTest);
+  }
 
-	@Test
-	public void testEqualsWithTwoDifferentCoordinateShouldNoEquals() {
-		// GIVEN
-		Coordinate otherCoordinate = new Coordinate(1, 1);
+  @Test
+  public void testEqualsWithTwoDifferentCoordinateShouldNoEquals() {
+    // GIVEN
+    Coordinate otherCoordinate = new Coordinate(1, 1);
 
-		// WHEN
+    // WHEN
 
-		// THEN
-		Assert.assertNotEquals(otherCoordinate, underTest);
-	}
+    // THEN
+    Assert.assertNotEquals(otherCoordinate, underTest);
+  }
 
 }

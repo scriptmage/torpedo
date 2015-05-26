@@ -1,63 +1,63 @@
 package com.epam.torpedo.network.protocol.commands;
 
+import com.epam.torpedo.network.protocol.Command;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import com.epam.torpedo.network.protocol.Command;
-
 public class CommandQueue {
 
-	private List<Command> queue = new ArrayList<>();
+  private List<Command> queue = new ArrayList<>();
 
-	public void add(Command command) {
-		queue.add(command);
-	}
-	
-	public void addAll(CommandQueue commandQueue) {
-		Iterator<Command> iterator = commandQueue.iterator();
-		while(iterator.hasNext()) {
-			Command command = iterator.next();
-			add(command);
-		}
-	}
-	
-	public Command get(int index) {
-		return queue.get(index);
-	}
+  public void add(Command command) {
+    queue.add(command);
+  }
 
-	public Collection<Command> get() {
-		return Collections.unmodifiableCollection(queue);
-	}
+  public void addAll(CommandQueue commandQueue) {
+    Iterator<Command> iterator = commandQueue.iterator();
+    while (iterator.hasNext()) {
+      Command command = iterator.next();
+      add(command);
+    }
+  }
 
-	public Iterator<Command> iterator() {
-		return queue.iterator();
-	}
-	
-	public void clear() {
-		queue.clear();
-	}
-	
-	public int size() {
-		return queue.size();
-	}
+  public Command get(int index) {
+    return queue.get(index);
+  }
 
-	@Override
-	public String toString() {
-		String result = "";
-		Iterator<Command> iterator = queue.iterator();
+  public Collection<Command> get() {
+    return Collections.unmodifiableCollection(queue);
+  }
 
-		if (iterator.hasNext()) {
-			result = iterator.next().toString();
-		}
+  public Iterator<Command> iterator() {
+    return queue.iterator();
+  }
 
-		while (iterator.hasNext()) {
-			result += "\n" + iterator.next().toString();
-		}
+  public void clear() {
+    queue.clear();
+  }
 
-		return result;
-	}
+  public int size() {
+    return queue.size();
+  }
+
+  @Override
+  public String toString() {
+    String result = "";
+    Iterator<Command> iterator = queue.iterator();
+
+    if (iterator.hasNext()) {
+      result = iterator.next().toString();
+    }
+
+    while (iterator.hasNext()) {
+      result += "\n" + iterator.next().toString();
+    }
+
+    return result;
+  }
 
 }

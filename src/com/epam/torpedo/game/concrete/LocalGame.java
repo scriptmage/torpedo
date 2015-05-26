@@ -7,16 +7,16 @@ import com.epam.torpedo.battlefield.BattleFieldFactory;
 import com.epam.torpedo.hunters.HunterFactory;
 
 public class LocalGame implements Startable {
-	
-	@Override
-	public void start() {
-		BattleField battleField = BattleFieldFactory.getBattleField();
-		Hunter hunter = HunterFactory.getHunter();
-		
-		battleField.createBattleField();
-		while (battleField.isAliveShips()) {
-			battleField.shoot(hunter);
-		}
-	}
-	
+
+  @Override
+  public void start() {
+    BattleField battleField = BattleFieldFactory.getBattleField();
+    Hunter hunter = HunterFactory.getHunter();
+
+    battleField.createBattleField();
+    while (battleField.isAliveShips()) {
+      battleField.shoot(hunter);
+    }
+  }
+
 }

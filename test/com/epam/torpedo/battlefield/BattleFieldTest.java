@@ -13,47 +13,47 @@ import com.epam.torpedo.targets.ships.concrete.LineShip;
 
 public class BattleFieldTest {
 
-	private BattleField underTest;
+  private BattleField underTest;
 
-	@Before
-	public void setUp() {
-		underTest = new RandomBattleField();
-		underTest.setDimension(new Dimension(10, 10));
-	}
+  @Before
+  public void setUp() {
+    underTest = new RandomBattleField();
+    underTest.setDimension(new Dimension(10, 10));
+  }
 
-	@Test
-	@Ignore
-	public void testGetNumberOfShipsWhenAddedTwoShipsShouldTrue() {
-		// GIVEN
-		underTest.setMaxNumberOfShips(2);
-		underTest.setDimension(new Dimension(10, 10));
-		underTest.createBattleField();
+  @Test
+  @Ignore
+  public void testGetNumberOfShipsWhenAddedTwoShipsShouldTrue() {
+    // GIVEN
+    underTest.setMaxNumberOfShips(2);
+    underTest.setDimension(new Dimension(10, 10));
+    underTest.createBattleField();
 
-		// WHEN
-		int result = underTest.getNumberOfShips();
+    // WHEN
+    int result = underTest.getNumberOfShips();
 
-		// THEN
-		Assert.assertEquals(2, result);
-	}
+    // THEN
+    Assert.assertEquals(2, result);
+  }
 
-	@Test
-	@Ignore
-	public void testGetShipWhenAddedOneShipShouldPositionSame() {
-		// GIVEN
-		Coordinate position = new Coordinate(2, 2);
+  @Test
+  @Ignore
+  public void testGetShipWhenAddedOneShipShouldPositionSame() {
+    // GIVEN
+    Coordinate position = new Coordinate(2, 2);
 
-		Ship ship = new LineShip(1);
-		ship.setPosition(position);
+    Ship ship = new LineShip(1);
+    ship.setPosition(position);
 
-		underTest.setMaxNumberOfShips(0);
-		underTest.addShip(ship);
+    underTest.setMaxNumberOfShips(0);
+    underTest.addShip(ship);
 
-		// WHEN
-		Ship result = underTest.getShip(position);
+    // WHEN
+    Ship result = underTest.getShip(position);
 
-		// THEN
-		Assert.assertEquals(position.getX(), result.getPositionX());
-		Assert.assertEquals(position.getY(), result.getPositionY());
-	}
+    // THEN
+    Assert.assertEquals(position.getX(), result.getPositionX());
+    Assert.assertEquals(position.getY(), result.getPositionY());
+  }
 
 }

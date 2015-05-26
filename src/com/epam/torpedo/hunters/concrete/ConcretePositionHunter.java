@@ -5,35 +5,35 @@ import com.epam.torpedo.components.Coordinate;
 
 public class ConcretePositionHunter extends Hunter {
 
-	private Coordinate position;
+  private Coordinate position;
 
-	public void setPosition(Object[] params) {
-		int x = Integer.parseInt((String) params[0]);
-		int y = Integer.parseInt((String) params[1]);
-		setPosition(x, y);
-	}
-	
-	public void setPosition(int x, int y) {
-		setPosition(new Coordinate(x, y));
-	}
+  public void setPosition(Object[] params) {
+    int positionX = Integer.parseInt((String) params[0]);
+    int positionY = Integer.parseInt((String) params[1]);
+    setPosition(positionX, positionY);
+  }
 
-	@Override
-	public void setPosition(Coordinate coordinate) {
-		position = coordinate;
-	}
-	
-	public Coordinate getPosition() {
-		return position;
-	}
-	
-	@Override
-	public Coordinate nextShot() {
-		addShot(position);
-		return position;
-	}
+  public void setPosition(int x, int y) {
+    setPosition(new Coordinate(x, y));
+  }
 
-	@Override
-	public void clear() {
-	}
+  @Override
+  public void setPosition(Coordinate coordinate) {
+    position = coordinate;
+  }
+
+  public Coordinate getPosition() {
+    return position;
+  }
+
+  @Override
+  public Coordinate nextShot() {
+    addShot(position);
+    return position;
+  }
+
+  @Override
+  public void clear() {
+  }
 
 }
